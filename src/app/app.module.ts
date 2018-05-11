@@ -11,6 +11,8 @@ import {VanillaPage} from "../pages/vanilla/vanilla";
 import {MapfrecitoComponent} from "../pages/mapfrecito/mapfrecito.component";
 import {ComponentsModule} from "../components/components.module";
 import {UserMessageComponent} from "../components/components-user-message/components-user-message";
+import { HeaderComponent } from '../pages/header/header.component';
+
 
 //SERVICES
 import { MapfreServiceService } from '../services/mapfre.service';
@@ -25,21 +27,18 @@ import { HttpClientModule } from '@angular/common/http';
     TabsPage,
     VanillaPage,
     MapfrecitoComponent,
-    UserMessageComponent
-
-
+    UserMessageComponent,
+    HeaderComponent
   ],
+
   imports: [
     BrowserModule,
-<<<<<<< HEAD
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
-=======
     IonicModule.forRoot(MyApp),
-
->>>>>>> dfe026e66ea6d4a24e7e1382fa49b17bfccc2e79
   ],
+
   bootstrap: [IonicApp],
+
   entryComponents: [
     MyApp,
     HomePage,
@@ -47,8 +46,8 @@ import { HttpClientModule } from '@angular/common/http';
     VanillaPage,
     MapfrecitoComponent,
     UserMessageComponent
-
   ],
+
   providers: [
     StatusBar,
     SplashScreen,

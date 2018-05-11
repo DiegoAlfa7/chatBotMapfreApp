@@ -6,8 +6,14 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
+<ion-row *ngFor="let m of messageFeed" class="Aligner" [ngClass]="{'row-start': m.from == 'user'}">
+<components-user-message [ngClass]="{
+                  'box-user': m.from == 'user',
+                  'sb4-user': m.from == 'user',
+                  'box-bot': m.from == 'bot',
+                  'sb4-bot': m.from == 'bot'}" color="secondary"  [message]="m">
 
-<components-user-message *ngFor="let m of messageFeed"  [message]="m"></components-user-message>
-
+</components-user-message>
+</ion-row>
 </ion-content>

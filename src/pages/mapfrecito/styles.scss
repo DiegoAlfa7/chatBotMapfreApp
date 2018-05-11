@@ -1,4 +1,83 @@
-.a{
-
-  color: red;
+.box-bot {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 900;
+  background-color: color($colors, secondary);
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  color: #fff;
+  position: relative;
+  left: 0px;
+  z-index: 0;
 }
+.sb4-bot:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid color($colors, secondary);
+  border-right: 10px solid transparent;
+  border-top: 10px solid color($colors, secondary);
+  border-bottom: 10px solid transparent;
+
+  left: 19px;
+  bottom: -19px;
+  z-index: 1;
+}
+.box-user {
+  display: inline-block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  text-align: center;
+  font-weight: 900;
+  background-color: color($colors, primary);
+  border-radius: 5px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+  color: #fff;
+  right: 5px;
+  position: relative;
+  z-index: 0;
+}
+
+.sb4-user:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid color($colors, primary);
+  border-top: 10px solid color($colors, primary);
+  border-bottom: 10px solid transparent;
+
+  right: 19px;
+  bottom: -19px;
+  z-index: 1;
+}
+
+.box-user p{
+
+  display: inline-block;
+
+}
+.Aligner {
+  display: flex;
+
+}
+
+.row-start{
+
+  flex-flow: row-reverse;
+
+}
+
+.row-end{
+
+
+
+}
+
+

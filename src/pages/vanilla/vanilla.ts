@@ -18,7 +18,7 @@ import { MapfreServiceService } from '../../services/mapfre.service';
 export class VanillaPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public service: MapfreServiceService) {
-    
+
   }
 
   ngOnInit(): void {
@@ -29,17 +29,12 @@ export class VanillaPage {
     })
   }
 
- 
-  
+
+
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VanillaPage');
 
-<<<<<<< HEAD
-   
-
-=======
->>>>>>> dfe026e66ea6d4a24e7e1382fa49b17bfccc2e79
   }
 
 

@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { UserMessageComponent} from "./user-message/user-message";
-import {BotMessageComponent} from "./bot-message/bot-message";
+import { MessageComponent} from "./message/message";
+
 
 @NgModule({
-  declarations: [UserMessageComponent, BotMessageComponent],
+  declarations: [MessageComponent],
   imports: [],
   exports: [],
-  entryComponents: [UserMessageComponent, BotMessageComponent]
+  entryComponents: [MessageComponent]
 })
 export class ComponentsModule {
 

@@ -8,6 +8,9 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {TabsPage} from "../pages/tabs/tabs";
 import {VanillaPage} from "../pages/vanilla/vanilla";
+import {MapfrecitoComponent} from "../pages/mapfrecito/mapfrecito.component";
+import {ComponentsModule} from "../components/components.module";
+import {UserMessageComponent} from "../components/components-user-message/components-user-message";
 
 //SERVICES
 import { MapfreServiceService } from '../services/mapfre.service';
@@ -20,19 +23,31 @@ import { HttpClientModule } from '@angular/common/http';
     MyApp,
     HomePage,
     TabsPage,
-    VanillaPage
+    VanillaPage,
+    MapfrecitoComponent,
+    UserMessageComponent
+
+
   ],
   imports: [
     BrowserModule,
+<<<<<<< HEAD
     HttpClientModule,
     IonicModule.forRoot(MyApp)
+=======
+    IonicModule.forRoot(MyApp),
+
+>>>>>>> dfe026e66ea6d4a24e7e1382fa49b17bfccc2e79
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
     TabsPage,
-    VanillaPage
+    VanillaPage,
+    MapfrecitoComponent,
+    UserMessageComponent
+
   ],
   providers: [
     StatusBar,

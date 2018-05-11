@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Mapfrecito
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+<components-user-message *ngFor="let m of messageFeed" [message]="m"></components-user-message>
+
+</ion-content>

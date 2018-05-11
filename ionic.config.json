@@ -2,7 +2,10 @@
   "name": "mapfreBot",
   "app_id": "3608cd20",
   "type": "ionic-angular",
+
+
   "integrations": {
     "cordova": {}
   }
+
 }

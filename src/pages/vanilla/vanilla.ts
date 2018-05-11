@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
 
 import { MapfreServiceService } from '../../services/mapfre.service';
 
@@ -36,8 +35,11 @@ export class VanillaPage {
   ionViewDidLoad() {
     console.log('ionViewDidLoad VanillaPage');
 
+<<<<<<< HEAD
    
 
+=======
+>>>>>>> dfe026e66ea6d4a24e7e1382fa49b17bfccc2e79
   }
 
 

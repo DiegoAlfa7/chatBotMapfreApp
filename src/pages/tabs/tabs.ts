@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import {HomePage} from "../home/home";
 import {VanillaPage} from "../vanilla/vanilla";
+import {MapfrecitoComponent} from "../mapfrecito/mapfrecito.component";
 
 
 @Component({
@@ -8,7 +8,7 @@ import {VanillaPage} from "../vanilla/vanilla";
 })
 export class TabsPage {
 
-  tab1Root = HomePage;
+  tab1Root = MapfrecitoComponent;
   tab2Root = VanillaPage;
 
 

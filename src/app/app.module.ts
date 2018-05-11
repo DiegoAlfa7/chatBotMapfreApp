@@ -9,6 +9,12 @@ import { HomePage } from '../pages/home/home';
 import {TabsPage} from "../pages/tabs/tabs";
 import {VanillaPage} from "../pages/vanilla/vanilla";
 
+//SERVICES
+import { MapfreServiceService } from '../services/mapfre.service';
+
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -18,6 +24,7 @@ import {VanillaPage} from "../pages/vanilla/vanilla";
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp)
   ],
   bootstrap: [IonicApp],
@@ -30,6 +37,7 @@ import {VanillaPage} from "../pages/vanilla/vanilla";
   providers: [
     StatusBar,
     SplashScreen,
+    MapfreServiceService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

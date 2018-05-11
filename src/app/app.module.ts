@@ -8,24 +8,35 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import {TabsPage} from "../pages/tabs/tabs";
 import {VanillaPage} from "../pages/vanilla/vanilla";
+import {MapfrecitoComponent} from "../pages/mapfrecito/mapfrecito.component";
+import {ComponentsModule} from "../components/components.module";
+import {UserMessageComponent} from "../components/components-user-message/components-user-message";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     TabsPage,
-    VanillaPage
+    VanillaPage,
+    MapfrecitoComponent,
+    UserMessageComponent
+
+
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     HomePage,
     TabsPage,
-    VanillaPage
+    VanillaPage,
+    MapfrecitoComponent,
+    UserMessageComponent
+
   ],
   providers: [
     StatusBar,

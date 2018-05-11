@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import { HomePage } from '../home/home';
 
 /**
  * Generated class for the VanillaPage page.
@@ -21,7 +20,7 @@ export class VanillaPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VanillaPage');
-    
+
   }
 
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
+import { MapfreServiceService } from '../../services/mapfre.service';
+
 /**
  * Generated class for the VanillaPage page.
  *
@@ -15,12 +17,30 @@ import { NavController, NavParams } from 'ionic-angular';
 })
 export class VanillaPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public service: MapfreServiceService) {
+    
   }
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
+    this.service.getQuery('qweq').subscribe(data => {
+
+    })
+  }
+
+ 
+  
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad VanillaPage');
 
+<<<<<<< HEAD
+   
+
+=======
+>>>>>>> dfe026e66ea6d4a24e7e1382fa49b17bfccc2e79
   }
+
 
 }

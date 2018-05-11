@@ -14,6 +14,12 @@ import {UserMessageComponent} from "../components/user-message/user-message";
 import {BotMessageComponent} from "../components/bot-message/bot-message";
 
 
+//SERVICES
+import { MapfreServiceService } from '../services/mapfre.service';
+
+import { HttpClientModule } from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     MyApp,
@@ -28,8 +34,17 @@ import {BotMessageComponent} from "../components/bot-message/bot-message";
   ],
   imports: [
     BrowserModule,
+<<<<<<< HEAD
     IonicModule.forRoot(MyApp)
+=======
+<<<<<<< HEAD
+    HttpClientModule,
+    IonicModule.forRoot(MyApp)
+=======
+    IonicModule.forRoot(MyApp),
+>>>>>>> 164b2a62bdd4273c48a972628b2a4af4da1406aa
 
+>>>>>>> dfe026e66ea6d4a24e7e1382fa49b17bfccc2e79
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -45,6 +60,7 @@ import {BotMessageComponent} from "../components/bot-message/bot-message";
   providers: [
     StatusBar,
     SplashScreen,
+    MapfreServiceService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

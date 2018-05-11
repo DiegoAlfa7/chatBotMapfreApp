@@ -9,7 +9,7 @@ import {Message} from "../../app/classes/Message";
  */
 @Component({
   selector: 'components-user-message',
-  templateUrl: 'components-user-message.html'
+  templateUrl: 'user-message.html'
 })
 export class UserMessageComponent {
 

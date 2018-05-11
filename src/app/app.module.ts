@@ -10,7 +10,9 @@ import {TabsPage} from "../pages/tabs/tabs";
 import {VanillaPage} from "../pages/vanilla/vanilla";
 import {MapfrecitoComponent} from "../pages/mapfrecito/mapfrecito.component";
 import {ComponentsModule} from "../components/components.module";
-import {UserMessageComponent} from "../components/components-user-message/components-user-message";
+import {UserMessageComponent} from "../components/user-message/user-message";
+import {BotMessageComponent} from "../components/bot-message/bot-message";
+
 
 @NgModule({
   declarations: [
@@ -19,13 +21,14 @@ import {UserMessageComponent} from "../components/components-user-message/compon
     TabsPage,
     VanillaPage,
     MapfrecitoComponent,
-    UserMessageComponent
+    UserMessageComponent,
+    BotMessageComponent
 
 
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    IonicModule.forRoot(MyApp)
 
   ],
   bootstrap: [IonicApp],
@@ -35,7 +38,8 @@ import {UserMessageComponent} from "../components/components-user-message/compon
     TabsPage,
     VanillaPage,
     MapfrecitoComponent,
-    UserMessageComponent
+    UserMessageComponent,
+    BotMessageComponent
 
   ],
   providers: [

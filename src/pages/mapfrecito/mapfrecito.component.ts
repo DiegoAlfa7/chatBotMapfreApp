@@ -18,11 +18,11 @@ export class MapfrecitoComponent{
 
     this.messageFeed = [
 
-      new Message('Message1'),
-      new Message('Message2'),
-      new Message('Message3'),
-      new Message('Message4'),
-      new Message('Message5'),
+      new Message("Message1", "bot"),
+      new Message('Message2', "user"),
+      new Message('Message3', "bot"),
+      new Message('Message4', "user" ),
+      new Message('Message5', "user"),
 
     ];
 

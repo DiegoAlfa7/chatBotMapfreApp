@@ -14,7 +14,7 @@ import {MessageComponent} from "../components/message/message";
 
 
 //SERVICES
-import { MapfreServiceService } from '../services/mapfre.service';
+import { MapfreService } from '../services/mapfre.service';
 
 import { HttpClientModule } from '@angular/common/http';
 
@@ -52,7 +52,7 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
-    MapfreServiceService,
+    MapfreService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

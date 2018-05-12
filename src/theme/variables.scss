@@ -22,7 +22,16 @@ $app-direction: ltr;
 // To view all the possible Ionic variables, see:
 // http://ionicframework.com/docs/theming/overriding-ionic-variables/
 
+.circle{
 
+  border-radius: 50px;
+  width: 30px;
+  height: 30px;
+  box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+
+
+
+}
 
 
 // Named Color Variables
@@ -87,6 +96,7 @@ $font-family-wp-base : Roboto;
 // default are overridden.
 
 @import "ionic.theme.default";
+
 
 
 // Ionicons

@@ -1,7 +1,7 @@
 .box-bot {
   display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 10px;
   text-align: center;
   font-weight: 900;
@@ -10,7 +10,8 @@
   box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
   color: #fff;
   position: relative;
-  left: 0px;
+  left: 5px;
+  max-width: 300px;
   z-index: 0;
 }
 .sb4-bot:before {
@@ -29,8 +30,8 @@
 }
 .box-user {
   display: inline-block;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 15px;
+  margin-bottom: 15px;
   padding: 10px;
   text-align: center;
   font-weight: 900;
@@ -58,15 +59,18 @@
   z-index: 1;
 }
 
-.box-user p{
+.box-user p, .box-bot p{
 
   display: inline-block;
 
 }
-.Aligner {
-  display: flex;
+.box-user h1, .box-bot h1,.box-user h2, .box-bot h2, .box-user h3, .box-bot h3, .box-user h4, .box-bot h4,
+.box-user h5, .box-bot h5{
+
+  display: inline-block;
 
 }
+
 
 .row-start{
 
@@ -74,10 +78,6 @@
 
 }
 
-.row-end{
 
-
-
-}
 
 

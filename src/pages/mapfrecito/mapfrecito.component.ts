@@ -53,6 +53,7 @@ export class MapfrecitoComponent implements OnInit{
   public enviarMensaje(){
 
     this.scrollToBottom();
+
     if(this.lastMsg && this.lastMsg != '') {
 
 

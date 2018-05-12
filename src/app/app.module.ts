@@ -13,6 +13,7 @@ import {MessageComponent} from "../components/message/message";
 
 
 
+
 //SERVICES
 import { MapfreService } from '../services/mapfre.service';
 
@@ -28,32 +29,34 @@ import { HttpClientModule } from '@angular/common/http';
     MapfrecitoComponent,
     MessageComponent
 
-
   ],
+
   imports: [
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp)
 
 
-
   ],
+
   bootstrap: [IonicApp],
+
   entryComponents: [
     MyApp,
     HomePage,
     TabsPage,
     VanillaPage,
     MapfrecitoComponent,
-    MessageComponent,
-
-
+    MessageComponent
   ],
+
   providers: [
     StatusBar,
     SplashScreen,
+
     MapfreService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
+
   ]
 })
-export class AppModule {}
+export class AppModule { }

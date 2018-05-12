@@ -1,17 +1,17 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Mapfrecito
-    </ion-title>
+  <ion-navbar color="primary">
+    <img src="../../assets/imgs/logoHeader.png" class="fotoHeader"/>
   </ion-navbar>
 </ion-header>
-
-
 <ion-content>
   <ion-row *ngFor="let m of messageFeed" [ngClass]="{'row-start': m.from == 'user'}">
     <div class="max-h" *ngIf="m.from == 'bot'" style="display: flex;align-items: center;justify-content: center;">
-      <div class="circle d-flex" >
-        <img src="assets/imgs/bot.png" alt="">
+      <div class="circle d-flex"
+           [ngStyle]="{
+           'background-image': 'url(assets/imgs/bot.png)',
+            'background-size':'cover'
+            }">
+        
 
       </div>
     </div>
@@ -19,31 +19,27 @@
                   'box-user': m.from == 'user',
                   'sb4-user': m.from == 'user',
                   'box-bot': m.from == 'bot',
-                  'sb4-bot': m.from == 'bot'}" color="secondary"  [message]="m">
+                  'sb4-bot': m.from == 'bot'}" color="secondary" [message]="m">
 
     </components-user-message>
   </ion-row>
   <ion-infinite-scroll (ionInfinite)="cargarMensajes($event)">
     <ion-infinite-scroll-content id="infiniteScrollContent"
-    loadingSpinner="bubbles"
-    loadingText="Hmm...">
+                                 loadingSpinner="bubbles"
+                                 loadingText="Hmm...">
 
     </ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
 <ion-footer class="input-footer">
 
-    <ion-item padding-bottom color="transparent">
+  <ion-item padding-bottom color="transparent">
 
-      <ion-input type="text" (keyup.enter)="enviarMensaje();" placeholder="Escribe..." [(ngModel)]="lastMsg"></ion-input>
-      <button ion-button outline icon-only item-right (click)="enviarMensaje()">
-        <ion-icon name="send"></ion-icon>
-      </button>
-    </ion-item>
-
+    <ion-input type="text" (keyup.enter)="enviarMensaje();" placeholder="Escribe..." [(ngModel)]="lastMsg"></ion-input>
+    <button ion-button outline icon-only item-right (click)="enviarMensaje()">
+      <ion-icon name="send"></ion-icon>
+    </button>
+  </ion-item>
 
 
 </ion-footer>
-
-
-

@@ -5,14 +5,19 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
 import { MyApp } from './app.component';
+
+//PAGES
 import { HomePage } from '../pages/home/home';
-import {TabsPage} from "../pages/tabs/tabs";
-import {VanillaPage} from "../pages/vanilla/vanilla";
-import {MapfrecitoComponent} from "../pages/mapfrecito/mapfrecito.component";
-import {MessageComponent} from "../components/message/message";
+import { TabsPage } from "../pages/tabs/tabs";
+import { VanillaPage } from "../pages/vanilla/vanilla";
+import { MapfrecitoComponent } from "../pages/mapfrecito/mapfrecito.component";
+import { LoginPage } from '../pages/login/login';
 
+//COMPONENTS
+import { MessageComponent } from "../components/message/message";
 
-
+//CAMERA
+import { Camera } from '@ionic-native/camera';
 
 //SERVICES
 import { MapfreService } from '../services/mapfre.service';
@@ -26,6 +31,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomePage,
     TabsPage,
     VanillaPage,
+    LoginPage,
     MapfrecitoComponent,
     MessageComponent
 
@@ -46,6 +52,7 @@ import { HttpClientModule } from '@angular/common/http';
     HomePage,
     TabsPage,
     VanillaPage,
+    LoginPage,
     MapfrecitoComponent,
     MessageComponent
   ],
@@ -53,9 +60,9 @@ import { HttpClientModule } from '@angular/common/http';
   providers: [
     StatusBar,
     SplashScreen,
-
+    Camera,
     MapfreService,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
 
   ]
 })

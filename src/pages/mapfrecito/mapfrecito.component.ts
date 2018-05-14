@@ -8,10 +8,7 @@ import {MapfreService} from "../../services/mapfre.service";
 @Component({
   selector: 'page-mapfrecito',
   templateUrl: 'mapfrecito.template.html',
-
-
-
-
+  
 })
 export class MapfrecitoComponent implements OnInit{
 

@@ -23,7 +23,7 @@
         <ion-icon ios="ios-person" md="md-person" class="margin-icon"></ion-icon>
         Nombre
       </ion-label>
-      <ion-input clearInput type="text"></ion-input>
+      <ion-input clearInput type="text" [(ngModel)]="nombreUsuario"></ion-input>
     </ion-item>
 
     <ion-item>
@@ -37,7 +37,7 @@
   </ion-list>
 
   <p>
-    <button ion-button round color="primary" class="botones" (click)="irChatLoggeado">Iniciar sesión</button>
+    <button ion-button round color="primary" class="botones" (click)="irChatLoggeado()">Iniciar sesión</button>
   </p>
 
   <p>

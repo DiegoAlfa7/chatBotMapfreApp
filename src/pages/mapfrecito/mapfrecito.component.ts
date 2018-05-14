@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Message } from "../../app/classes/Message";
 import { Content, Grid } from "ionic-angular";
 import { MapfreService } from "../../services/mapfre.service";
@@ -16,18 +17,31 @@ export class MapfrecitoComponent implements OnInit {
   public messageFeed: Message[];
   public lastMsg: string;
   private messageFeedChangeObserver: MutationObserver;
+  public usuarioRegistrado: any = this.navParams.get('name');
 
-  constructor(private mapfreService: MapfreService) {
+  constructor(private mapfreService: MapfreService, public navParams: NavParams) {
 
     this.messageFeed = [];
 
   }
 
+  ionViewWillEnter() {
+    console.log(this.usuarioRegistrado);
+
+    if (this.usuarioRegistrado) {
+      this.mapfreService.sendQuery('loginasegurado:' + this.usuarioRegistrado).subscribe((result: any) => {
+        this.messageFeed.push(new Message(result.result.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
+      });
+    } else {
+      this.mapfreService.sendQuery('Hola').subscribe((result: any) => {
+        this.messageFeed.push(new Message(result.result.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
+      });
+    }
+  }
+
   ngOnInit() {
 
-    this.mapfreService.sendQuery('Hola').subscribe((result: any) => {
-      this.messageFeed.push(new Message(result.result.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
-    });
+
 
     this.messageFeedChangeObserver = new MutationObserver((mutations) => {
       this.scrollToBottom()
@@ -36,7 +50,7 @@ export class MapfrecitoComponent implements OnInit {
     this.messageFeedChangeObserver.observe(this.messageFeedNode.nativeElement, {
       childList: true
     });
-   
+    this.messageFeed.push(new Message("Necesito una foto", GLOBALS.MESSAGE_PHOTO_INTENT, 'bot'));
   }
 
 

@@ -19,7 +19,6 @@ import { HttpClientModule } from '@angular/common/http';
 
 //SERVICES
 import { MapfreService } from '../services/mapfre.service';
-
 //Components
 import { MyApp } from './app.component';
 import {MessageAbstract} from "../components/message/message_abstract.component";

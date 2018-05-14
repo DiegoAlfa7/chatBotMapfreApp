@@ -17,15 +17,27 @@ import { MapfrecitoComponent } from '../mapfrecito/mapfrecito.component';
 
 export class LoginPage {
 
+  public nombreUsuario;
+
+  public jsonUser = {
+
+    name:''
+
+  }
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad LoginPage');
+
+  irChatInvitado() {
+    this.navCtrl.push(MapfrecitoComponent);
   }
 
-  irChatInvitado(){
-    this.navCtrl.push(MapfrecitoComponent);
+  irChatLoggeado() {
+    this.jsonUser.name = this.nombreUsuario;
+    console.log(this.jsonUser);
+    this.navCtrl.push(MapfrecitoComponent, this.jsonUser);
   }
 
 }

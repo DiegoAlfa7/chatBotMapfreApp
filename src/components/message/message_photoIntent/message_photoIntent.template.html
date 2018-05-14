@@ -1,9 +1,14 @@
 <!-- Generated template for the MessageAbstract component -->
-<div>
-  <p>{{message.msgBody}}</p>
+<div *ngIf="!imgRetrieved">
+  <p>{{message.msgBody}}</p><br/>
   <button ion-button icon-only (click)="getImage()">
     <ion-icon name="camera"></ion-icon>
   </button>
+
+</div>
+<div *ngIf="imgRetrieved">
+  <p>Esta es la foto que has sacado: </p><br/>
+  <img [src]="base64ImageString" class="responsive">
 
 </div>
 

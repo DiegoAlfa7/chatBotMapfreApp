@@ -16,6 +16,7 @@ import {Camera, CameraOptions} from "@ionic-native/camera";
 export class MessagePhotoIntentComponent {
 
   @Input() public message:Message;
+  public imgRetrieved:boolean = false;
 
   //  destinationType values: --
   //  ------------------------
@@ -49,6 +50,7 @@ export class MessagePhotoIntentComponent {
       // data is base64:
       let base64Image = 'data:image/jpeg;base64,' + imageData;
       this.base64ImageString = base64Image;
+      this.imgRetrieved = true;
 
 
     }, (err) => {

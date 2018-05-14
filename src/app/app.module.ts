@@ -3,18 +3,24 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { MyApp } from './app.component';
-import {MapfrecitoComponent} from "../pages/mapfrecito/mapfrecito.component";
-import {MessageAbstract} from "../components/message/message_abstract.component";
 
 
 
+
+
+//Modules
+import {Camera} from "@ionic-native/camera";
+import { HttpClientModule } from '@angular/common/http';
 
 //SERVICES
 import { MapfreService } from '../services/mapfre.service';
 
-import { HttpClientModule } from '@angular/common/http';
+//Components
+import { MyApp } from './app.component';
+import {MapfrecitoComponent} from "../pages/mapfrecito/mapfrecito.component";
+import {MessageAbstract} from "../components/message/message_abstract.component";
 import {MessageTextComponent} from "../components/message/message_text/message_text.component";
+import {MessagePhotoIntentComponent} from "../components/message/message_photoIntent/message_photoIntent.component";
 
 
 
@@ -23,7 +29,9 @@ import {MessageTextComponent} from "../components/message/message_text/message_t
     MyApp,
     MessageTextComponent,
     MapfrecitoComponent,
-    MessageAbstract
+    MessageAbstract,
+    MessageTextComponent,
+    MessagePhotoIntentComponent
 
   ],
 
@@ -41,13 +49,15 @@ import {MessageTextComponent} from "../components/message/message_text/message_t
     MyApp,
     MessageTextComponent,
     MapfrecitoComponent,
-    MessageAbstract
+    MessageAbstract,
+    MessageTextComponent,
+    MessagePhotoIntentComponent
   ],
 
   providers: [
     StatusBar,
     SplashScreen,
-
+    Camera,
     MapfreService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
 

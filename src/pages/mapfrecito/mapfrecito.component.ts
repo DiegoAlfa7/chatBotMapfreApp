@@ -6,8 +6,7 @@ import * as GLOBALS from '../../app/app.constants';
 
 @Component({
   selector: 'page-mapfrecito',
-  templateUrl: 'mapfrecito.template.html',
-  
+  templateUrl: 'mapfrecito.template.html'
 })
 export class MapfrecitoComponent implements OnInit {
 
@@ -37,7 +36,7 @@ export class MapfrecitoComponent implements OnInit {
     this.messageFeedChangeObserver.observe(this.messageFeedNode.nativeElement, {
       childList: true
     });
-    this.messageFeed.push(new Message("Necesito una foto",GLOBALS.MESSAGE_PHOTO_INTENT,'bot'));
+   
   }
 
 

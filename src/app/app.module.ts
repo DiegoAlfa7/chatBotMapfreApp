@@ -5,7 +5,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 import { MyApp } from './app.component';
 import {MapfrecitoComponent} from "../pages/mapfrecito/mapfrecito.component";
-import {MessageComponent} from "../components/message/message";
+import {MessageAbstract} from "../components/message/message_abstract.component";
 
 
 
@@ -14,15 +14,16 @@ import {MessageComponent} from "../components/message/message";
 import { MapfreService } from '../services/mapfre.service';
 
 import { HttpClientModule } from '@angular/common/http';
-import {HomePage} from "../pages/home/home";
+import {MessageTextComponent} from "../components/message/message_text/message_text.component";
+
 
 
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    MessageTextComponent,
     MapfrecitoComponent,
-    MessageComponent
+    MessageAbstract
 
   ],
 
@@ -38,9 +39,9 @@ import {HomePage} from "../pages/home/home";
 
   entryComponents: [
     MyApp,
-    HomePage,
+    MessageTextComponent,
     MapfrecitoComponent,
-    MessageComponent
+    MessageAbstract
   ],
 
   providers: [

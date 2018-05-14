@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { Message } from "../../app/classes/Message";
 import { Content, Grid } from "ionic-angular";
 import { MapfreService } from "../../services/mapfre.service";
+import * as GLOBALS from '../../app/app.constants';
 
 @Component({
   selector: 'page-mapfrecito',
@@ -25,7 +26,7 @@ export class MapfrecitoComponent implements OnInit {
   ngOnInit() {
 
     this.mapfreService.sendQuery('Hola').subscribe((result: any) => {
-      this.messageFeed.push(new Message(result.result.speech, 'bot'));
+      this.messageFeed.push(new Message(result.result.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
     });
 
     this.messageFeedChangeObserver = new MutationObserver((mutations) => {
@@ -45,11 +46,11 @@ export class MapfrecitoComponent implements OnInit {
 
     if (this.lastMsg && this.lastMsg != '') {
 
-      this.messageFeed.push(new Message(this.lastMsg, 'user'));
+      this.messageFeed.push(new Message(this.lastMsg, GLOBALS.MESSAGE_TEXT, 'user'));
 
       this.mapfreService.sendQuery(this.lastMsg).subscribe((result: any) => {
 
-        this.messageFeed.push(new Message(result.result.speech, 'bot'));
+        this.messageFeed.push(new Message(result.result.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
 
       });
 

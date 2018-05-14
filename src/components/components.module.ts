@@ -1,12 +1,12 @@
 import { NgModule } from '@angular/core';
-import { MessageComponent} from "./message/message";
+import { MessageAbstract} from "./message/message_abstract.component";
 
 
 @NgModule({
-  declarations: [MessageComponent],
+  declarations: [MessageAbstract],
   imports: [],
   exports: [],
-  entryComponents: [MessageComponent]
+  entryComponents: [MessageAbstract]
 })
 export class ComponentsModule {
 

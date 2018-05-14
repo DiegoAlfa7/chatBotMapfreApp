@@ -6,6 +6,8 @@ export class Message{
 
    msgBody:string;
 
+   type:string;
+
    context: any;
 
   /**
@@ -15,9 +17,10 @@ export class Message{
    * @param {string} to
    * @param context should store the context for further usages
    */
-   constructor(body:string, from?:string, to?:string, context?:any){
+   constructor(body:string, type:string, from?:string, to?:string, context?:any){
 
     this.msgBody = body;
+    this.type = type;
 
     if(from){
 

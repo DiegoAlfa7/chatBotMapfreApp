@@ -11,7 +11,17 @@
             'background-size':'cover'
             }">
 
+  <ion-grid>
+    <ion-row *ngFor="let m of messageFeed" [ngClass]="{'row-start': m.from == 'user'}">
+      <div class="max-h" *ngIf="m.from == 'bot'" style="display: flex;align-items: center;justify-content: center;">
+        <div class="circle d-flex"
+            [ngStyle]="{
+            'background-image': 'url(assets/imgs/bot.png)',
+              'background-size':'cover'
+              }">
 
+
+        </div>
       </div>
     </div>
     <components-user-message [ngClass]="{
@@ -24,9 +34,22 @@
   </ion-row>
   <ion-infinite-scroll (ionInfinite)="cargarMensajes($event)">
     <ion-infinite-scroll-content id="infiniteScrollContent" loadingSpinner="bubbles" loadingText="Hmm...">
+      <components-user-message [ngClass]="{
+                    'box-user': m.from == 'user',
+                    'sb4-user': m.from == 'user',
+                    'box-bot': m.from == 'bot',
+                    'sb4-bot': m.from == 'bot'}" color="secondary" [message]="m">
+
+      </components-user-message>
+    </ion-row>
+  </ion-grid>
+  <!--ion-infinite-scroll (ionInfinite)="cargarMensajes($event)">
+    <ion-infinite-scroll-content id="infiniteScrollContent"
+                                 loadingSpinner="bubbles"
+                                 loadingText="Hmm...">
 
     </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-infinite-scroll -->
 </ion-content>
 <ion-footer class="input-footer">
 

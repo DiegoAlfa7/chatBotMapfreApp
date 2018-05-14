@@ -19,10 +19,20 @@ import { MessageComponent } from "../components/message/message";
 //CAMERA
 import { Camera } from '@ionic-native/camera';
 
+//Modules
+import {Camera} from "@ionic-native/camera";
+import { HttpClientModule } from '@angular/common/http';
+
 //SERVICES
 import { MapfreService } from '../services/mapfre.service';
 
-import { HttpClientModule } from '@angular/common/http';
+//Components
+import { MyApp } from './app.component';
+import {MapfrecitoComponent} from "../pages/mapfrecito/mapfrecito.component";
+import {MessageAbstract} from "../components/message/message_abstract.component";
+import {MessageTextComponent} from "../components/message/message_text/message_text.component";
+import {MessagePhotoIntentComponent} from "../components/message/message_photoIntent/message_photoIntent.component";
+
 
 
 @NgModule({
@@ -32,8 +42,11 @@ import { HttpClientModule } from '@angular/common/http';
     TabsPage,
     VanillaPage,
     LoginPage,
+    MessageTextComponent,
     MapfrecitoComponent,
-    MessageComponent
+    MessageAbstract,
+    MessageTextComponent,
+    MessagePhotoIntentComponent
 
   ],
 
@@ -53,8 +66,11 @@ import { HttpClientModule } from '@angular/common/http';
     TabsPage,
     VanillaPage,
     LoginPage,
+    MessageTextComponent,
     MapfrecitoComponent,
-    MessageComponent
+    MessageAbstract,
+    MessageTextComponent,
+    MessagePhotoIntentComponent
   ],
 
   providers: [

@@ -1,14 +1,18 @@
 import {Component, Input} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
-import {Camera, CameraOptions} from "@ionic-native/camera";
+import {CameraOptions} from "@ionic-native/camera";
 
+//Hay que importar la camara en vez de CaeraMock si queremos que en produción se utilize la cámara nativa
+import { Camera } from "@ionic-native/camera";
 
-/**
- * Generated class for the MessageAbstract component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+//---------------------------------
+//
+//import {Toast} from '@ionic-native/toast'
+
+//import {CameraMock } from '../../../services/mocks/camera.mock'
+import { MapfreService } from '../../../services/mapfre.service';
+import { ToastController } from 'ionic-angular';
+
 @Component({
   selector: 'message-photo-intent',
   templateUrl: 'message_photoIntent.template.html'
@@ -31,26 +35,47 @@ export class MessagePhotoIntentComponent {
     mediaType: this.camera.MediaType.PICTURE
   };
 
+  
+
   public base64ImageString:string;
 
-  constructor( private camera:Camera) {
+  constructor( 
+    private camera:Camera, 
+    private mapfre:MapfreService,
+    private toastCtrl:ToastController) {
 
 
 
 
   }
 
+  sendImg(){
+    //this.toast should be mock for testing purpouses
+    let toast = this.toastCtrl.create({
+      message: "Img must have been sended: "+this.base64ImageString.substr(0, 100) + " [...]",
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.present();
+    
+
+
+  }
+
   getImage(){
+  
 
 
     //Camera.getPicture returns a Promise, so should implement success and error cb functions
-
+    console.log('Getting Photo');
     this.camera.getPicture(this.default_options).then((imageData) => {
 
       // data is base64:
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      this.base64ImageString = base64Image;
+      
+      this.base64ImageString = imageData+'';
       this.imgRetrieved = true;
+     
 
 
     }, (err) => {

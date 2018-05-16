@@ -1,7 +1,7 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule, Toast, ToastController } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -24,6 +24,9 @@ import { MyApp } from './app.component';
 import {MessageAbstract} from "../components/message/message_abstract.component";
 import {MessageTextComponent} from "../components/message/message_text/message_text.component";
 import {MessagePhotoIntentComponent} from "../components/message/message_photoIntent/message_photoIntent.component";
+import { CameraMock } from '../services/mocks/camera.mock';
+import { SanitizerPipe } from '../pipes/sanitizer.pipe';
+import { ToastMock } from '@ionic-native-mocks/toast';
 
 
 
@@ -35,7 +38,8 @@ import {MessagePhotoIntentComponent} from "../components/message/message_photoIn
     MessageAbstract,
     MessageTextComponent,
     LoginPage,
-    MessagePhotoIntentComponent
+    MessagePhotoIntentComponent,
+    SanitizerPipe
 
   ],
 
@@ -62,7 +66,8 @@ import {MessagePhotoIntentComponent} from "../components/message/message_photoIn
   providers: [
     StatusBar,
     SplashScreen,
-    Camera,
+   Camera,CameraMock,
+   ToastController,
     MapfreService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
 

@@ -1,16 +1,17 @@
-import {Component, Input} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
 import {CameraOptions} from "@ionic-native/camera";
 
 //Hay que importar la camara en vez de CaeraMock si queremos que en produción se utilize la cámara nativa
-//import { Camera } from "@ionic-native/camera";
+import { Camera } from "@ionic-native/camera";
 
 //---------------------------------
 //
 import {Toast} from '@ionic-native/toast'
 
-import {CameraMock } from '../../../services/mocks/camera.mock'
+//import {CameraMock } from '../../../services/mocks/camera.mock'
 import { MapfreService } from '../../../services/mapfre.service';
+import {CaptureVideoOptions, MediaCapture, MediaFile} from "@ionic-native/media-capture";
 
 
 @Component({
@@ -19,11 +20,14 @@ import { MapfreService } from '../../../services/mapfre.service';
 })
 export class MessageCameraIntentComponent {
 
+  @ViewChild('videoOutput') videoOut: ElementRef;
+
   @Input() public message:Message;
   // 0 for CAMERA, 1 for VIDEO or any for both
   @Input() public intentType:number;
 
   public imgRetrieved:boolean = false;
+  public videoRetrieved:boolean = false;
 
   //  destinationType values: --
   //  ------------------------
@@ -39,26 +43,35 @@ export class MessageCameraIntentComponent {
 
   };
 
-
-
-
-
+  private default_videoCamera_options: CaptureVideoOptions = {
+    limit:1,
+    duration: 20
+  };
   public base64ImageString:string;
 
   constructor(
-    private camera:CameraMock,
+    private camera:Camera,
     private mapfre:MapfreService,
-    private toast:Toast) {
+    private toast:Toast,
+    private mediaCapture:MediaCapture) {
 
 
 
 
   }
 
-  sendImg(){
-    //this.toast should be mock for testing purpouses
-    this.toast.showLongBottom("Image sent...");
 
+
+
+
+
+  sendImage(){
+
+  this.toast.showLongCenter("Img sent...");
+
+  }
+
+  sendVideo(){
 
 
 
@@ -82,6 +95,46 @@ export class MessageCameraIntentComponent {
     }, (err) => {
       // Handle error
     });
+
+
+
+
+  }
+  getVideo(){
+
+
+
+    //MediaCapture.captureVideo() returns a Promise, so should implement success and error cb functions
+    console.log('Getting Video');
+    this.mediaCapture.captureVideo(this.default_videoCamera_options).then(
+
+      (videoData: MediaFile[]) =>{
+
+        let data = JSON.stringify(videoData);
+        let result = JSON.parse(data);
+
+        let videoURL = result[0].fullPath;
+
+        let videoTag = this.videoOut.nativeElement;
+        this.videoRetrieved = true;
+        console.log(videoURL);
+        videoTag.src = videoURL;
+        videoTag.play();
+
+
+      },
+      (err) => {
+
+        console.log(err);
+        this.toast.showLongCenter(err.code).subscribe(then=>{
+
+
+          console.log("Toast:"+ err.code);
+
+
+        });
+
+      });
 
 
 

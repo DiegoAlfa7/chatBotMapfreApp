@@ -1,4 +1,9 @@
-<!-- Generated template for the MessageAbstract component -->
+<!-- Generic message for plain-text outpuC -->
 <message-text *ngIf="message.type == textType" [message]="message"></message-text>
+<!--  0 for PHOTO, 1 for VIDEO or any for both  -->
+<message-camera-intent *ngIf="message.type == photoIntentType" [message]="message" [intentType]="0"></message-camera-intent>
+<message-camera-intent *ngIf="message.type == videoIntentType" [message]="message" [intentType]="1"></message-camera-intent>
+<message-camera-intent *ngIf="message.type == cameraIntentType" [message]="message" [intentType]="2"></message-camera-intent>
+
+<!-- Audio -->
 <app-message_audioIntent *ngIf="message.type == audioIntentType" [message]="message"></app-message_audioIntent>
-<message-camera-intent *ngIf="message.type == photoIntentType" [message]="message"></message-camera-intent>

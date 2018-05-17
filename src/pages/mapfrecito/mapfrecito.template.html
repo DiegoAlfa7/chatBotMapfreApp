@@ -16,13 +16,13 @@
 
         </div>
       </div>
-      <components-user-message [ngClass]="{
+      <message-component [ngClass]="{
                     'box-user': m.from == 'user',
                     'sb4-user': m.from == 'user',
                     'box-bot': m.from == 'bot',
                     'sb4-bot': m.from == 'bot'}" color="secondary" [message]="m">
 
-      </components-user-message>
+      </message-component>
     </ion-row>
   </ion-grid>
   <!--ion-infinite-scroll (ionInfinite)="cargarMensajes($event)">

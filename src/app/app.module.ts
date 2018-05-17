@@ -21,6 +21,7 @@ import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 import { NativeAudio } from "@ionic-native/native-audio"
 import { Toast } from '@ionic-native/toast';
+import { MediaCapture } from "@ionic-native/media-capture";
 import { HttpClientModule } from '@angular/common/http';
 
 //SERVICES
@@ -37,52 +38,96 @@ import { SanitizerPipe } from '../pipes/sanitizer.pipe';
 
 
 @NgModule({
-    declarations: [
-        MyApp,
-        MessageTextComponent,
-        MapfrecitoComponent,
-        MessageAbstract,
-        MessageTextComponent,
-        LoginPage,
-        FormularioPage,
-        MessageAudioIntentComponent,
-        MessageCameraIntentComponent,
-        SanitizerPipe
+  declarations: [
+    MyApp,
+    MessageTextComponent,
+    MapfrecitoComponent,
+    MessageAbstract,
+    MessageTextComponent,
+    LoginPage,
+    FormularioPage,
+    MessageAudioIntentComponent,
+    MessageCameraIntentComponent,
+    SanitizerPipe
 
-    ],
+  ],
 
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        IonicModule.forRoot(MyApp)
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    IonicModule.forRoot(MyApp)
 
 
-    ],
+  ],
 
-    bootstrap: [IonicApp],
+  bootstrap: [IonicApp],
 
-    entryComponents: [
-        MyApp,
-        MessageTextComponent,
-        MapfrecitoComponent,
-        MessageAbstract,
-        MessageTextComponent,
-        MessageAudioIntentComponent,
-        MessageCameraIntentComponent,
-        LoginPage,
-        FormularioPage
-    ],
+  entryComponents: [
+    MyApp,
+    MessageTextComponent,
+    MapfrecitoComponent,
+    MessageAbstract,
+    MessageAudioIntentComponent,
+    MessageCameraIntentComponent,
+    LoginPage,
+    FormularioPage
+  ],
 
-    providers: [
-        StatusBar,
-        SplashScreen,
-        Camera, CameraMock,
-        Toast,
-        MapfreService,
-        Media,
-        File,
-        { provide: ErrorHandler, useClass: IonicErrorHandler }
+  providers: [
+    StatusBar,
+    SplashScreen,
+    Camera, CameraMock,
+    Toast,
+    MediaCapture,
+    MapfreService,
+    Media,
+    File,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
 
-    ]
+  ],
+  declarations: [
+    MyApp,
+    MessageTextComponent,
+    MapfrecitoComponent,
+    MessageAbstract,
+    MessageAudioIntentComponent,
+    LoginPage,
+    MessageCameraIntentComponent,
+    SanitizerPipe
+
+  ],
+
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    IonicModule.forRoot(MyApp)
+
+
+  ],
+
+  bootstrap: [IonicApp],
+
+  entryComponents: [
+    MyApp,
+    MessageTextComponent,
+    MapfrecitoComponent,
+    MessageAbstract,
+    MessageCameraIntentComponent,
+    MessageAudioIntentComponent,
+    LoginPage
+  ],
+
+  providers: [
+    StatusBar,
+    SplashScreen,
+    Camera, CameraMock,
+    Toast,
+    MapfreService,
+    MediaCapture,
+    Media,
+    File,
+    { provide: ErrorHandler, useClass: IonicErrorHandler }
+
+  ]
 })
 export class AppModule { }

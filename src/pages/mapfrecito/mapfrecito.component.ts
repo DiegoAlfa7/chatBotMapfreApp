@@ -51,7 +51,8 @@ export class MapfrecitoComponent implements OnInit {
       childList: true
     });
     this.messageFeed.push(new Message("Necesito una foto", GLOBALS.MESSAGE_PHOTO_INTENT, 'bot'));
-
+    this.messageFeed.push(new Message("Necesito un vídeo", GLOBALS.MESSAGE_VIDEO_INTENT, 'bot'));
+    this.messageFeed.push(new Message("Necesito una captura de tu entorno", GLOBALS.MESSAGE_CAMERA_INTENT, 'bot'))
     this.messageFeed.push(new Message("Envia un audio", GLOBALS.MESSAGE_AUDIO_INTENT, 'bot'));
   }
 

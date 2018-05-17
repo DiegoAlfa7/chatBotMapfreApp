@@ -32,7 +32,7 @@ export class MessageAudioIntentComponent {
     }
   }
 
-  startRecord() {
+  public startRecord() {
     if (this.platform.is('ios')) {
       this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
       this.filePath = this.file.documentsDirectory + this.fileName;
@@ -46,8 +46,8 @@ export class MessageAudioIntentComponent {
     this.recording = true;
   }
 
-  stopRecord() {
-    console.log("Fin")
+  public stopRecord() {
+    console.log("Fin");
     this.audio.stopRecord();
     let data = { filename: this.fileName };
     this.audioList.push(data);

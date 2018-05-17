@@ -1,11 +1,41 @@
 <!-- Generated template for the MessageAbstract component -->
-<div *ngIf="!imgRetrieved">
+<div *ngIf="!imgRetrieved && !videoRetrieved">
+
+  <div *ngIf="intentType == 0">
   <p>{{message.msgBody}}</p><br/>
   <button ion-button icon-only (click)="getImage()">
     <ion-icon name="camera"></ion-icon>
   </button>
+  </div>
+
+  <div *ngIf="intentType == 1">
+    <p>{{message.msgBody}}</p><br/>
+    <button ion-button icon-only (click)="getVideo()">
+      <ion-icon name="videocam"></ion-icon>
+    </button>
+  </div>
+
+  <div *ngIf="intentType > 1 || intentType < 0">
+    <p>{{message.msgBody}}</p><br/>
+    <small text-center>Elige una:</small><br/>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-6>
+          <button ion-button icon-only (click)="getImage()">
+            <ion-icon name="camera"></ion-icon>
+          </button>
+        </ion-col>
+        <ion-col>
+          <button ion-button icon-only (click)="getVideo()">
+            <ion-icon name="videocam"></ion-icon>
+          </button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
 </div>
+
 <div *ngIf="imgRetrieved">
   <p>Esta es la foto que has sacado: </p><br/>
   <img [src]="base64ImageString | domseguro:'data:image/jpeg;base64,'" class="responsive">
@@ -14,8 +44,8 @@
   <ion-grid>
     <ion-row>
       <ion-col col-6>
-  <button ion-button  (click)="sendImg()">
-   Sí 
+  <button ion-button  (click)="sendImage()">
+   Sí
   </button>
   </ion-col>
   <ion-col>
@@ -24,6 +54,27 @@
   </button>
   </ion-col>
   </ion-row>
+  </ion-grid>
+
+</div>
+<div *ngIf="videoRetrieved">
+  <p>Esta es el video que he sacado: </p><br/>
+  <video #videoOutput controls="controls" preload="metadata" autoplay="autoplay" webkit-playsinline="webkit-playsinline" width="200" height="160"></video>
+  <hr/>
+  <p>Está bien?</p>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <button ion-button  (click)="sendVideo()">
+          Sí
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left (click)="getVideo()">
+          No, repetir
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
 </div>

@@ -1,16 +1,11 @@
 import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
-import {CameraOptions} from "@ionic-native/camera";
-
-//Hay que importar la camara en vez de CaeraMock si queremos que en produción se utilize la cámara nativa
-import { Camera } from "@ionic-native/camera";
-
+//Hay que importar la camara en vez de CaeraMock si queremos que se utilize la cámara nativa
+import {Camera, CameraOptions} from "@ionic-native/camera";
 //---------------------------------
-//
-import {Toast} from '@ionic-native/toast'
-
 //import {CameraMock } from '../../../services/mocks/camera.mock'
-import { MapfreService } from '../../../services/mapfre.service';
+import {ToastController} from "ionic-angular";
+import {MapfreService} from '../../../services/mapfre.service';
 import {CaptureVideoOptions, MediaCapture, MediaFile} from "@ionic-native/media-capture";
 
 
@@ -22,12 +17,12 @@ export class MessageCameraIntentComponent {
 
   @ViewChild('videoOutput') videoOut: ElementRef;
 
-  @Input() public message:Message;
+  @Input() public message: Message;
   // 0 for CAMERA, 1 for VIDEO or any for both
-  @Input() public intentType:number;
+  @Input() public intentType: number;
 
-  public imgRetrieved:boolean = false;
-  public videoRetrieved:boolean = false;
+  public imgRetrieved: boolean = false;
+  public videoRetrieved: boolean = false;
 
   //  destinationType values: --
   //  ------------------------
@@ -42,42 +37,45 @@ export class MessageCameraIntentComponent {
     mediaType: this.camera.MediaType.PICTURE
 
   };
-
+/*  TODO: may be implemented
   private default_videoCamera_options: CaptureVideoOptions = {
-    limit:1,
+    limit: 1,
     duration: 20
-  };
-  public base64ImageString:string;
+  };*/
+  public base64ImageString: string;
 
   constructor(
-    private camera:Camera,
-    private mapfre:MapfreService,
-    private toast:Toast,
-    private mediaCapture:MediaCapture) {
-
-
-
-
-  }
-
-
-
-
-
-
-  sendImage(){
-
-  this.toast.showLongCenter("Img sent...");
-
-  }
-
-  sendVideo(){
-
+    private camera: Camera,
+    private mapfre: MapfreService,
+    private toast: ToastController,
+    /*private mediaCapture: MediaCapture*/) {
 
 
   }
 
-  getImage(){
+  public presentToast(m: string, position: string, duration: number) {
+    let toast = this.toast.create({
+      message: m,
+      duration: duration,
+      position: position
+    });
+
+
+    toast.present();
+  }
+
+
+  sendImage() {
+
+    this.presentToast('Image sent', 'bottom', 1000);
+
+  }
+
+  /*sendVideo(){} -- TODO: may be implemented*/
+
+
+
+  public getImage() {
 
 
 
@@ -87,28 +85,25 @@ export class MessageCameraIntentComponent {
 
       // data is base64:
 
-      this.base64ImageString = imageData+'';
+      this.base64ImageString = imageData + '';
       this.imgRetrieved = true;
 
 
-
     }, (err) => {
-      // Handle error
+      this.presentToast(`Some error ocurred: ${err.m}`, 'top', 3000);
     });
 
 
-
-
   }
-  getVideo(){
 
-
+  /*
+  TODO: may be implemented
+  getVideo() {
 
     //MediaCapture.captureVideo() returns a Promise, so should implement success and error cb functions
     console.log('Getting Video');
     this.mediaCapture.captureVideo(this.default_videoCamera_options).then(
-
-      (videoData: MediaFile[]) =>{
+      (videoData: MediaFile[]) => {
 
         let data = JSON.stringify(videoData);
         let result = JSON.parse(data);
@@ -121,24 +116,16 @@ export class MessageCameraIntentComponent {
         videoTag.src = videoURL;
         videoTag.play();
 
-
       },
       (err) => {
 
-        console.log(err);
-        this.toast.showLongCenter(err.code).subscribe(then=>{
+        this.presentToast(`Some error ocurred: ${err.m}`, 'top', 3000);
 
-
-          console.log("Toast:"+ err.code);
-
-
-        });
 
       });
 
 
+  }*/
 
-
-  }
 
 }

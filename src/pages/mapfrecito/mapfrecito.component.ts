@@ -1,8 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Message } from "../../app/classes/Message";
-import { Content, Grid } from "ionic-angular";
-import { MapfreService } from "../../services/mapfre.service";
+import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {Content, Grid, NavParams} from 'ionic-angular';
+import {Message} from "../../app/classes/Message";
+import {MapfreService} from "../../services/mapfre.service";
 import * as GLOBALS from '../../app/app.constants';
 
 @Component({
@@ -51,8 +50,8 @@ export class MapfrecitoComponent implements OnInit {
       childList: true
     });
     this.messageFeed.push(new Message("Necesito una foto", GLOBALS.MESSAGE_PHOTO_INTENT, 'bot'));
-    this.messageFeed.push(new Message("Necesito un vídeo", GLOBALS.MESSAGE_VIDEO_INTENT, 'bot'));
-    this.messageFeed.push(new Message("Necesito una captura de tu entorno", GLOBALS.MESSAGE_CAMERA_INTENT, 'bot'))
+    /*this.messageFeed.push(new Message("Necesito un vídeo", GLOBALS.MESSAGE_VIDEO_INTENT, 'bot'));
+    this.messageFeed.push(new Message("Necesito una captura de tu entorno", GLOBALS.MESSAGE_CAMERA_INTENT, 'bot'))*/
     this.messageFeed.push(new Message("Envia un audio", GLOBALS.MESSAGE_AUDIO_INTENT, 'bot'));
   }
 

@@ -9,7 +9,7 @@ import * as GLOBALS from '../../app/app.constants';
  * Components.
  */
 @Component({
-  selector: 'components-user-message',
+  selector: 'message-component',
   templateUrl: 'message_abstract.template.html'
 })
 export class MessageAbstract {
@@ -19,6 +19,8 @@ export class MessageAbstract {
 
   public photoIntentType:string = GLOBALS.MESSAGE_PHOTO_INTENT;
   public textType:string = GLOBALS.MESSAGE_TEXT;
+  public videoIntentType = GLOBALS.MESSAGE_VIDEO_INTENT;
+  public cameraIntentType:string = GLOBALS.MESSAGE_CAMERA_INTENT;
 
 
   constructor() {

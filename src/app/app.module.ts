@@ -14,8 +14,9 @@ import { MapfrecitoComponent } from "../pages/mapfrecito/mapfrecito.component";
 
 
 //Modules
-import {Toast} from '@ionic-native/toast'
+
 import {Camera} from "@ionic-native/camera";
+import {MediaCapture} from "@ionic-native/media-capture";
 import { HttpClientModule } from '@angular/common/http';
 
 //SERVICES
@@ -27,6 +28,7 @@ import {MessageTextComponent} from "../components/message/message_text/message_t
 import {MessageCameraIntentComponent} from "../components/message/message_photoIntent/message_cameraIntent.component";
 import { CameraMock } from '../services/mocks/camera.mock';
 import { SanitizerPipe } from '../pipes/sanitizer.pipe';
+import {Toast} from "@ionic-native/toast";
 
 
 
@@ -66,7 +68,7 @@ import { SanitizerPipe } from '../pipes/sanitizer.pipe';
   providers: [
     StatusBar,
     SplashScreen,
-   Camera,CameraMock,
+   Camera,CameraMock,MediaCapture,
    Toast,
     MapfreService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }

@@ -1,3 +1,4 @@
+import { MESSAGE_AUDIO_INTENT } from './../../app/app.constants';
 import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {Content, Grid, NavParams} from 'ionic-angular';
 import {Message} from "../../app/classes/Message";
@@ -33,9 +34,10 @@ export class MapfrecitoComponent implements OnInit {
       });
     } else {
       this.mapfreService.sendQuery('Hola').subscribe((result: any) => {
-        this.messageFeed.push(new Message(result.result.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
+        this.messageFeed.push(new Message(result.result.fulfillment.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
       });
     }
+    this.messageFeed.push(new Message('necesito un audio', GLOBALS.MESSAGE_AUDIO_INTENT, 'bot'));
   }
 
   ngOnInit() {

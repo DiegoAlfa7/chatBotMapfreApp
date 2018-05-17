@@ -38,6 +38,13 @@ export class MapfrecitoComponent implements OnInit {
     }
   }
 
+  mapeoPeticion(){
+
+
+
+
+  }
+
   ngOnInit() {
 
 
@@ -49,7 +56,7 @@ export class MapfrecitoComponent implements OnInit {
     this.messageFeedChangeObserver.observe(this.messageFeedNode.nativeElement, {
       childList: true
     });
-    
+
   }
 
 

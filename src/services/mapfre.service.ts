@@ -13,7 +13,6 @@ export class MapfreService {
   private SESSION_ID: string;
 
 
-
   constructor(public httpClient: HttpClient) {
 
     if (localStorage.getItem(GLOBALS.STR_SESSION_ID)) {
@@ -45,51 +44,38 @@ export class MapfreService {
 
   public sendQuery(query: string, lang?: string, context?: string, sessionId?: string): Observable<Object> {
 
+    let url='';
     if (lang && context && sessionId) {
 
-      const url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${lang}&query=${query}&sessionId=${sessionId}&timezone=ES`;
-      //const url = this.urlDialogFlow + `query?v=20150910&contexts=apple&lang=ES&query=apple&sessionId=${sessionId}&timezone=Europa/España`;
-      let headers: HttpHeaders = this.getHeaders();
-
-      // return this.httpClient.get(url, {headers}).map((respose: any) => {
-      //         //   console.log(respose);
-      //         // })
-
-      return this.httpClient.get(url, { headers });
+       url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${lang}&query=${query}&sessionId=${sessionId}&timezone=ES`;
+   
 
     }
     else if (lang && context) {
 
-      const url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${lang}&query=${query}&sessionId=${this.SESSION_ID}&timezone=ES`;
-
-      let headers: HttpHeaders = this.getHeaders();
-
-      return this.httpClient.get(url, { headers });
+       url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${lang}&query=${query}&sessionId=${this.SESSION_ID}&timezone=ES`;
 
 
 
 
     } else if (context) {
 
-      const url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${GLOBALS.LANG_ES}&query=${query}&sessionId=${this.SESSION_ID}&timezone=ES`;
-
-      let headers: HttpHeaders = this.getHeaders();
-
-      return this.httpClient.get(url, { headers });
+       url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${GLOBALS.LANG_ES}&query=${query}&sessionId=${this.SESSION_ID}&timezone=ES`;
 
 
 
 
     } else {
 
-      const url = this.urlDialogFlow + `query?v=20150910&lang=${GLOBALS.LANG_ES}&query=${query}&sessionId=${this.SESSION_ID}&timezone=ES`;
+       url = this.urlDialogFlow + `query?v=20150910&lang=${GLOBALS.LANG_ES}&query=${query}&sessionId=${this.SESSION_ID}&timezone=ES`;
 
-      let headers: HttpHeaders = this.getHeaders();
 
-      return this.httpClient.get(url, { headers });
 
 
     }
 
+    let headers: HttpHeaders = this.getHeaders();
+
+    return this.httpClient.get(url, {headers});
   }
 }

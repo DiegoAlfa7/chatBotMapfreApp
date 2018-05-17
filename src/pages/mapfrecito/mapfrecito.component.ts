@@ -40,6 +40,13 @@ export class MapfrecitoComponent implements OnInit {
     this.messageFeed.push(new Message('necesito un audio', GLOBALS.MESSAGE_AUDIO_INTENT, 'bot'));
   }
 
+  mapeoPeticion(){
+
+
+
+
+  }
+
   ngOnInit() {
 
 
@@ -51,7 +58,7 @@ export class MapfrecitoComponent implements OnInit {
     this.messageFeedChangeObserver.observe(this.messageFeedNode.nativeElement, {
       childList: true
     });
-    
+
   }
 
 

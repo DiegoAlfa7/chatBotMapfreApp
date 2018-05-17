@@ -1,19 +1,13 @@
 import {Injectable, OnInit} from "@angular/core";
 import {Observable} from "rxjs/Observable";
 import {toObservable} from "@angular/forms/src/validators";
+import {Subject} from "rxjs/Subject";
 
 
 @Injectable()
 export class ShareImageService{
 
-  private imgData:Observable<string>;
-
-
-  constructor(){
-
-    this.imgData = toObservable('');
-
-  }
+  private imgData:Subject<string>;
 
   /**
    * This method changes the observable value and should trigger all the subscribes cb functions wherever
@@ -21,7 +15,7 @@ export class ShareImageService{
    */
   public setData(base64encoded:string){
 
-    this.imgData = toObservable(base64encoded);
+    this.imgData.next(base64encoded);
 
 
   }
@@ -32,7 +26,7 @@ export class ShareImageService{
    */
   public getData():Observable<string>{
 
-    return this.imgData;
+    return this.imgData.asObservable();
 
   }
 

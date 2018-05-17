@@ -44,8 +44,8 @@ export class MessageCameraIntentComponent {
   };
 
   private default_videoCamera_options: CaptureVideoOptions = {
-    duration: 20000,
-    quality: 1
+    limit:1,
+    duration: 20
   };
   public base64ImageString:string;
 
@@ -67,7 +67,7 @@ export class MessageCameraIntentComponent {
 
   sendImage(){
 
-
+  this.toast.showLongCenter("Img sent...");
 
   }
 
@@ -126,7 +126,13 @@ export class MessageCameraIntentComponent {
       (err) => {
 
         console.log(err);
+        this.toast.showLongCenter(err.code).subscribe(then=>{
 
+
+          console.log("Toast:"+ err.code);
+
+
+        });
 
       });
 

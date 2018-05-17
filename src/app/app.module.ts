@@ -1,7 +1,7 @@
 
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule, Toast, ToastController } from 'ionic-angular';
+import { IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 
@@ -14,6 +14,7 @@ import { MapfrecitoComponent } from "../pages/mapfrecito/mapfrecito.component";
 
 
 //Modules
+import {Toast} from '@ionic-native/toast'
 import {Camera} from "@ionic-native/camera";
 import { HttpClientModule } from '@angular/common/http';
 
@@ -23,10 +24,9 @@ import { MapfreService } from '../services/mapfre.service';
 import { MyApp } from './app.component';
 import {MessageAbstract} from "../components/message/message_abstract.component";
 import {MessageTextComponent} from "../components/message/message_text/message_text.component";
-import {MessagePhotoIntentComponent} from "../components/message/message_photoIntent/message_photoIntent.component";
+import {MessageCameraIntentComponent} from "../components/message/message_photoIntent/message_cameraIntent.component";
 import { CameraMock } from '../services/mocks/camera.mock';
 import { SanitizerPipe } from '../pipes/sanitizer.pipe';
-import { ToastMock } from '@ionic-native-mocks/toast';
 
 
 
@@ -38,7 +38,7 @@ import { ToastMock } from '@ionic-native-mocks/toast';
     MessageAbstract,
     MessageTextComponent,
     LoginPage,
-    MessagePhotoIntentComponent,
+    MessageCameraIntentComponent,
     SanitizerPipe
 
   ],
@@ -59,7 +59,7 @@ import { ToastMock } from '@ionic-native-mocks/toast';
     MapfrecitoComponent,
     MessageAbstract,
     MessageTextComponent,
-    MessagePhotoIntentComponent,
+    MessageCameraIntentComponent,
     LoginPage
   ],
 
@@ -67,7 +67,7 @@ import { ToastMock } from '@ionic-native-mocks/toast';
     StatusBar,
     SplashScreen,
    Camera,CameraMock,
-   ToastController,
+   Toast,
     MapfreService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
 

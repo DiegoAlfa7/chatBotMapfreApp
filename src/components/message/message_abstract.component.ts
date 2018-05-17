@@ -16,6 +16,7 @@ export class MessageAbstract {
 
   @Input() public message:Message;
 
+
   public photoIntentType:string = GLOBALS.MESSAGE_PHOTO_INTENT;
   public textType:string = GLOBALS.MESSAGE_TEXT;
 

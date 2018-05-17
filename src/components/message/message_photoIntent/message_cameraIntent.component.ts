@@ -65,10 +65,13 @@ export class MessageCameraIntentComponent {
 
 
 
-  sendImg(){
+  sendImage(){
 
 
 
+  }
+
+  sendVideo(){
 
 
 

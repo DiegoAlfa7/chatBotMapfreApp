@@ -42,6 +42,7 @@ import { SanitizerPipe } from '../pipes/sanitizer.pipe';
     MapfrecitoComponent,
     MessageAbstract,
     MessageTextComponent,
+    MessageAudioIntentComponent,
     LoginPage,
     MessageCameraIntentComponent,
     SanitizerPipe
@@ -75,6 +76,7 @@ import { SanitizerPipe } from '../pipes/sanitizer.pipe';
    Camera,CameraMock,
    Toast,
     MapfreService,
+    MediaCapture,
     Media,
     File,
     { provide: ErrorHandler, useClass: IonicErrorHandler }

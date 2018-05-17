@@ -1,3 +1,4 @@
+import { FormularioPage } from './../pages/formulario/formulario';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 //Modules
@@ -22,7 +23,6 @@ import { MessageTextComponent } from "../components/message/message_text/message
 import { MessageCameraIntentComponent } from "../components/message/message_photoIntent/message_cameraIntent.component";
 import { CameraMock } from '../services/mocks/camera.mock';
 import { SanitizerPipe } from '../pipes/sanitizer.pipe';
-import { FormularioPage } from '../pages/formulario/formulario';
 
 
 
@@ -34,6 +34,7 @@ import { FormularioPage } from '../pages/formulario/formulario';
     MessageTextComponent,
     MapfrecitoComponent,
     MessageAbstract,
+    FormularioPage,
     MessageAudioIntentComponent,
     LoginPage,
     MessageCameraIntentComponent,
@@ -58,6 +59,7 @@ import { FormularioPage } from '../pages/formulario/formulario';
     MessageAbstract,
     MessageCameraIntentComponent,
     MessageAudioIntentComponent,
+    FormularioPage,
     LoginPage
   ],
 

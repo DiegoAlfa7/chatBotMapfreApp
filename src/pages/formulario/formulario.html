@@ -12,36 +12,204 @@
 
 
 <ion-content padding>
+  <!-- ASEGURADO -->
+  <ion-card text-wrap>
+    <ion-card-header>
+      <h1>Asegurado</h1>
+    </ion-card-header>
+    <hr>
+    <ion-card-content>
+      <ion-label>Nombre
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="Daniel" type="text"></ion-input>
 
-  <ion-label>
-    <h3>
-      <strong>ASEGURADO</strong>
-    </h3>
-  </ion-label>
+      <ion-label>Apellidos
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="Arroyo Mayo" type="text"></ion-input>
+
+      <ion-label>Número de teléfono
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="655321889" type="number"></ion-input>
+
+      <ion-label>
+        ¿El asegurado puede recuperar el IVA referente al vehículo?
+        <strong>*</strong>
+      </ion-label>
+
+      <ion-list radio-group>
+        <ion-item>
+          <ion-label>Si</ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>No</ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+      </ion-list>
+
+      <br>
+      <h2>
+        <strong>Dirección</strong>
+      </h2>
+      <hr>
+
+      <ion-label>Calle y número
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="Calle falsa 123" type="text"></ion-input>
+
+      <ion-label>Localidad
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="Localidad" type="text"></ion-input>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!--VEHÍCULO-->
+  <ion-card text-wrap>
+
+    <ion-card-header>
+      <h1>Vehículo</h1>
+    </ion-card-header>
+    <hr>
+
+    <ion-card-content>
+
+      <ion-label>Marca y modelo
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="Seat Toledo" type="text"></ion-input>
+
+      <ion-label>Matrícula
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="1234abc" type="text"></ion-input>
+    </ion-card-content>
+
+  </ion-card>
+
+  <!--ASEGURADORA-->
+  <ion-card text-wrap>
+
+    <ion-card-header>
+      <h1>Aseguradora</h1>
+    </ion-card-header>
+    <hr>
+
+    <ion-card-content>
+
+      <ion-label>Nombre de la aseguradora
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="Mapfre" type="text"></ion-input>
+
+      <ion-label>Número de la póliza
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="234234" type="number"></ion-input>
+
+      <br>
+      <h2>
+        <strong>Carta verde (solo extranjeros)</strong>
+      </h2>
+      <hr>
+
+      <ion-label>Número de carta verde</ion-label>
+      <ion-input value="123456789" type="number"></ion-input>
+
+      <ion-label>Válido hasta</ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
+
+      <ion-label>¿Los daños propios del vehículo están asegurados?</ion-label>
+      <ion-list radio-group>
+        <ion-item>
+          <ion-label>Si</ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+        <ion-item>
+          <ion-label>No</ion-label>
+          <ion-radio></ion-radio>
+        </ion-item>
+      </ion-list>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <!--CONDUCTOR-->
+  <ion-card text-wrap>
+
+    <ion-card-header>
+      <h1>Conductor</h1>
+    </ion-card-header>
+    <hr>
+
+    <ion-card-content>
+
+      <ion-label>Nombre
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="DANIEL" type="text"></ion-input>
+
+      <ion-label>Apellidos
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="Arroyo Mayo" type="text"></ion-input>
+
+      <ion-label>Dirección
+        <strong>*</strong>
+      </ion-label>
+      <ion-input value="Calle Falsa 123" type="text"></ion-input>
+
+      <ion-label>Permiso de conducir
+        <strong>*</strong>
+      </ion-label>
+      <ion-select placeholder="Elige un permiso">
+        <ion-option value="AM">AM</ion-option>
+        <ion-option value="A1">A1</ion-option>
+        <ion-option value="A2">A2</ion-option>
+        <ion-option value="A">A</ion-option>
+        <ion-option value="B1">B1</ion-option>
+        <ion-option value="B">B</ion-option>
+        <ion-option value="C1">C1</ion-option>
+        <ion-option value="D1">D1</ion-option>
+        <ion-option value="D">D</ion-option>
+        <ion-option value="BE">BE</ion-option>
+        <ion-option value="C1E">C1E</ion-option>
+        <ion-option value="CE">CE</ion-option>
+        <ion-option value="D1E">D1E</ion-option>
+        <ion-option value="DE">DE</ion-option>
+      </ion-select>
+
+      <ion-label>Fecha de expedición
+        <strong>*</strong>
+      </ion-label>
+
+      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
+
+      <ion-label>Fecha de caducidad
+        <strong>*</strong>
+      </ion-label>
+      <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card>
+
+    <ion-card-header>
+      <h1>OBSERVACIONES</h1>
+    </ion-card-header>
+    <hr>
+
+    <ion-label>AUDIO A IMPORTAR</ion-label>
 
 
-  <hr>
-
-  <ion-list>
-
-    <ion-label>
-      <h5>
-        <strong>Datos personales:</strong>
-      </h5>
-    </ion-label>
-
-    <ion-item>
-      <ion-label floating>Nombre</ion-label>
-      <ion-input type="text" value="Nombre"></ion-input>
-    </ion-item>
-
-    <ion-item>
-      <ion-label floating>Apellidos</ion-label>
-      <ion-input type="text" value="Apellido1 Apellido2"></ion-input>
-    </ion-item>
-
-
-
-  </ion-list>
+  </ion-card>
 
 </ion-content>

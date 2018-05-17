@@ -4,14 +4,14 @@ import {toObservable} from "@angular/forms/src/validators";
 
 
 @Injectable()
-export class ShareImageService implements OnInit{
+export class ShareImageService{
 
   private imgData:Observable<string>;
 
-  ngOnInit(): void {
+
+  constructor(){
 
     this.imgData = toObservable('');
-
 
   }
 
@@ -22,6 +22,7 @@ export class ShareImageService implements OnInit{
   public setData(base64encoded:string){
 
     this.imgData = toObservable(base64encoded);
+
 
   }
 

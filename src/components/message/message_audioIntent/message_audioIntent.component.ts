@@ -21,7 +21,7 @@ export class MessageAudioIntentComponent {
 
   constructor(public navCtrl: NavController, private media: Media, private file: File, public platform: Platform) { }
 
-  verInforme(){
+  verInforme() {
     this.navCtrl.push(FormularioPage);
   }
 
@@ -34,15 +34,16 @@ export class MessageAudioIntentComponent {
 
   public startRecord() {
     if (this.platform.is('ios')) {
-      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
+      this.fileName = 'observacion' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
       this.filePath = this.file.documentsDirectory + this.fileName;
       this.audio = this.media.create(this.filePath);
     } else if (this.platform.is('android')) {
-      this.fileName = 'record' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
+      this.fileName = 'observacion' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
       this.filePath = this.file.externalDataDirectory + this.fileName;
       this.audio = this.media.create(this.filePath);
     }
     this.audio.startRecord();
+    let ruta = this.file.resolveLocalFilesystemUrl(this.filePath);
     this.recording = true;
   }
 
@@ -56,8 +57,8 @@ export class MessageAudioIntentComponent {
     this.getAudioList();
   }
 
-  playAudio(file, idx) {
-  
+  playAudio() {
+
     this.audio.play();
     this.audio.setVolume(0.8);
   }

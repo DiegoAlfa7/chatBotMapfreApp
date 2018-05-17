@@ -14,16 +14,20 @@ import { MapfrecitoComponent } from "../pages/mapfrecito/mapfrecito.component";
 
 
 //Modules
-import {Camera} from "@ionic-native/camera";
+import { Camera } from "@ionic-native/camera";
+import { Media } from '@ionic-native/media';
+import { File } from '@ionic-native/file';
+import { NativeAudio } from "@ionic-native/native-audio"
 import { HttpClientModule } from '@angular/common/http';
 
 //SERVICES
 import { MapfreService } from '../services/mapfre.service';
 //Components
 import { MyApp } from './app.component';
-import {MessageAbstract} from "../components/message/message_abstract.component";
-import {MessageTextComponent} from "../components/message/message_text/message_text.component";
-import {MessagePhotoIntentComponent} from "../components/message/message_photoIntent/message_photoIntent.component";
+import { MessageAbstract } from "../components/message/message_abstract.component";
+import { MessageTextComponent } from "../components/message/message_text/message_text.component";
+import { MessagePhotoIntentComponent } from "../components/message/message_photoIntent/message_photoIntent.component";
+import { MessageAudioIntentComponent } from '../components/message/message_audioIntent/message_audioIntent.component';
 
 
 
@@ -35,7 +39,8 @@ import {MessagePhotoIntentComponent} from "../components/message/message_photoIn
     MessageAbstract,
     MessageTextComponent,
     LoginPage,
-    MessagePhotoIntentComponent
+    MessagePhotoIntentComponent,
+    MessageAudioIntentComponent
 
   ],
 
@@ -56,6 +61,7 @@ import {MessagePhotoIntentComponent} from "../components/message/message_photoIn
     MessageAbstract,
     MessageTextComponent,
     MessagePhotoIntentComponent,
+    MessageAudioIntentComponent,
     LoginPage
   ],
 
@@ -64,6 +70,8 @@ import {MessagePhotoIntentComponent} from "../components/message/message_photoIn
     SplashScreen,
     Camera,
     MapfreService,
+    Media,
+    File,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
 
   ]

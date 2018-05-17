@@ -1,0 +1,10 @@
+<div>
+  <p>{{message.msgBody}}</p>
+  <button *ngIf="!recording" ion-button icon-only (click)="startRecord()">
+    <ion-icon ios="ios-microphone" md="md-microphone"></ion-icon>
+  </button>
+
+  <button *ngIf="recording" ion-button icon-only (click)="stopRecord()">
+    <ion-icon ios=" ios-pause" md="md-pause"></ion-icon>
+  </button>
+</div>

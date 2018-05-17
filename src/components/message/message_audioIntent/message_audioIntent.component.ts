@@ -1,3 +1,4 @@
+import { FormularioPage } from './../../../pages/formulario/formulario';
 import { Component, Input } from '@angular/core';
 import { Message } from "../../../app/classes/Message";
 import { NavController, Platform } from 'ionic-angular';
@@ -20,7 +21,16 @@ export class MessageAudioIntentComponent {
 
   constructor(public navCtrl: NavController, private media: Media, private file: File, public platform: Platform) { }
 
+  verInforme(){
+    this.navCtrl.push(FormularioPage);
+  }
 
+  getAudioList() {
+    if (localStorage.getItem("audiolist")) {
+      this.audioList = JSON.parse(localStorage.getItem("audiolist"));
+      console.log(this.audioList);
+    }
+  }
 
   startRecord() {
     if (this.platform.is('ios')) {
@@ -39,7 +49,17 @@ export class MessageAudioIntentComponent {
   stopRecord() {
     console.log("Fin")
     this.audio.stopRecord();
+    let data = { filename: this.fileName };
+    this.audioList.push(data);
+    localStorage.setItem("audiolist", JSON.stringify(this.audioList));
     this.recording = false;
+    this.getAudioList();
+  }
+
+  playAudio(file, idx) {
+  
+    this.audio.play();
+    this.audio.setVolume(0.8);
   }
 
 }

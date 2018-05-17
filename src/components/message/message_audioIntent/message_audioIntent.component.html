@@ -1,10 +1,20 @@
 <div>
   <p>{{message.msgBody}}</p>
+
+  <button ion-button (click)="verInforme()">FORM</button>
+
   <button *ngIf="!recording" ion-button icon-only (click)="startRecord()">
     <ion-icon ios="ios-microphone" md="md-microphone"></ion-icon>
   </button>
 
   <button *ngIf="recording" ion-button icon-only (click)="stopRecord()">
-    <ion-icon ios=" ios-pause" md="md-pause"></ion-icon>
+    <ion-icon ios="ios-pause" md="md-pause"></ion-icon>
   </button>
+
+  <ion-item *ngFor="let audio of audioList; index as i;">
+    <p>{{audio.filename}}</p>
+    <button ion-button clear item-end large (click)="playAudio(audio.filename,i)">
+      <ion-icon name="play"></ion-icon>
+    </button>
+  </ion-item>
 </div>

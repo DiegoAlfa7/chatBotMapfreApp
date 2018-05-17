@@ -18,6 +18,7 @@ export class MessageAbstract {
 
 
   public photoIntentType:string = GLOBALS.MESSAGE_PHOTO_INTENT;
+  public audioIntentType:string = GLOBALS.MESSAGE_AUDIO_INTENT;
   public textType:string = GLOBALS.MESSAGE_TEXT;
   public videoIntentType = GLOBALS.MESSAGE_VIDEO_INTENT;
   public cameraIntentType:string = GLOBALS.MESSAGE_CAMERA_INTENT;

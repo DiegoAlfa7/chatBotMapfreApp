@@ -14,10 +14,13 @@ import { MapfrecitoComponent } from "../pages/mapfrecito/mapfrecito.component";
 
 
 //Modules
-
+import {Toast} from '@ionic-native/toast'
 import {Camera} from "@ionic-native/camera";
 import {MediaCapture} from "@ionic-native/media-capture";
 import { HttpClientModule } from '@angular/common/http';
+import { Media } from '@ionic-native/media';
+import { File } from '@ionic-native/file';
+import { NativeAudio } from "@ionic-native/native-audio"
 
 //SERVICES
 import { MapfreService } from '../services/mapfre.service';
@@ -26,9 +29,9 @@ import { MyApp } from './app.component';
 import {MessageAbstract} from "../components/message/message_abstract.component";
 import {MessageTextComponent} from "../components/message/message_text/message_text.component";
 import {MessageCameraIntentComponent} from "../components/message/message_photoIntent/message_cameraIntent.component";
+import { MessageAudioIntentComponent } from '../components/message/message_audioIntent/message_audioIntent.component';
 import { CameraMock } from '../services/mocks/camera.mock';
 import { SanitizerPipe } from '../pipes/sanitizer.pipe';
-import {Toast} from "@ionic-native/toast";
 
 
 
@@ -62,15 +65,18 @@ import {Toast} from "@ionic-native/toast";
     MessageAbstract,
     MessageTextComponent,
     MessageCameraIntentComponent,
+    MessageAudioIntentComponent,
     LoginPage
   ],
 
   providers: [
     StatusBar,
     SplashScreen,
-   Camera,CameraMock,MediaCapture,
+   Camera,CameraMock,
    Toast,
     MapfreService,
+    Media,
+    File,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
 
   ]

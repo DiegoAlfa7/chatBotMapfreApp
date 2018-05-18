@@ -40,7 +40,7 @@ export class MapfreService {
 
     const headers = new HttpHeaders({
       'Authorization': 'Bearer ' + this.token
-    })
+    });
 
     return headers;
   }

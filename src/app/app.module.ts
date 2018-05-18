@@ -23,9 +23,7 @@ import { MessageTextComponent } from "../components/message/message_text/message
 import { MessageCameraIntentComponent } from "../components/message/message_photoIntent/message_cameraIntent.component";
 import { CameraMock } from '../services/mocks/camera.mock';
 import { SanitizerPipe } from '../pipes/sanitizer.pipe';
-
-
-
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -45,9 +43,8 @@ import { SanitizerPipe } from '../pipes/sanitizer.pipe';
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
-
-
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
 
   bootstrap: [IonicApp],

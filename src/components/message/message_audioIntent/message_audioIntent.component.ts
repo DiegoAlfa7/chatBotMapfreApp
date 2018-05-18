@@ -35,6 +35,7 @@ export class MessageAudioIntentComponent {
   }
 
   public startRecord() {
+    this.audioList.splice(1);
     if (this.platform.is('ios')) {
       this.fileName = 'observacion' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
       this.filePath = this.file.documentsDirectory + this.fileName;
@@ -50,7 +51,6 @@ export class MessageAudioIntentComponent {
   }
 
   public stopRecord() {
-    this.audioList.splice(1);
     console.log("Fin");
     this.audioRetrieved = true;
     this.audio.stopRecord();

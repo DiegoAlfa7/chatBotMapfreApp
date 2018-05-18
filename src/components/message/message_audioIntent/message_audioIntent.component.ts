@@ -4,6 +4,7 @@ import { Message } from "../../../app/classes/Message";
 import { NavController, Platform } from 'ionic-angular';
 import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
+import { ToastController } from 'ionic-angular';
 
 @Component({
   selector: 'app-message_audioIntent',
@@ -14,12 +15,13 @@ export class MessageAudioIntentComponent {
   @Input() public message: Message;
 
   recording: boolean = false;
+  audioRetrieved: boolean = false;
   filePath: string;
   fileName: string;
   audio: MediaObject;
   audioList: any[] = [];
 
-  constructor(public navCtrl: NavController, private media: Media, private file: File, public platform: Platform) { }
+  constructor(public navCtrl: NavController, private media: Media, private file: File, public platform: Platform, private toastCtrl: ToastController) { }
 
   verInforme() {
     this.navCtrl.push(FormularioPage);
@@ -33,6 +35,7 @@ export class MessageAudioIntentComponent {
   }
 
   public startRecord() {
+    this.audioList.splice(1);
     if (this.platform.is('ios')) {
       this.fileName = 'observacion' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
       this.filePath = this.file.documentsDirectory + this.fileName;
@@ -49,6 +52,7 @@ export class MessageAudioIntentComponent {
 
   public stopRecord() {
     console.log("Fin");
+    this.audioRetrieved = true;
     this.audio.stopRecord();
     let data = { filename: this.fileName };
     this.audioList.push(data);
@@ -61,6 +65,11 @@ export class MessageAudioIntentComponent {
 
     this.audio.play();
     this.audio.setVolume(0.8);
+
+
   }
+
+
+
 
 }

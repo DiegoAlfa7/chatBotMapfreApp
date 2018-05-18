@@ -2,10 +2,11 @@
 <div *ngIf="!imgRetrieved">
 
   <div *ngIf="intentType == 0">
-  <p>{{message.msgBody}}</p><br/>
-  <button ion-button icon-only (click)="getImage()">
-    <ion-icon name="camera"></ion-icon>
-  </button>
+    <p>{{message.msgBody}}</p>
+    <br/>
+    <button ion-button icon-only (click)="getImage()">
+      <ion-icon name="camera"></ion-icon>
+    </button>
   </div>
 
   <!--
@@ -39,23 +40,24 @@
 </div>
 
 <div *ngIf="imgRetrieved">
-  <p>Esta es la foto que has sacado: </p><br/>
+  <p>Esta es la foto que has sacado: </p>
+  <br/>
   <img [src]="base64ImageString | domseguro:'data:image/jpeg;base64,'" class="responsive">
   <hr/>
-  <p>Está bien?</p>
+  <p>¿Está bien?</p>
   <ion-grid>
     <ion-row>
       <ion-col col-6>
-  <button ion-button  (click)="sendImage()">
-   Sí
-  </button>
-  </ion-col>
-  <ion-col>
-  <button ion-button icon-left (click)="getImage()">
-    No, repetir
-  </button>
-  </ion-col>
-  </ion-row>
+        <button ion-button (click)="sendImage()">
+          Sí
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button icon-left (click)="getImage()">
+          No, repetir
+        </button>
+      </ion-col>
+    </ion-row>
   </ion-grid>
 
 </div>
@@ -82,5 +84,3 @@
 
 </div>
 -->
-
-

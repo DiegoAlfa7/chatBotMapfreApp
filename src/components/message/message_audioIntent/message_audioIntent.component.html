@@ -1,20 +1,45 @@
-<div>
+<div *ngIf="!audioRetrieved">
   <p>{{message.msgBody}}</p>
 
   <button ion-button (click)="verInforme()">FORM</button>
 
   <button *ngIf="!recording" ion-button icon-only (click)="startRecord()">
-    <ion-icon ios="ios-microphone" md="md-microphone"></ion-icon>
+    <ion-icon ios="ios-mic" md="md-mic"></ion-icon>
   </button>
 
   <button *ngIf="recording" ion-button icon-only (click)="stopRecord()">
     <ion-icon ios="ios-pause" md="md-pause"></ion-icon>
   </button>
 
+</div>
+
+<div *ngIf="audioRetrieved">
+
+  <p>Este es el audio que has enviado:</p>
+
   <ion-item *ngFor="let audio of audioList; index as i;">
+
     <p>{{audio.filename}}</p>
-    <button ion-button clear item-end large (click)="playAudio()">
+    <button ion-button clear (click)="playAudio()">
       <ion-icon name="play"></ion-icon>
     </button>
+
   </ion-item>
+
+  <p>¿Está bien?</p>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <button ion-button (click)="sendAudio()">
+          Sí
+        </button>
+      </ion-col>
+      <ion-col>
+        <button ion-button (click)="startRecord()">
+          No, repetir
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </div>

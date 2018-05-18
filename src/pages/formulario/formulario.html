@@ -121,8 +121,9 @@
       <ion-label>Número de carta verde</ion-label>
       <ion-input value="123456789" type="number"></ion-input>
 
+
+      <ion-label>Válido hasta</ion-label>
       <ion-item>
-        <ion-label>Válido hasta</ion-label>
         <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
       </ion-item>
 
@@ -167,11 +168,12 @@
       </ion-label>
       <ion-input value="Calle Falsa 123" type="text"></ion-input>
 
+
+      <ion-label>Permiso de conducir
+        <strong>*</strong>
+      </ion-label>
       <ion-item>
-        <ion-label>Permiso de conducir
-          <strong>*</strong>
-        </ion-label>
-        <ion-select placeholder="Elige un permiso">
+        <ion-select placeholder="Elegir">
           <ion-option value="AM">AM</ion-option>
           <ion-option value="A1">A1</ion-option>
           <ion-option value="A2">A2</ion-option>
@@ -189,18 +191,19 @@
         </ion-select>
       </ion-item>
 
-      <ion-item>
-        <ion-label>Fecha de expedición
-          <strong>*</strong>
-        </ion-label>
 
+      <ion-label>Fecha de expedición
+        <strong>*</strong>
+      </ion-label>
+      <ion-item>
         <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
       </ion-item>
 
+
+      <ion-label>Fecha de caducidad
+        <strong>*</strong>
+      </ion-label>
       <ion-item>
-        <ion-label>Fecha de caducidad
-          <strong>*</strong>
-        </ion-label>
         <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
       </ion-item>
     </ion-card-content>
@@ -212,11 +215,32 @@
     <ion-card-header>
       <h1>OBSERVACIONES</h1>
     </ion-card-header>
-    <hr>
+    <hr/>
 
-    <ion-label>AUDIO A IMPORTAR</ion-label>
-
+    <ion-card-content>
+      <ion-label>AUDIO A IMPORTAR</ion-label>
+    </ion-card-content>
 
   </ion-card>
+
+  <ion-card>
+
+    <ion-card-header>
+      <h1>IMAGEN DEL ACCIDENTE</h1>
+    </ion-card-header>
+    <hr/>
+
+    <ion-card-content>
+
+      <img src="../../assets/imgs/logoCover.png" />
+
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-content>
+    <button ion-button color="secondary">Aceptar</button>
+  </ion-content>
+
 
 </ion-content>

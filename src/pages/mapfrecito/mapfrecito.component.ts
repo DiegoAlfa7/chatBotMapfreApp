@@ -14,7 +14,7 @@ export class MapfrecitoComponent implements OnInit {
 
   @ViewChild(Content) content: Content;
   @ViewChild(Grid, {read: ElementRef}) messageFeedNode: ElementRef;
-
+  //TODO: implement input lock when last message context asks for photo
   public messageFeed: Message[] = [];
   public lastMsg: string;
   private messageFeedChangeObserver: MutationObserver;

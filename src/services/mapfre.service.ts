@@ -45,10 +45,11 @@ export class MapfreService {
   public sendQuery(query: string, lang?: string, context?: string, sessionId?: string): Observable<Object> {
 
     let url='';
+
     if (lang && context && sessionId) {
 
        url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${lang}&query=${query}&sessionId=${sessionId}&timezone=ES`;
-   
+
 
     }
     else if (lang && context) {

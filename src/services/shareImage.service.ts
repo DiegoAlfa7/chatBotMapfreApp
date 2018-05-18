@@ -7,7 +7,20 @@ import {Subject} from "rxjs/Subject";
 @Injectable()
 export class ShareImageService{
 
+
   private imgData:Subject<string>;
+  private img:string;
+
+  private imgDataArr:Subject<string[]>;
+  private imaArr:string[];
+
+
+  public addImgArr(string:string){
+
+    this.imaArr = [... this.imaArr , string];
+    this.imgDataArr.next(this.imaArr);
+  }
+
 
   /**
    * This method changes the observable value and should trigger all the subscribes cb functions wherever
@@ -15,7 +28,9 @@ export class ShareImageService{
    */
   public setData(base64encoded:string){
 
-    this.imgData.next(base64encoded);
+
+    this.img = base64encoded;
+    this.imgData.next(this.img);
 
 
   }

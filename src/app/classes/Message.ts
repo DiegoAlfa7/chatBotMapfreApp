@@ -1,14 +1,14 @@
 export class Message{
 
-   from:string;
+   private _from:string;
 
-   to:string;
+   private _to:string;
 
-   msgBody:string;
+   private _msgBody:string;
 
-   type:string;
+   private _type:string;
 
-   context: any;
+   private _context: string;
 
   /**
    *
@@ -19,26 +19,66 @@ export class Message{
    */
    constructor(body:string, type:string, from?:string, to?:string, context?:any){
 
-    this.msgBody = body;
-    this.type = type;
+    this._msgBody = body;
+    this._type = type;
 
     if(from){
 
-      this.from = from;
+      this._from = from;
 
     }
 
     if(to){
 
-      this.to = to;
+      this._to = to;
 
     }
 
     if(context){
 
-      this.context = context;
+      this._context = context;
     }
 
    }
 
+
+  get from(): string {
+    return this._from;
+  }
+
+  set from(value: string) {
+    this._from = value;
+  }
+
+  get to(): string {
+    return this._to;
+  }
+
+  set to(value: string) {
+    this._to = value;
+  }
+
+  get msgBody(): string {
+    return this._msgBody;
+  }
+
+  set msgBody(value: string) {
+    this._msgBody = value;
+  }
+
+  get type(): string {
+    return this._type;
+  }
+
+  set type(value: string) {
+    this._type = value;
+  }
+
+  get context(): string {
+    return this._context;
+  }
+
+  set context(value: string) {
+    this._context = value;
+  }
 }

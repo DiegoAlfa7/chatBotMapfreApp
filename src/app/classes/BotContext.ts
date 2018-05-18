@@ -1,8 +1,9 @@
-export interface BotContext{
+export class BotContext{
 
   name:string;
   params:any;
 
+  constructor(){}
 
 
 }

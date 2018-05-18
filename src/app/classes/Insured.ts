@@ -1,6 +1,6 @@
 
 
-export interface Insured{
+export class Insured{
 
   nombre: string;
   apellidos: string;
@@ -16,6 +16,8 @@ export interface Insured{
   c_verde:string;
   c_verde_val: string;
   d_prop_asegurados:string;
+
+  constructor(){}
 
 
 

@@ -1,9 +1,10 @@
 export class BotContext{
 
   name:string;
-  params:any;
+  params:any[];
 
   constructor(){}
 
+  panams = [];
 
 }

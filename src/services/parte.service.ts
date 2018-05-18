@@ -21,6 +21,29 @@ export class ParteService{
 
   }
 
+  /**
+   * returns a string like: DatosAsegurado: Jose , Martín Gomez,  Avenida de Euskadi 8 , Madrid ,  , 623345123 , No , Seat , Leon ,  , 234234 , mapfre , No
+   * the values are separated by columns and every value is directly surrounded by character spacings so if any value is not initialized, it would be replaced by duble-spacing.
+   * @returns {string} DatosAsegurado-like string representation of an Insured object
+   */
+  public getDatosAsegurado1():string{
+
+    return `DatosAsegurado: ${this.asegurado1.nombre || ''} , ${this.asegurado1.apellidos || ''} , ${this.asegurado1.direccion || ''} , ${this.asegurado1.localidad || ''} , ${this.asegurado1.cp || ''} , ${this.asegurado1.telefono || ''} , ${this.asegurado1.recuperar_iva ? 'Si':'No'} , ${this.asegurado1.marca || ''} , ${this.asegurado1.modelo || ''} , ${this.asegurado1.matricula || ''} , ${this.asegurado1.poliza || ''} , ${this.asegurado1.agencia || ''} , ${this.asegurado1.d_prop_asegurados ? 'Si': 'No'} `;
+
+
+  }
+
+  /**
+   * returns a string like: DatosAsegurado: Jose , Martín Gomez,  Avenida de Euskadi 8 , Madrid ,  , 623345123 , No , Seat , Leon ,  , 234234 , mapfre , No
+   * the values are separated by columns and every value is directly surrounded by character spacings so if any value is not initialized, it would be replaced by duble-spacing.
+   * @returns {string} DatosAsegurado-like string representation of an Insured object
+   */
+  public getDatosAsegurado2():string{
+
+    return `DatosAsegurado: ${this.asegurado2.nombre || ''} , ${this.asegurado2.apellidos || ''} , ${this.asegurado2.direccion || ''} , ${this.asegurado2.localidad || ''} , ${this.asegurado2.cp || ''} , ${this.asegurado2.telefono || ''} , ${this.asegurado2.recuperar_iva ? 'Si':'No'} , ${this.asegurado2.marca || ''} , ${this.asegurado2.modelo || ''} , ${this.asegurado2.matricula || ''} , ${this.asegurado2.poliza || ''} , ${this.asegurado2.agencia || ''} , ${this.asegurado2.d_prop_asegurados ? 'Si': 'No'} `;
+
+
+  }
 
   get url_audioAccidente(): string {
     return this._url_audioAccidente;

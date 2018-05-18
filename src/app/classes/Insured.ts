@@ -10,6 +10,7 @@ export class Insured{
   telefono: string;
   recuperar_iva: string;
   marca: string;
+  modelo: string;
   matricula: string;
   poliza: string;
   agencia:string;

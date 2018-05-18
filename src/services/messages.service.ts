@@ -8,10 +8,18 @@ export class MessagesService {
 
 
   private _messagesFeed:Subject<Message[]>;
-  private messagesArray:Message[];
+  private messagesArray:Message[]=[];
 
   private _lastMessage:Subject<Message>;
-  private message_last:Message;
+  private message_last:Message=undefined;
+
+  constructor(){
+
+    this._messagesFeed = new Subject<Message[]>();
+    this._lastMessage = new Subject<Message>();
+
+
+  }
 
   /**
    * Pass in a Message object value that will be appended at current's array end.
@@ -24,6 +32,7 @@ export class MessagesService {
     //Update the value of _lastMessage to propagate changes
     this._lastMessage.next(this.message_last);
     //Of course, update the whole array observer value
+    this.messagesArray.push();
     this.messagesArray = [... this.messagesArray, this.message_last];
     this._messagesFeed.next(this.messagesArray);
 

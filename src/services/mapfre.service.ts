@@ -45,7 +45,7 @@ export class MapfreService {
     return headers;
   }
 
-  public sendQuery(query: string, lang?: string, context?: string, sessionId?: string): BotResponse {
+  public sendQuery(query: string, lang?: string, context?: string, sessionId?: string): Observable<Object> {
 
     let url='';
 
@@ -81,32 +81,8 @@ export class MapfreService {
     let headers: HttpHeaders = this.getHeaders();
 
 
-    return this.processResposne(this.httpClient.get(url, {headers}));
+    return this.httpClient.get(url, {headers});
   }
 
-  private processResposne(objectObservable: Observable<Object>):BotResponse {
 
-    let respuestaBot:BotResponse = new BotResponse();
-
-    objectObservable.subscribe( (dialogResponse:any) => {
-
-        //Mapping all data
-        respuestaBot.pregunta = dialogResponse.result.resolvedQuery;
-        respuestaBot.speech = dialogResponse.result.fulfillment.speech;
-        respuestaBot.paramsRespose = dialogResponse.result.parameters;
-        respuestaBot.contexts = dialogResponse.result.contexts.map((context) => {
-
-          let context1:BotContext = new BotContext();
-          context1.name = context.name;
-          context1.params = context.params;
-          respuestaBot.contexts.push(context1);
-
-        });
-
-    });
-    return respuestaBot;
-
-
-
-  }
 }

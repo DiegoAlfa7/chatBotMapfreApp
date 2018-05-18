@@ -23,6 +23,10 @@ import { MessageTextComponent } from "../components/message/message_text/message
 import { MessageCameraIntentComponent } from "../components/message/message_photoIntent/message_cameraIntent.component";
 import { CameraMock } from '../services/mocks/camera.mock';
 import { SanitizerPipe } from '../pipes/sanitizer.pipe';
+import {ContextGateController} from "../services/context-gate-controller.service";
+import {ExternalsService} from "../services/externals.service";
+import {MessagesService} from "../services/messages.service";
+import {ParteService} from "../services/parte.service";
 
 
 
@@ -72,7 +76,11 @@ import { SanitizerPipe } from '../pipes/sanitizer.pipe';
     MediaCapture,
     Media,
     File,
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: IonicErrorHandler },
+    ContextGateController,
+    ExternalsService,
+    MessagesService,
+    ParteService
 
   ]
 })

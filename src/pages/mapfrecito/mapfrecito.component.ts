@@ -1,9 +1,10 @@
-import { MESSAGE_AUDIO_INTENT } from './../../app/app.constants';
 import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
 import {Content, Grid, NavParams} from 'ionic-angular';
 import {Message} from "../../app/classes/Message";
-import {MapfreService} from "../../services/mapfre.service";
-import * as GLOBALS from '../../app/app.constants';
+import {ContextGateController} from "../../services/context-gate-controller.service";
+import {MessagesService} from "../../services/messages.service";
+import {ParteService} from "../../services/parte.service";
+import {Insured} from "../../app/classes/Insured";
 
 @Component({
   selector: 'page-mapfrecito',
@@ -12,43 +13,40 @@ import * as GLOBALS from '../../app/app.constants';
 export class MapfrecitoComponent implements OnInit {
 
   @ViewChild(Content) content: Content;
-  @ViewChild(Grid, { read: ElementRef }) messageFeedNode: ElementRef;
+  @ViewChild(Grid, {read: ElementRef}) messageFeedNode: ElementRef;
 
-  public messageFeed: Message[];
+  public messageFeed: Message[] = [];
   public lastMsg: string;
   private messageFeedChangeObserver: MutationObserver;
   public usuarioRegistrado: any = this.navParams.get('name');
 
-  constructor(private mapfreService: MapfreService, public navParams: NavParams) {
+  constructor(
+    private navParams: NavParams,
+    private gate: ContextGateController,
+    private messages: MessagesService,
+    private parte: ParteService
+  ) {
 
-    this.messageFeed = [];
+    this.messages.getMessageListObserver().subscribe((messages: Message[]) => {
+      this.messageFeed = messages;
+    });
+
 
   }
 
   ionViewWillEnter() {
     console.log(this.usuarioRegistrado);
 
-    if (this.usuarioRegistrado) {
-      this.mapfreService.sendQuery('loginasegurado:' + this.usuarioRegistrado).subscribe((result: any) => {
-        this.messageFeed.push(new Message(result.result.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
-      });
-    } else {
-      this.mapfreService.sendQuery('Hola').subscribe((result: any) => {
-        this.messageFeed.push(new Message(result.result.fulfillment.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
-      });
-    }
-    this.messageFeed.push(new Message('necesito un audio', GLOBALS.MESSAGE_AUDIO_INTENT, 'bot'));
-  }
+    //This is the app enter point, so the service should not have any data set
 
-  mapeoPeticion(){
-
-
-
+    let asegurado:Insured = new Insured();
+    asegurado.nombre = this.usuarioRegistrado;
+    this.parte.asegurado1 = asegurado;
+    this.gate.sendLoginAsegurado(this.usuarioRegistrado);
 
   }
 
   ngOnInit() {
-
 
 
     this.messageFeedChangeObserver = new MutationObserver((mutations) => {
@@ -69,13 +67,7 @@ export class MapfrecitoComponent implements OnInit {
 
     if (this.lastMsg && this.lastMsg != '') {
 
-      this.messageFeed.push(new Message(this.lastMsg, GLOBALS.MESSAGE_TEXT, 'user'));
-
-      this.mapfreService.sendQuery(this.lastMsg).subscribe((result: any) => {
-
-        this.messageFeed.push(new Message(result.result.speech, GLOBALS.MESSAGE_TEXT, 'bot'));
-
-      });
+      this.gate.sendVisibleMessage(this.lastMsg);
 
       this.lastMsg = '';
     }

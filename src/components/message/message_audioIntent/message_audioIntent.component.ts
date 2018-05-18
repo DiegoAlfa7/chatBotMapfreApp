@@ -50,6 +50,7 @@ export class MessageAudioIntentComponent {
   }
 
   public stopRecord() {
+    this.audioList.splice(1);
     console.log("Fin");
     this.audioRetrieved = true;
     this.audio.stopRecord();

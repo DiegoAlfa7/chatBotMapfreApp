@@ -27,9 +27,7 @@ import {ContextGateController} from "../services/context-gate-controller.service
 import {ExternalsService} from "../services/externals.service";
 import {MessagesService} from "../services/messages.service";
 import {ParteService} from "../services/parte.service";
-
-
-
+import { IonicStorageModule } from '@ionic/storage';
 
 
 @NgModule({
@@ -49,9 +47,8 @@ import {ParteService} from "../services/parte.service";
   imports: [
     BrowserModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
-
-
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
 
   bootstrap: [IonicApp],

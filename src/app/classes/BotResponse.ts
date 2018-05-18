@@ -1,11 +1,15 @@
 import {BotContext} from "./BotContext";
 
-export interface BotResponse{
+export class BotResponse{
 
   pregunta:string;
   paramsRespose:any;
   speech:string;
   contexts:BotContext[];
+
+  constructor(){}
+
+
 
 
 

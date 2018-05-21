@@ -1,7 +1,7 @@
 <!-- Generated template for the MessageAbstract component -->
 <div *ngIf="!imgRetrieved">
 
-  <div >
+  <div>
     <p>{{message.msgBody}}</p>
     <br/>
     <button ion-button icon-only (click)="getImage()">
@@ -61,6 +61,7 @@
     </ion-row>
   </ion-grid>
   </div>
+  <p *ngIf="isAllDone" padding>{{this.matricula}}</p>
 
 </div>
 <!--

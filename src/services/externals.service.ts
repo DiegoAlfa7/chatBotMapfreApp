@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
 
 /**
  * Implements the calls to external services, ex: MATRICULA_OCR
@@ -14,40 +15,50 @@ export class ExternalsService {
 
 
 
-  reconocerMatrícula(base64:string):string{
+  public reconocerMatrícula(base64:string):Observable<Object>{
 
-    let matriculaReconocida=undefined;
 
     let url = 'http://api.cemobile.eu/gv/reconocer_matricula';
 
     let formPart = new FormData();
 
-    let blob:Blob = this.b64toBlob(base64, 'multipart/form-data', 512 );
+    let blob:Blob = this.btblob(base64);
 
     formPart.append('file', blob);
 
-    this.http.post(url, formPart).subscribe((respuesta:any)=>{
+    let headers = new HttpHeaders().set('Authorization', 'Bearer 1b26cb2f76ea4cb0979026ef6c350d05')
+      .set('Access-Control-Allow-Origin','*');
 
-      matriculaReconocida = respuesta.matricula;
-
-
-    }, (error)=>{
-
-        console.log(error.toString());
+    return this.http.post(url, formPart, {headers});
 
 
-    });
+  }
 
-    return matriculaReconocida || 'error-reconociendo-matricula';
+  public getDatosAsegurado():Observable<Object>{
+
+    let url = 'http://api.cemobile.eu/gv/datos_matricula';
 
 
+
+
+
+    return this.http.post(url, null);
 
 
 
   }
 
 
-  b64toBlob(b64Data, contentType, sliceSize) {
+
+
+  /**
+   * Convers a string base64 encoded image to a Binary Large Object by reading each 'real' character byte value
+   * @param b64Data
+   * @param contentType
+   * @param sliceSize
+   * @returns {Blob}
+   */
+  public b64toBlob(b64Data, contentType, sliceSize):Blob {
 
     contentType = contentType || '';
 
@@ -76,6 +87,27 @@ export class ExternalsService {
 
     let blob = new Blob(parentByteArrays, {type: contentType});
     return blob;
+  }
+
+  /**
+   * An ugly version of the upper method 'b64toBlob'
+   *
+   * @param {string} string
+   * @returns {Blob}
+   */
+  btblob(string:string){
+
+    let decodedS = atob(string);
+
+    let ab = new ArrayBuffer(decodedS.length);
+    let ia = new Uint8Array(ab);
+    for (var i = 0; i < decodedS.length; i++) {
+      ia[i] = decodedS.charCodeAt(i);
+    }
+
+    // write the ArrayBuffer to a blob, and you're done
+    let bb = new Blob([ab]);
+    return bb;
   }
 
 

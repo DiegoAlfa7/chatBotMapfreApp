@@ -28,6 +28,7 @@ import {ExternalsService} from "../services/externals.service";
 import {MessagesService} from "../services/messages.service";
 import {ParteService} from "../services/parte.service";
 import { IonicStorageModule } from '@ionic/storage';
+import {MessageMatriculaIntentComponent} from "../components/message/message_matriculaIntent/message_matriculaIntent.component";
 
 
 @NgModule({
@@ -40,6 +41,7 @@ import { IonicStorageModule } from '@ionic/storage';
     MessageAudioIntentComponent,
     LoginPage,
     MessageCameraIntentComponent,
+    MessageMatriculaIntentComponent,
     SanitizerPipe
 
   ],
@@ -59,6 +61,7 @@ import { IonicStorageModule } from '@ionic/storage';
     MapfrecitoComponent,
     MessageAbstract,
     MessageCameraIntentComponent,
+    MessageMatriculaIntentComponent,
     MessageAudioIntentComponent,
     FormularioPage,
     LoginPage

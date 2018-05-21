@@ -10,25 +10,29 @@ import {CaptureVideoOptions, MediaCapture, MediaFile} from "@ionic-native/media-
 import {ExternalsService} from "../../../services/externals.service";
 import {ParteService} from "../../../services/parte.service";
 import {ContextGateController} from "../../../services/context-gate-controller.service";
+import {CameraMock} from "../../../services/mocks/camera.mock";
 
 
 @Component({
-  selector: 'message-camera-intent',
-  templateUrl: 'message_cameraIntent.template.html'
+  selector: 'message-matricula-intent',
+  templateUrl: 'message_matriculaIntent.template.html'
 })
-export class MessageCameraIntentComponent {
+export class MessageMatriculaIntentComponent {
 
-  @ViewChild('videoOutput') videoOut: ElementRef;
+  /*@ViewChild('videoOutput') videoOut: ElementRef;*/
 
   @Input() public message: Message;
-  // 0 for CAMERA, 1 for VIDEO or any for both **** NOT YET IMPLEMENTED *****
+  // 0 for CAMERA, 1 for VIDEO or any for both *** NOT YET IMPLEMENTED **
   @Input() public intentType: number;
 
   //This will emit the cancel event that will block the input in case we want it to happen
  /* @Output() private blockInput = new EventEmitter();*/
 
+
+
   public imgRetrieved: boolean = false;
   public isAllDone:boolean = false;
+  public matricula:string;
   /*public videoRetrieved: boolean = false;*/
 
   //  destinationType values: --
@@ -53,6 +57,7 @@ export class MessageCameraIntentComponent {
 
   constructor(
     private camera: Camera,
+    /*private camera: CameraMock,*/
     private mapfre: MapfreService,
     private toast: ToastController,
     private externals: ExternalsService,
@@ -84,8 +89,40 @@ export class MessageCameraIntentComponent {
 
   sendImage() {
 
-    this.parte.base64_accidente = this.base64ImageString;
-    this.presentToast('Imagen Enviada...', 'bottom',1000);
+    this.externals.reconocerMatrícula(this.base64ImageString).subscribe((response:any)=>{
+
+
+        if(response.matricula) {
+
+          console.log('matrícula: '+response.matricula);
+          if(this.intentType == 1) {
+
+            this.parte.asegurado1.matricula = response.matricula;
+            this.parte.matricula_coche_1 = this.base64ImageString;
+
+          }else{
+            this.parte.asegurado2.matricula = response.matricula;
+            this.parte.matricula_coche_2 = this.base64ImageString;
+          }
+
+          this.gate.sendInvisibleMessage(response.matricula);
+
+          this.matricula = response.matricula;
+          this.isAllDone = true;
+
+        }else{
+
+          this.presentToast('Ha habido un error reconociendo la matrícula de la foto, lo sentimos','bottom', 3000);
+
+
+        }
+
+    }, (error1) =>{
+
+
+      this.presentToast('Ha habido un error reconociendo la matrícula de la foto, lo sentimos','bottom', 3000);
+
+    });
 
   }
 

@@ -39,9 +39,8 @@ export class MapfrecitoComponent implements OnInit {
 
     //This is the app enter point, so the service should not have any data set
 
-    let asegurado:Insured = new Insured();
-    asegurado.nombre = this.usuarioRegistrado;
-    this.parte.asegurado1 = asegurado;
+
+    this.parte.asegurado1.nombre = this.usuarioRegistrado;
     this.gate.sendLoginAsegurado(this.usuarioRegistrado);
 
   }
@@ -76,6 +75,7 @@ export class MapfrecitoComponent implements OnInit {
   public cargarMensajes(infiniteScrollEvent) {
 
   }
+
 
   public scrollToBottom() {
 

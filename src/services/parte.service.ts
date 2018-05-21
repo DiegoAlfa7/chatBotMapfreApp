@@ -1,5 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Insured} from "../app/classes/Insured";
+import {ExternalsService} from "./externals.service";
 
 @Injectable()
 export class ParteService{
@@ -14,12 +15,31 @@ export class ParteService{
   private _url_audioAccidente:string;
 
 
-  constructor(){
+  constructor(private external:ExternalsService) {
 
-      this._asegurado1 = new Insured();
-      this._asegurado2 = new Insured();
+    this._asegurado1 = new Insured();
+    this._asegurado2 = new Insured();
+    this.external.getDatosAsegurado().subscribe((response: any) => {
 
+        this._asegurado1.telefono = response.telefono;
+        this._asegurado1.cp = response.cp;
+        this._asegurado1.poliza = response.poliza;
+        this._asegurado1.d_prop_asegurados = response.d_prop_asegurados;
+        this._asegurado1.c_verde_val = response.c_verde_val;
+        this._asegurado1.c_verde = response.c_verde;
+        this._asegurado1.localidad = response.localidad;
+        this._asegurado1.apellidos = response.apellidos;
+        this._asegurado1.direccion = response.direccion;
+        this._asegurado1.matricula = response.matricula;
+        this._asegurado1.agencia = response.agencia;
+        this._asegurado1.marca = response.marca;
+        this._asegurado1.recuperar_iva = response.recuperar_iva;
+
+
+      }
+    );
   }
+
 
   /**
    * returns a string like: DatosAsegurado: Jose , Martín Gomez,  Avenida de Euskadi 8 , Madrid ,  , 623345123 , No , Seat , Leon ,  , 234234 , mapfre , No

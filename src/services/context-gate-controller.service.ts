@@ -8,7 +8,7 @@ import * as GLOBALS from '../app/app.constants';
 import {BotContext} from "../app/classes/BotContext";
 import {Observable} from "rxjs/Observable";
 
-import * as cOp from '../app/classes/ContextOperator';
+import * as operations from '../app/classes/ContextOperator';
 
 /**
  *  The main logic of the application, manages communication between MapfrecitoComponent an all the services involved in the process
@@ -88,8 +88,8 @@ export class ContextGateController {
 
       switch (true){
 
-
-        case (cOp.contains_noContainsStartWith(botResponse.contexts, 'fingruaasegurado', 'completardatosasegurado_dialog_params')):
+        // Response is fingruaasegurado, so its expecting DatosAsegurado-like expresion with data
+        case (operations.contains_noContainsStartWith(botResponse.contexts, 'fingruaasegurado', 'completardatosasegurado_dialog_params')):
 
           //CASOS:
 
@@ -105,6 +105,64 @@ export class ContextGateController {
           this.sendInvisibleMessage(this.parte.getDatosAsegurado1());
           console.log(this.parte.getDatosAsegurado1()+' Enviado...');
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+
+          break;
+
+
+        // Response is fingruaasegurado with matricula parameter
+        case (operations.containsParameterWithName(botResponse.contexts, 'matricula')):
+
+          //CASOS:
+
+          // 1 -  RESPUESTA_ANERIOR: Peticion de un parámetro
+
+          //      TEXTO_ENVIADO: un código postal
+
+          //      RESPUESTA: '1771 JDR'
+
+          //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
+
+
+
+          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA1_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+
+          break;
+
+        // Response is fingruaasegurado with matricula parameter
+        case (operations.only_contains(botResponse.contexts, 'datosaseguradocompletos')):
+
+          //CASOS:
+
+          // 1 -  RESPUESTA_ANERIOR: Se ha pedido el último parámetro del asegurado 1
+
+          //      TEXTO_ENVIADO: (whatever)
+
+          //      RESPUESTA: (whatever)
+
+          //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
+
+
+
+          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA2_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+
+          break;
+
+
+        case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
+
+          //CASOS:
+
+          // 1 -  RESPUESTA_ANERIOR: Se ha pedido el último parámetro del asegurado 1
+
+          //      TEXTO_ENVIADO: (whatever)
+
+          //      RESPUESTA: (whatever)
+
+          //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
+
+
+
+          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
           break;
 

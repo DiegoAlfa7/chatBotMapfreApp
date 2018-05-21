@@ -17,6 +17,33 @@ export function contains(contexts:BotContext[], s:string):boolean{
 
 }
 
+/**
+ * This is not an exact parametrized search, it loops through the array and splits
+ * each context name by its '_', then compares the last part of the resultant array with the name
+ * u gave as string parameter.
+ * @param {BotContext[]} contexts
+ * @param {string} name
+ * @returns {boolean} if the condition explained uphere returns true.
+ */
+export function containsParameterWithName(contexts:BotContext[], name:string):boolean{
+
+  for (let co of contexts){
+
+    let name_sliced:string[] = co.name.split('_');
+    let posible_paramater_name = name_sliced[name_sliced.length-1];
+    if(posible_paramater_name == name){
+
+      return true;
+
+    }
+
+
+  }
+  return false;
+
+
+}
+
 export function only_contains(contexts:BotContext[], s:string):boolean{
 
   if(contexts.length > 1){

@@ -20,6 +20,15 @@ export class MessagesService {
 
 
   }
+  public reset(){
+
+    this._messagesFeed = new Subject<Message[]>();
+    this._lastMessage = new Subject<Message>();
+    this.messagesArray = [];
+    this.message_last = undefined;
+
+
+  }
 
   /**
    * Pass in a Message object value that will be appended at current's array end.

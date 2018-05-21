@@ -1,10 +1,11 @@
 import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
-import {Content, Grid, NavParams} from 'ionic-angular';
+import {Content, Grid, NavController, NavParams} from 'ionic-angular';
 import {Message} from "../../app/classes/Message";
 import {ContextGateController} from "../../services/context-gate-controller.service";
 import {MessagesService} from "../../services/messages.service";
 import {ParteService} from "../../services/parte.service";
 import {Insured} from "../../app/classes/Insured";
+import {FormularioPage} from "../formulario/formulario";
 
 @Component({
   selector: 'page-mapfrecito',
@@ -22,6 +23,7 @@ export class MapfrecitoComponent implements OnInit {
 
   constructor(
     private navParams: NavParams,
+    private navController: NavController,
     private gate: ContextGateController,
     private messages: MessagesService,
     private parte: ParteService
@@ -33,8 +35,16 @@ export class MapfrecitoComponent implements OnInit {
 
 
   }
+  private ionViewWillLeave(){
 
-  ionViewWillEnter() {
+    console.log('Logging out...');
+    this.messages.reset();
+
+  }
+
+
+
+  private ionViewWillEnter() {
     console.log(this.usuarioRegistrado);
 
     //This is the app enter point, so the service should not have any data set
@@ -56,6 +66,13 @@ export class MapfrecitoComponent implements OnInit {
       childList: true
     });
 
+  }
+
+
+  private goToParte(){
+
+
+    this.navController.push(FormularioPage);
   }
 
 

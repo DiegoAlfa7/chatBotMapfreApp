@@ -22,17 +22,17 @@
       <ion-label>Nombre
         <strong>*</strong>
       </ion-label>
-      <ion-input value="Daniel" type="text"></ion-input>
+      <ion-input ([ngModel])="asegurado1.nombre" type="text"></ion-input>
 
       <ion-label>Apellidos
         <strong>*</strong>
       </ion-label>
-      <ion-input value="Arroyo Mayo" type="text"></ion-input>
+      <ion-input ([ngModel])="asegurado1.apellidos" type="text"></ion-input>
 
       <ion-label>Número de teléfono
         <strong>*</strong>
       </ion-label>
-      <ion-input value="655321889" type="number"></ion-input>
+      <ion-input ([ngModel])="asegurado1.telefono" type="number"></ion-input>
 
       <ion-label>
         ¿El asegurado puede recuperar el IVA referente al vehículo?
@@ -42,11 +42,11 @@
       <ion-list radio-group>
         <ion-item>
           <ion-label>Si</ion-label>
-          <ion-radio></ion-radio>
+          <ion-radio  value="true"></ion-radio>
         </ion-item>
         <ion-item>
           <ion-label>No</ion-label>
-          <ion-radio></ion-radio>
+          <ion-radio  value="false"></ion-radio>
         </ion-item>
       </ion-list>
 
@@ -59,12 +59,12 @@
       <ion-label>Calle y número
         <strong>*</strong>
       </ion-label>
-      <ion-input value="Calle falsa 123" type="text"></ion-input>
+      <ion-input ([ngModel])="asegurado1.direccion" type="text"></ion-input>
 
       <ion-label>Localidad
         <strong>*</strong>
       </ion-label>
-      <ion-input value="Localidad" type="text"></ion-input>
+      <ion-input ([ngModel])="asegurado1.localidad" type="text"></ion-input>
 
     </ion-card-content>
   </ion-card>

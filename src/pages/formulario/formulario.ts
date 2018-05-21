@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {ParteService} from "../../services/parte.service";
+import {Insured} from "../../app/classes/Insured";
 
 /**
  * Generated class for the FormularioPage page.
@@ -15,11 +17,36 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class FormularioPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private asegurado1:Insured;
+  private asegurado2:Insured;
+
+  private base64_matricula1:string;
+  private base64_matricula2:string;
+
+  private base64_accidente:string;
+
+
+
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams,
+              public parte:ParteService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad FormularioPage');
+  ionViewWillEnter() {
+
+    this.asegurado1 = this.parte.asegurado1;
+    this.asegurado2 = this.parte.asegurado2;
+
+    this.base64_matricula1 = this.parte.matricula_coche_1;
+    this.base64_matricula2 = this.parte.matricula_coche_2;
+
+    this.base64_accidente = this.parte.base64_accidente;
+
+    console.log(this.asegurado1);
+
+
+
+
   }
 
 }

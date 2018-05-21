@@ -34,6 +34,8 @@ export class ParteService{
         this._asegurado1.agencia = response.agencia;
         this._asegurado1.marca = response.marca;
         this._asegurado1.recuperar_iva = response.recuperar_iva;
+        console.log('Asegurado: ');
+        console.log(this._asegurado1);
 
 
       }
@@ -48,7 +50,7 @@ export class ParteService{
    */
   public getDatosAsegurado1():string{
 
-    return `DatosAsegurado: ${this.asegurado1.nombre || ''} , ${this.asegurado1.apellidos || ''} , ${this.asegurado1.direccion || ''} , ${this.asegurado1.localidad || ''} , ${this.asegurado1.cp || ''} , ${this.asegurado1.telefono || ''} , ${this.asegurado1.recuperar_iva ? 'Si':'No'} , ${this.asegurado1.marca || ''} , ${this.asegurado1.modelo || ''} , ${this.asegurado1.matricula || ''} , ${this.asegurado1.poliza || ''} , ${this.asegurado1.agencia || ''} , ${this.asegurado1.d_prop_asegurados ? 'Si': 'No'} `;
+    return `DatosAsegurado: ${this.asegurado1.nombre || ''} , ${this.asegurado1.apellidos || ''} , ${this.asegurado1.direccion || ''} , ${this.asegurado1.localidad || ''} , ${this.asegurado1.cp || ''} , ${this.asegurado1.telefono || ''} , ${this.asegurado1.recuperar_iva == 'True' ? 'Si':'No'} , ${this.asegurado1.marca || ''} , ${this.asegurado1.modelo || ''} , ${this.asegurado1.matricula || ''} , ${this.asegurado1.poliza || ''} , ${this.asegurado1.agencia || ''} , ${this.asegurado1.d_prop_asegurados == 'True' ? 'Si': 'No'} `;
 
 
   }

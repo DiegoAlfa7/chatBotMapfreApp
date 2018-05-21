@@ -14,7 +14,7 @@
 <ion-content padding>
   <!-- ASEGURADO -->
   <ion-card text-wrap>
-    <ion-card-header>
+    <ion-card-header (click)="printInsured()">
       <h1>Asegurado</h1>
     </ion-card-header>
     <hr>
@@ -22,7 +22,7 @@
       <ion-label>Nombre
         <strong>*</strong>
       </ion-label>
-      <ion-input ([ngModel])="asegurado1.nombre" type="text"></ion-input>
+      <ion-input  ([value])="asegurado1.nombre" type="text">}</ion-input>
 
       <ion-label>Apellidos
         <strong>*</strong>

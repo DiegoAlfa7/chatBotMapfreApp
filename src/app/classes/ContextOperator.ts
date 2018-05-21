@@ -2,6 +2,8 @@ import {BotContext} from "./BotContext";
 
 export function contains(contexts:BotContext[], s:string):boolean{
 
+  if(!contexts || contexts.length == 0) return false;
+
   for (let co of contexts){
 
     if(co.name == s){
@@ -27,6 +29,8 @@ export function contains(contexts:BotContext[], s:string):boolean{
  */
 export function containsParameterWithName(contexts:BotContext[], name:string):boolean{
 
+  if(!contexts || contexts.length == 0) return false;
+
   for (let co of contexts){
 
     let name_sliced:string[] = co.name.split('_');
@@ -45,6 +49,8 @@ export function containsParameterWithName(contexts:BotContext[], name:string):bo
 }
 
 export function only_contains(contexts:BotContext[], s:string):boolean{
+
+  if(!contexts || contexts.length == 0) return false;
 
   if(contexts.length > 1){
 
@@ -67,11 +73,15 @@ export function only_contains(contexts:BotContext[], s:string):boolean{
  */
 export function contains_isFirst(contexts:BotContext[], s:string):boolean{
 
+  if(!contexts || contexts.length == 0) return false;
+
   return contexts[0].name == s;
 
 }
 
 export function contains_startsWith(contexts:BotContext[], s:string):boolean{
+
+  if(!contexts || contexts.length == 0) return false;
 
   for (let co of contexts){
 
@@ -95,6 +105,8 @@ export function contains_startsWith(contexts:BotContext[], s:string):boolean{
  * @returns {boolean}
  */
 export function contains_noContainsStartWith(contexts:BotContext[], s:string, noContainsStartingWith:string):boolean{
+
+  if(!contexts || contexts.length == 0) return false;
 
   let result:boolean = false;
 

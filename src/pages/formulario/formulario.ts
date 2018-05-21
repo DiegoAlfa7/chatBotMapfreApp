@@ -30,6 +30,13 @@ export class FormularioPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public parte:ParteService) {
+    this.asegurado1 = this.parte.asegurado1;
+    this.asegurado2 = this.parte.asegurado2;
+
+    this.base64_matricula1 = this.parte.matricula_coche_1;
+    this.base64_matricula2 = this.parte.matricula_coche_2;
+
+    this.base64_accidente = this.parte.base64_accidente;
   }
 
   ionViewWillEnter() {
@@ -46,6 +53,13 @@ export class FormularioPage {
 
 
 
+
+  }
+
+  public printInsured(){
+
+
+    console.log(this.asegurado1);
 
   }
 

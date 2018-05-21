@@ -97,7 +97,7 @@ export class ContextGateController {
 
           //      TEXTO_ENVIADO: 'Sí' (no tiene por que)
 
-          //      RESPUESTA: 'Vamos a comprobar todos los datos [...] procederemos a completar los del otro vehiculo'
+          //      RESPUESTA_ACTUAL_TEXTO: 'Vamos a comprobar todos los datos [...] procederemos a completar los del otro vehiculo'
 
           //      COMPORTAMIENTO: Debemos enviar la palabra clave 'DatosAsegurado:[...]' con todos los campos del asegurado
           //                      de los que dispongamos en nuestro servicio de asegurado y además pintar el mensaje de respuesta
@@ -118,7 +118,7 @@ export class ContextGateController {
 
           //      TEXTO_ENVIADO: un código postal
 
-          //      RESPUESTA: '1771 JDR'
+          //      RESPUESTA_ACTUAL_TEXTO: 'Necesitamos una foto de tu matricula'
 
           //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
 
@@ -128,7 +128,7 @@ export class ContextGateController {
 
           break;
 
-        // Response is fingruaasegurado with matricula parameter
+
         case (operations.only_contains(botResponse.contexts, 'datosaseguradocompletos')):
 
           //CASOS:
@@ -137,7 +137,7 @@ export class ContextGateController {
 
           //      TEXTO_ENVIADO: (whatever)
 
-          //      RESPUESTA: (whatever)
+          //      RESPUESTA_ACTUAL_TEXTO: 'Ahora necesitamos que introduzcas la matricula del otro conductor'
 
           //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
 
@@ -152,11 +152,11 @@ export class ContextGateController {
 
           //CASOS:
 
-          // 1 -  RESPUESTA_ANERIOR: Se ha pedido el último parámetro del asegurado 1
+          // 1 -  RESPUESTA_ANERIOR: Se ha pedido la matrícula del otro conductor
 
           //      TEXTO_ENVIADO: (whatever)
 
-          //      RESPUESTA: (whatever)
+          //      RESPUESTA_ACTUAL_TEXTO: 'Ahora necesitamos una foto del accidente'
 
           //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
 
@@ -170,7 +170,7 @@ export class ContextGateController {
 
 
         default:
-          // EL COMPORTAMIENTO POR DEFECTO CUANDO SE LEE UNA RESPUESTA DEBE SER PINTAR EL MENSAJE DEL BOT, UN MENSAJE NORMAL
+          // EL COMPORTAMIENTO POR DEFECTO CUANDO SE LEE UNA RESPUESTA_ACTUAL_TEXTO DEBE SER PINTAR EL MENSAJE DEL BOT, UN MENSAJE NORMAL
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
           break;

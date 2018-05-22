@@ -108,8 +108,27 @@ export class ContextGateController {
 
           break;
 
+        case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
 
-        // Response is fingruaasegurado with matricula parameter
+          //CASOS:
+
+          // 1 -  RESPUESTA_ANERIOR: '[...] desea completar el parte de seguro mientras llega?'
+
+          //      TEXTO_ENVIADO: 'Sí' (no tiene por que)
+
+          //      RESPUESTA_ACTUAL_TEXTO: 'Vamos a comprobar todos los datos [...] procederemos a completar los del otro vehiculo'
+
+          //      COMPORTAMIENTO: Debemos enviar la palabra clave 'DatosAsegurado:[...]' con todos los campos del asegurado
+          //                      de los que dispongamos en nuestro servicio de asegurado y además pintar el mensaje de respuesta
+
+          //this.sendInvisibleMessage('VideoRealizado');
+
+          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+
+          break;
+
+
+       /* // Response is fingruaasegurado with matricula parameter
         case (operations.containsParameterWithName(botResponse.contexts, 'matricula')):
 
           //CASOS:
@@ -126,10 +145,10 @@ export class ContextGateController {
 
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA1_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          break;
+          break;*/
 
 
-        case (operations.only_contains(botResponse.contexts, 'datosaseguradocompletos')):
+       /* case (operations.only_contains(botResponse.contexts, 'datosaseguradocompletos')):
 
           //CASOS:
 
@@ -145,7 +164,7 @@ export class ContextGateController {
 
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA2_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          break;
+          break;*/
 
 
         case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):

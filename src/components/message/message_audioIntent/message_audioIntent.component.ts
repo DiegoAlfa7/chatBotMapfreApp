@@ -1,11 +1,11 @@
-import { FormularioPage } from './../../../pages/formulario/formulario';
-import { Component, Input } from '@angular/core';
-import { Message } from "../../../app/classes/Message";
-import { NavController, Platform } from 'ionic-angular';
-import { MediaCapture, MediaFile, CaptureError, CaptureVideoOptions, CaptureAudioOptions } from '@ionic-native/media-capture';
-import { File } from '@ionic-native/file';
-import { Storage } from '@ionic/storage';
-import { Media, MediaObject } from '@ionic-native/media';
+import {Component, Input} from '@angular/core';
+import {Message} from "../../../app/classes/Message";
+import {NavController, ToastController} from 'ionic-angular';
+import {CaptureError, MediaCapture} from '@ionic-native/media-capture';
+import {File} from '@ionic-native/file';
+import {Storage} from '@ionic/storage';
+import {Media, MediaObject} from '@ionic-native/media';
+import {ParteService} from "../../../services/parte.service";
 
 const MEDIA_FILES_KEY = 'mediaFiles';
 
@@ -17,11 +17,18 @@ const MEDIA_FILES_KEY = 'mediaFiles';
 export class MessageAudioIntentComponent {
   mediaFiles = [];
   @Input() public message: Message;
+  private isAllDone:boolean = false;
 
   recording: boolean = false;
   audioRetrieved: boolean = false;
 
-  constructor(public navCtrl: NavController, private mediaCapture: MediaCapture, private storage: Storage, private file: File, private media: Media) { }
+  constructor(public toast:ToastController,
+              public navCtrl: NavController,
+              private mediaCapture: MediaCapture,
+              private storage: Storage,
+              private file: File,
+              private media: Media,
+              private parte:ParteService) { }
 
   ionViewDidLoad() {
     this.storage.get(MEDIA_FILES_KEY).then(res => {
@@ -33,7 +40,33 @@ export class MessageAudioIntentComponent {
     this.recording = true;
     this.mediaCapture.captureAudio().then(res => {
       this.storeMediaFiles(res);
-    }, (err: CaptureError) => console.error(err));
+    }, (err: CaptureError) => this.presentToast('Hubo un error grabando el audio', 'bottom' , 1000));
+  }
+
+  public presentToast(m: string, position: string, duration: number) {
+    let toast = this.toast.create({
+      message: m,
+      duration: duration,
+      position: position
+    });
+
+
+    toast.present();
+  }
+
+  sendAudio(){
+
+    this.parte.url_audioAccidente = this.mediaFiles[0];
+    this.isAllDone = true;
+    this.presentToast('Audio Enviado...', 'bottom' ,1000);
+
+
+  }
+
+  repetirAudio(){
+
+    this.mediaFiles = [];
+
   }
 
   play(myFile) {
@@ -68,18 +101,18 @@ export class MessageAudioIntentComponent {
 
 
 
-  /* 
+  /*
     verInforme() {
       this.navCtrl.push(FormularioPage);
     }
-  
+
     getAudioList() {
       if (localStorage.getItem("audiolist")) {
         this.audioList = JSON.parse(localStorage.getItem("audiolist"));
         console.log(this.audioList);
       }
     }
-  
+
     public startRecord() {
       this.audioList.splice(1);
       if (this.platform.is('ios')) {
@@ -95,7 +128,7 @@ export class MessageAudioIntentComponent {
       let ruta = this.file.resolveLocalFilesystemUrl(this.filePath);
       this.recording = true;
     }
-  
+
     public stopRecord() {
       console.log("Fin");
       this.audioRetrieved = true;
@@ -106,21 +139,21 @@ export class MessageAudioIntentComponent {
       this.recording = false;
       this.getAudioList();
     }
-  
+
     playAudio() {
-  
+
       this.audio.play();
       this.audio.setVolume(0.8);
-  
-  
+
+
     }
-  
+
     public repetirAudio(){
-  
+
       this.audioRetrieved = false;
-  
-  
-  
+
+
+
     }
   */
 

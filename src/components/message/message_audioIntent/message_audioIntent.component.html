@@ -7,8 +7,8 @@
     <ion-icon ios="ios-mic" md="md-mic"></ion-icon>
   </button>
 
-  <button *ngIf="recording" ion-button icon-only >
-    <ion-icon ios="ios-pause" md="md-pause"></ion-icon>
+  <button *ngIf="recording" ion-button icon-only>
+    <ion-spinner name="bubbles"></ion-spinner>
   </button>
 
   <ion-list>
@@ -21,7 +21,7 @@
 </div>
 
 <div *ngIf="audioRetrieved">
-
+  <div *ngIf="!isAllDone">
   <p>Este es el audio que has enviado:</p>
 
   <ion-item *ngFor="let audio of mediaFiles; index as i;">
@@ -49,4 +49,5 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+</div>
 </div>

@@ -1,15 +1,15 @@
-import {Component, ElementRef, EventEmitter, Input, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, ViewChild} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
 //Hay que importar la camara en vez de CaeraMock si queremos que se utilize la cámara nativa
-import {Camera, CameraOptions} from "@ionic-native/camera";
+import {CameraOptions} from "@ionic-native/camera";
 //---------------------------------
 //import {CameraMock } from '../../../services/mocks/camera.mock'
 import {ToastController} from "ionic-angular";
 import {MapfreService} from '../../../services/mapfre.service';
-import {CaptureVideoOptions, MediaCapture, MediaFile} from "@ionic-native/media-capture";
 import {ExternalsService} from "../../../services/externals.service";
 import {ParteService} from "../../../services/parte.service";
 import {ContextGateController} from "../../../services/context-gate-controller.service";
+import {CameraMock} from "../../../services/mocks/camera.mock";
 
 
 @Component({
@@ -52,7 +52,7 @@ export class MessageCameraIntentComponent {
   public base64ImageString: string;
 
   constructor(
-    private camera: Camera,
+    private camera: CameraMock,
     private mapfre: MapfreService,
     private toast: ToastController,
     private externals: ExternalsService,
@@ -85,6 +85,7 @@ export class MessageCameraIntentComponent {
   sendImage() {
 
     this.parte.base64_accidente = this.base64ImageString;
+    this.isAllDone = true;
     this.presentToast('Imagen Enviada...', 'bottom',1000);
 
   }

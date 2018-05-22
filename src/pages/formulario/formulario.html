@@ -19,11 +19,12 @@
     </ion-card-header>
     <hr>
     <ion-card-content>
+      <ion-item>
       <ion-label>Nombre
         <strong>*</strong>
       </ion-label>
-      <ion-input  ([value])="asegurado1.nombre" type="text">}</ion-input>
-
+      <ion-input  [(value)]="asegurado1.nombre" type="text"></ion-input>
+      </ion-item>
       <ion-label>Apellidos
         <strong>*</strong>
       </ion-label>
@@ -232,7 +233,7 @@
 
     <ion-card-content>
 
-      <img src="../../assets/imgs/logoCover.png" />
+      <img [src]="this.base64_accidente | domseguro:'data:image/jpeg;base64,'" />
 
     </ion-card-content>
 

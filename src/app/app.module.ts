@@ -76,8 +76,7 @@ import {MessageMatriculaIntentComponent} from "../components/message/message_mat
     // { provide: Camera, useClass: CameraMock }, // Discomment only for development
     ToastController,
     MapfreService,
-    MediaCapture, // Comment for development
-    // { provide: MediaCapture, useClass: MediaCaptureMock }, // Discomment only for development
+    MediaCapture,
     Media,
     File,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

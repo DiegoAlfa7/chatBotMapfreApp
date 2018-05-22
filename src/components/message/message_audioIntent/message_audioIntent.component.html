@@ -19,18 +19,18 @@
 </div>
 
 <div *ngIf="audioRetrieved">
-  <div *ngIf="!isAllDone">
+
   <p>Este es el audio que has enviado:</p>
 
-  <ion-item *ngFor="let audio of mediaFiles; index as i;">
+  <ion-item>
 
-    <p>{{audio.name}}</p>
-    <button ion-button clear (click)="play(audio)">
+    <p>{{fileName}}</p>
+    <button ion-button clear (click)="playAudio()">
       <ion-icon name="play"></ion-icon>
     </button>
 
   </ion-item>
-
+  <div *ngIf="!isAllDone">
   <p>¿Está bien?</p>
 
   <ion-grid>

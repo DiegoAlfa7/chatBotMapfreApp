@@ -19,53 +19,70 @@
     </ion-card-header>
     <hr>
     <ion-card-content>
-      <ion-label>Nombre
-        <strong>*</strong>
-      </ion-label>
-      <ion-input  ([value])="asegurado1.nombre" type="text">}</ion-input>
 
-      <ion-label>Apellidos
-        <strong>*</strong>
-      </ion-label>
-      <ion-input ([ngModel])="asegurado1.apellidos" type="text"></ion-input>
-
-      <ion-label>Número de teléfono
-        <strong>*</strong>
-      </ion-label>
-      <ion-input ([ngModel])="asegurado1.telefono" type="number"></ion-input>
-
-      <ion-label>
-        ¿El asegurado puede recuperar el IVA referente al vehículo?
-        <strong>*</strong>
-      </ion-label>
-
-      <ion-list radio-group>
+      <ion-list>
         <ion-item>
-          <ion-label>Si</ion-label>
-          <ion-radio  value="true"></ion-radio>
+          <ion-label floating color="primary">Nombre
+            <strong>*</strong>
+          </ion-label>
+          <ion-input [(value)]="asegurado1.nombre" type="text"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label>No</ion-label>
-          <ion-radio  value="false"></ion-radio>
+          <ion-label floating color="primary">Apellidos
+            <strong>*</strong>
+          </ion-label>
+          <ion-input [(value)]="asegurado1.apellidos" type="text"></ion-input>
         </ion-item>
+
+        <ion-item>
+          <ion-label floating color="primary">Número de teléfono
+            <strong>*</strong>
+          </ion-label>
+          <ion-input [(value)]="asegurado1.telefono" type="number"></ion-input>
+        </ion-item>
+
+
+        <ion-list radio-group padding-top>
+
+          <h2>
+            <strong>¿El asegurado puede recuperar el IVA referente al vehículo?</strong>
+          </h2>
+          <hr>
+
+          <ion-item>
+            <ion-label>Si</ion-label>
+            <ion-radio value="true"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>No</ion-label>
+            <ion-radio value="false"></ion-radio>
+          </ion-item>
+
+        </ion-list>
+
+        <br>
+        <h2>
+          <strong>Dirección</strong>
+        </h2>
+        <hr>
+
+        <ion-item>
+          <ion-label floating color="primary">Calle y número
+            <strong>*</strong>
+          </ion-label>
+          <ion-input [(value)]="asegurado1.direccion" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating color="primary">Localidad
+            <strong>*</strong>
+          </ion-label>
+          <ion-input [(value)]="asegurado1.localidad" type="text"></ion-input>
+        </ion-item>
+
       </ion-list>
-
-      <br>
-      <h2>
-        <strong>Dirección</strong>
-      </h2>
-      <hr>
-
-      <ion-label>Calle y número
-        <strong>*</strong>
-      </ion-label>
-      <ion-input ([ngModel])="asegurado1.direccion" type="text"></ion-input>
-
-      <ion-label>Localidad
-        <strong>*</strong>
-      </ion-label>
-      <ion-input ([ngModel])="asegurado1.localidad" type="text"></ion-input>
-
     </ion-card-content>
   </ion-card>
 
@@ -79,15 +96,24 @@
 
     <ion-card-content>
 
-      <ion-label>Marca y modelo
-        <strong>*</strong>
-      </ion-label>
-      <ion-input value="Seat Toledo" type="text"></ion-input>
+      <ion-list>
 
-      <ion-label>Matrícula
-        <strong>*</strong>
-      </ion-label>
-      <ion-input value="1234abc" type="text"></ion-input>
+        <ion-item>
+          <ion-label floating color="primary">Marca y modelo
+            <strong>*</strong>
+          </ion-label>
+          <ion-input value="Seat Toledo" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating color="primary">Matrícula
+            <strong>*</strong>
+          </ion-label>
+          <ion-input value="1234abc" type="text"></ion-input>
+        </ion-item>
+
+      </ion-list>
+
     </ion-card-content>
 
   </ion-card>
@@ -101,44 +127,53 @@
     <hr>
 
     <ion-card-content>
+      <ion-list>
 
-      <ion-label>Nombre de la aseguradora
-        <strong>*</strong>
-      </ion-label>
-      <ion-input value="Mapfre" type="text"></ion-input>
-
-      <ion-label>Número de la póliza
-        <strong>*</strong>
-      </ion-label>
-      <ion-input value="234234" type="number"></ion-input>
-
-      <br>
-      <h2>
-        <strong>Carta verde (solo extranjeros)</strong>
-      </h2>
-      <hr>
-
-      <ion-label>Número de carta verde</ion-label>
-      <ion-input value="123456789" type="number"></ion-input>
-
-
-      <ion-label>Válido hasta</ion-label>
-      <ion-item>
-        <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
-      </ion-item>
-
-      <ion-label>¿Los daños propios del vehículo están asegurados?</ion-label>
-      <ion-list radio-group>
         <ion-item>
-          <ion-label>Si</ion-label>
-          <ion-radio></ion-radio>
+          <ion-label floating color="primary">Nombre de la aseguradora
+            <strong>*</strong>
+          </ion-label>
+          <ion-input value="Mapfre" type="text"></ion-input>
         </ion-item>
+
         <ion-item>
-          <ion-label>No</ion-label>
-          <ion-radio></ion-radio>
+          <ion-label floating color="primary">Número de la póliza
+            <strong>*</strong>
+          </ion-label>
+          <ion-input value="234234" type="number"></ion-input>
         </ion-item>
+
+        <br>
+        <h2>
+          <strong>Carta verde (solo extranjeros)</strong>
+        </h2>
+        <hr>
+
+        <ion-item>
+          <ion-label floating color="primary">Número de carta verde</ion-label>
+          <ion-input value="123456789" type="number"></ion-input>
+        </ion-item>
+
+        <ion-label floating color="primary">Válido hasta</ion-label>
+        <ion-item>
+          <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
+        </ion-item>
+
+
+        <ion-label floating color="primary">¿Los daños propios del vehículo están asegurados?</ion-label>
+        <ion-list radio-group>
+          <ion-item>
+            <ion-label>Si</ion-label>
+            <ion-radio></ion-radio>
+          </ion-item>
+          <ion-item>
+            <ion-label>No</ion-label>
+            <ion-radio></ion-radio>
+          </ion-item>
+        </ion-list>
+
+
       </ion-list>
-
     </ion-card-content>
 
   </ion-card>
@@ -153,23 +188,23 @@
 
     <ion-card-content>
 
-      <ion-label>Nombre
+      <ion-label floating color="primary">Nombre
         <strong>*</strong>
       </ion-label>
-      <ion-input value="DANIEL" type="text"></ion-input>
+      <ion-input value="  " type="text"></ion-input>
 
-      <ion-label>Apellidos
+      <ion-label floating color="primary">Apellidos
         <strong>*</strong>
       </ion-label>
       <ion-input value="Arroyo Mayo" type="text"></ion-input>
 
-      <ion-label>Dirección
+      <ion-label floating color="primary">Dirección
         <strong>*</strong>
       </ion-label>
       <ion-input value="Calle Falsa 123" type="text"></ion-input>
 
 
-      <ion-label>Permiso de conducir
+      <ion-label floating color="primary">Permiso de conducir
         <strong>*</strong>
       </ion-label>
       <ion-item>

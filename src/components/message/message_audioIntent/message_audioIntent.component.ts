@@ -1,12 +1,13 @@
-import {Component, Input} from '@angular/core';
+import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
-import {NavController, ToastController} from 'ionic-angular';
+import {NavController, Platform, ToastController} from 'ionic-angular';
 import {CaptureError, MediaCapture} from '@ionic-native/media-capture';
 import {File} from '@ionic-native/file';
 import {Storage} from '@ionic/storage';
 import {Media, MediaObject} from '@ionic-native/media';
 import {ParteService} from "../../../services/parte.service";
 import {ContextGateController} from "../../../services/context-gate-controller.service";
+
 
 const MEDIA_FILES_KEY = 'mediaFiles';
 
@@ -15,16 +16,25 @@ const MEDIA_FILES_KEY = 'mediaFiles';
   templateUrl: './message_audioIntent.component.html'
 })
 
-export class MessageAudioIntentComponent {
+export class MessageAudioIntentComponent implements OnInit{
   mediaFiles = [];
   @Input() public message: Message;
-  private isAllDone:boolean = false;
 
-  recording: boolean = false;
-  audioRetrieved: boolean = false;
+  //This will emit the cancel event that will block the input in case we want it to happen
+  @Output() private blockInput:EventEmitter<Object> = new EventEmitter(true);
+
+  private fileName:string;
+  private filePath:string;
+  private mediaObject:MediaObject;
+  private isAllDone:boolean = false;
+  private playing: boolean = false;
+  private recording: boolean = false;
+  private audioRetrieved: boolean = false;
+  private locked: boolean;
+  private fileURL:string;
 
   constructor(public toast:ToastController,
-              public navCtrl: NavController,
+              private platform:Platform,
               private mediaCapture: MediaCapture,
               private storage: Storage,
               private file: File,
@@ -32,126 +42,49 @@ export class MessageAudioIntentComponent {
               private gate:ContextGateController,
               private parte:ParteService) { }
 
-  ionViewDidLoad() {
-    this.storage.get(MEDIA_FILES_KEY).then(res => {
-      this.mediaFiles = JSON.parse(res) || [];
-    })
-  }
-
-  captureAudio() {
-    this.recording = true;
-
-    this.mediaCapture.captureAudio().then(res => {
-        this.storeMediaFiles(res);
-        this.recording = false;
-        this.audioRetrieved = true;
-      },
-      (err: CaptureError) => {
-        this.presentToast('Hubo un error grabando el audio:' + err, 'bottom', 3000);
-      });
-  }
-
-  public presentToast(m: string, position: string, duration: number) {
-    let toast = this.toast.create({
-      message: m,
-      duration: duration,
-      position: position
-    });
-
-
-    toast.present();
-  }
-
-  sendAudio(){
-
-    this.parte.url_audioAccidente = this.mediaFiles[0];
-    this.isAllDone = true;
-    this.presentToast('Audio Enviado...', 'bottom' ,1000);
-    this.gate.sendInvisibleMessage(this.parte.getDescripcionAccidenteFinalizada());
-
-  }
-
-  repetirAudio(){
-    this.audioRetrieved = false;
-    this.mediaFiles = [];
-
-  }
-
-  play(myFile) {
-    const audioFile: MediaObject = this.media.create(myFile.localURL);
-    audioFile.play();
-  }
-
-  storeMediaFiles(files) {
-    this.storage.get(MEDIA_FILES_KEY).then(res => {
-      if (res) {
-        let arr = JSON.parse(res);
-        arr = arr.concat(files);
-        this.storage.set(MEDIA_FILES_KEY, JSON.stringify(arr));
-      } else {
-        this.storage.set(MEDIA_FILES_KEY, JSON.stringify(files))
-      }
-      this.mediaFiles = this.mediaFiles.concat(files);
-    })
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  /*
-    verInforme() {
-      this.navCtrl.push(FormularioPage);
-    }
-
-    getAudioList() {
-      if (localStorage.getItem("audiolist")) {
-        this.audioList = JSON.parse(localStorage.getItem("audiolist"));
-        console.log(this.audioList);
-      }
-    }
 
     public startRecord() {
-      this.audioList.splice(1);
+
       if (this.platform.is('ios')) {
         this.fileName = 'observacion' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
         this.filePath = this.file.documentsDirectory + this.fileName;
-        this.audio = this.media.create(this.filePath);
+         this.mediaObject = this.media.create(this.filePath);
       } else if (this.platform.is('android')) {
         this.fileName = 'observacion' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
         this.filePath = this.file.externalDataDirectory + this.fileName;
-        this.audio = this.media.create(this.filePath);
+        this.mediaObject = this.media.create(this.filePath);
       }
-      this.audio.startRecord();
-      let ruta = this.file.resolveLocalFilesystemUrl(this.filePath);
+      this.mediaObject.startRecord();
+      this.file.resolveLocalFilesystemUrl(this.filePath).then((onfullfilled)=>{
+
+              this.fileURL = onfullfilled.toURL();
+
+      });
       this.recording = true;
     }
 
     public stopRecord() {
       console.log("Fin");
       this.audioRetrieved = true;
-      this.audio.stopRecord();
-      let data = { filename: this.fileName };
-      this.audioList.push(data);
-      localStorage.setItem("audiolist", JSON.stringify(this.audioList));
+      this.mediaObject.stopRecord();
       this.recording = false;
-      this.getAudioList();
+
     }
 
     playAudio() {
+      this.mediaObject.seekTo(0);
+      this.mediaObject.play();
+      this.playing = true;
+      this.mediaObject.setVolume(0.8);
 
-      this.audio.play();
-      this.audio.setVolume(0.8);
+
+    }
+    stopAudio(){
+
+
+        this.mediaObject.stop();
+        this.playing = false;
+
 
 
     }
@@ -160,11 +93,39 @@ export class MessageAudioIntentComponent {
 
       this.audioRetrieved = false;
 
-
-
     }
-  */
 
+  sendAudio(){
+
+    this.parte.url_audioAccidente = this.fileURL;
+    this.parte.path_audioAccidente = this.filePath;
+    this.isAllDone = true;
+    this.presentToast('Audio Enviado...', 'bottom' ,1000);
+    this.gate.sendInvisibleMessage(this.parte.getDescripcionAccidenteFinalizada());
+
+
+  }
+
+  public presentToast(m: string, position: string, duration: number) {
+    let toast = this.toast.create({
+      message: m,
+      duration: duration,
+      position: position
+    });
+  }
+
+  public toggleLock(){
+    console.log('TOGGLIng');
+    this.locked = !this.locked;
+    this.blockInput.emit({lock: this.locked});
+
+  }
+
+  ngOnInit(): void {
+
+    this.toggleLock();
+
+  }
 
 
 }

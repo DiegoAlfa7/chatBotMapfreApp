@@ -14,26 +14,11 @@
 <ion-content padding>
   <!-- ASEGURADO -->
   <ion-card text-wrap>
-    <ion-card-header (click)="printInsured()">
-      <h1>Asegurado</h1>
+    <ion-card-header color="secondary" (click)="printInsured()">
+      <h1 color="primary">Asegurado</h1>
     </ion-card-header>
     <hr>
     <ion-card-content>
-      <ion-item>
-        <ion-label>Nombre
-          <strong>*</strong>
-        </ion-label>
-        <ion-input [(value)]="asegurado1.nombre" type="text"></ion-input>
-      </ion-item>
-      <ion-label>Apellidos
-        <strong>*</strong>
-      </ion-label>
-      <ion-input ([ngModel])="asegurado1.apellidos" type="text"></ion-input>
-
-      <ion-label>Número de teléfono
-        <strong>*</strong>
-      </ion-label>
-      <ion-input ([ngModel])="asegurado1.telefono" type="number"></ion-input>
 
       <ion-list>
         <ion-item>
@@ -67,12 +52,12 @@
 
           <ion-item>
             <ion-label>Si</ion-label>
-            <ion-radio value="true"></ion-radio>
+            <ion-radio [checked]="asegurado1.recuperar_iva" name="si" [(value)]="asegurado1.recuperar_iva"></ion-radio>
           </ion-item>
 
           <ion-item>
             <ion-label>No</ion-label>
-            <ion-radio value="false"></ion-radio>
+            <ion-radio name="no" [(value)]="asegurado1.recuperar_iva"></ion-radio>
           </ion-item>
 
         </ion-list>
@@ -114,17 +99,24 @@
       <ion-list>
 
         <ion-item>
-          <ion-label floating color="primary">Marca y modelo
+          <ion-label floating color="primary">Marca
             <strong>*</strong>
           </ion-label>
-          <ion-input value="Seat Toledo" type="text"></ion-input>
+          <ion-input [(value)]="asegurado1.marca" type="text"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating color="primary">Modelo
+            <strong>*</strong>
+          </ion-label>
+          <ion-input [(value)]="asegurado1.modelo" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Matrícula
             <strong>*</strong>
           </ion-label>
-          <ion-input value="1234abc" type="text"></ion-input>
+          <ion-input [(value)]="asegurado1.matricula" type="text"></ion-input>
         </ion-item>
 
       </ion-list>
@@ -148,14 +140,14 @@
           <ion-label floating color="primary">Nombre de la aseguradora
             <strong>*</strong>
           </ion-label>
-          <ion-input value="Mapfre" type="text"></ion-input>
+          <ion-input [(value)]="asegurado1.agencia" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Número de la póliza
             <strong>*</strong>
           </ion-label>
-          <ion-input value="234234" type="number"></ion-input>
+          <ion-input [(value)]="asegurado1.poliza" type="number"></ion-input>
         </ion-item>
 
         <br>
@@ -166,24 +158,27 @@
 
         <ion-item>
           <ion-label floating color="primary">Número de carta verde</ion-label>
-          <ion-input value="123456789" type="number"></ion-input>
+          <ion-input [(value)]="asegurado1.c_verde" type="text"></ion-input>
         </ion-item>
 
-        <ion-label floating color="primary">Válido hasta</ion-label>
         <ion-item>
-          <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
+
+          <ion-label color="primary">Válido hasta</ion-label>
+          <ion-datetime [(ngModel)]="asegurado1.c_verde_val" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY"></ion-datetime>
         </ion-item>
 
-
-        <ion-label floating color="primary">¿Los daños propios del vehículo están asegurados?</ion-label>
-        <ion-list radio-group>
+        <ion-list radio-group padding-top>
+          <h2>
+            <strong>¿Los daños propios del vehículo están asegurados?</strong>
+          </h2>
+          <hr>
           <ion-item>
             <ion-label>Si</ion-label>
-            <ion-radio></ion-radio>
+            <ion-radio [checked]="asegurado1.d_prop_asegurados" value="true"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>No</ion-label>
-            <ion-radio></ion-radio>
+            <ion-radio value="false"></ion-radio>
           </ion-item>
         </ion-list>
 
@@ -203,59 +198,66 @@
 
     <ion-card-content>
 
-      <ion-label floating color="primary">Nombre
-        <strong>*</strong>
-      </ion-label>
-      <ion-input value="  " type="text"></ion-input>
+      <ion-list>
 
-      <ion-label floating color="primary">Apellidos
-        <strong>*</strong>
-      </ion-label>
-      <ion-input value="Arroyo Mayo" type="text"></ion-input>
+        <ion-item>
+          <ion-label floating color="primary">Nombre
+            <strong>*</strong>
+          </ion-label>
+          <ion-input [(value)]="asegurado1.nombre" type="text"></ion-input>
+        </ion-item>
 
-      <ion-label floating color="primary">Dirección
-        <strong>*</strong>
-      </ion-label>
-      <ion-input value="Calle Falsa 123" type="text"></ion-input>
+        <ion-item>
+          <ion-label floating color="primary">Apellidos
+            <strong>*</strong>
+          </ion-label>
+          <ion-input [(value)]="asegurado1.apellidos" type="text"></ion-input>
+        </ion-item>
 
+        <ion-item>
+          <ion-label floating color="primary">Dirección
+            <strong>*</strong>
+          </ion-label>
+          <ion-input [(value)]="asegurado1.direccion" type="text"></ion-input>
+        </ion-item>
 
-      <ion-label floating color="primary">Permiso de conducir
-        <strong>*</strong>
-      </ion-label>
-      <ion-item>
-        <ion-select placeholder="Elegir">
-          <ion-option value="AM">AM</ion-option>
-          <ion-option value="A1">A1</ion-option>
-          <ion-option value="A2">A2</ion-option>
-          <ion-option value="A">A</ion-option>
-          <ion-option value="B1">B1</ion-option>
-          <ion-option value="B">B</ion-option>
-          <ion-option value="C1">C1</ion-option>
-          <ion-option value="D1">D1</ion-option>
-          <ion-option value="D">D</ion-option>
-          <ion-option value="BE">BE</ion-option>
-          <ion-option value="C1E">C1E</ion-option>
-          <ion-option value="CE">CE</ion-option>
-          <ion-option value="D1E">D1E</ion-option>
-          <ion-option value="DE">DE</ion-option>
-        </ion-select>
-      </ion-item>
+        <ion-item>
+          <ion-label color="primary">Permiso de conducir
+            <strong>*</strong>
+          </ion-label>
+          <ion-select [(ngModel)]="asegurado1.permiso">
+            <ion-option value="AM">AM</ion-option>
+            <ion-option value="A1">A1</ion-option>
+            <ion-option value="A2">A2</ion-option>
+            <ion-option value="A">A</ion-option>
+            <ion-option value="B1">B1</ion-option>
+            <ion-option value="B">B</ion-option>
+            <ion-option value="C1">C1</ion-option>
+            <ion-option value="D1">D1</ion-option>
+            <ion-option value="D">D</ion-option>
+            <ion-option value="BE">BE</ion-option>
+            <ion-option value="C1E">C1E</ion-option>
+            <ion-option value="CE">CE</ion-option>
+            <ion-option value="D1E">D1E</ion-option>
+            <ion-option value="DE">DE</ion-option>
+          </ion-select>
+        </ion-item>
 
+        <ion-item>
+          <ion-label color="primary">Fecha de expedición
+            <strong>*</strong>
+          </ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
+        </ion-item>
 
-      <ion-label>Fecha de expedición
-        <strong>*</strong>
-      </ion-label>
-      <ion-item>
-        <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
-      </ion-item>
+        <ion-item>
+          <ion-label color="primary">Fecha de caducidad
+            <strong>*</strong>
+          </ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
+        </ion-item>
 
-
-      <ion-label>Fecha de caducidad
-        <strong>*</strong>
-      </ion-label>
-      <ion-item>
-        <ion-datetime displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
-      </ion-item>
+      </ion-list>
     </ion-card-content>
 
   </ion-card>

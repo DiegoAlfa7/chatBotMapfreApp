@@ -72,6 +72,7 @@ export class MessageAudioIntentComponent {
   play(myFile) {
     const audioFile: MediaObject = this.media.create(myFile.localURL);
     audioFile.play();
+    
   }
 
   storeMediaFiles(files) {

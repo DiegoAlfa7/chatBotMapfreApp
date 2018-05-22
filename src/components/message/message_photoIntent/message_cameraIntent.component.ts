@@ -3,13 +3,11 @@ import {Message} from "../../../app/classes/Message";
 //Hay que importar la camara en vez de CaeraMock si queremos que se utilize la cámara nativa
 import {Camera, CameraOptions} from "@ionic-native/camera";
 //---------------------------------
-//import {CameraMock } from '../../../services/mocks/camera.mock'
 import {ToastController} from "ionic-angular";
 import {MapfreService} from '../../../services/mapfre.service';
 import {ExternalsService} from "../../../services/externals.service";
 import {ParteService} from "../../../services/parte.service";
 import {ContextGateController} from "../../../services/context-gate-controller.service";
-import {CameraMock} from "../../../services/mocks/camera.mock";
 
 
 
@@ -54,7 +52,7 @@ export class MessageCameraIntentComponent implements OnInit{
   public base64ImageString: string;
 
   constructor(
-    private camera: CameraMock,
+    private camera: Camera,
     private mapfre: MapfreService,
     private toast: ToastController,
     private externals: ExternalsService,

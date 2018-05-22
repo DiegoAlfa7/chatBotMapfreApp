@@ -71,13 +71,12 @@ import {MessageMatriculaIntentComponent} from "../components/message/message_mat
   providers: [
     StatusBar,
     SplashScreen,
-    CameraMock,
-    Camera,// Comment for development
-
+    Camera, // Comment for development
     // { provide: Camera, useClass: CameraMock }, // Discomment only for development
     ToastController,
     MapfreService,
-    MediaCapture,
+    MediaCapture, // Comment for development
+    // { provide: MediaCapture, useClass: MediaCaptureMock }, // Discomment only for development
     Media,
     File,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

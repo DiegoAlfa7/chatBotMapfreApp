@@ -167,7 +167,7 @@ export class ContextGateController {
           break;
 
 
-        case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
+        /* case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
 
           //CASOS:
 
@@ -183,7 +183,7 @@ export class ContextGateController {
 
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          break;
+          break; */
 
 
         case (operations.only_contains(botResponse.contexts, 'videofinalizado')):

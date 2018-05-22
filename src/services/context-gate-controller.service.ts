@@ -186,7 +186,23 @@ export class ContextGateController {
           break;
 
 
+        case (operations.only_contains(botResponse.contexts, 'videofinalizado')):
 
+          //CASOS:
+
+          // 1 -  RESPUESTA_ANERIOR: Foto del accidente
+
+          //      TEXTO_ENVIADO: (whatever??)
+
+          //      RESPUESTA: (whatever??)
+
+          //      COMPORTAMIENTO: Mostrar el boton para grabar audio
+
+
+
+          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_AUDIO_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+
+          break;
 
         default:
           // EL COMPORTAMIENTO POR DEFECTO CUANDO SE LEE UNA RESPUESTA_ACTUAL_TEXTO DEBE SER PINTAR EL MENSAJE DEL BOT, UN MENSAJE NORMAL

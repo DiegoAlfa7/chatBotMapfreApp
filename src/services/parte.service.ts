@@ -67,6 +67,14 @@ export class ParteService{
 
   }
 
+  public getDescripcionAccidenteFinalizada():string {
+    return `DescripcionAccidenteFinalizada: ${this.asegurado1.nombre || ''} , ${this.asegurado1.apellidos || ''} , ${this.asegurado1.direccion || ''} , ${this.asegurado1.localidad || ''} , ${this.asegurado1.cp || ''} , ${this.asegurado1.telefono || ''} , ${this.asegurado1.recuperar_iva ? 'Si':'No'} , ${this.asegurado1.marca || ''} , ${this.asegurado1.modelo || ''} , ${this.asegurado1.matricula || ''} , ${this.asegurado1.poliza || ''} , ${this.asegurado1.agencia || ''} , ${this.asegurado1.d_prop_asegurados ? 'Si': 'No'} `;
+  }
+
+  public getVideoFinalizado():string {
+    return `VideoFinalizado`;
+  }
+
   get url_audioAccidente(): string {
     return this._url_audioAccidente;
   }

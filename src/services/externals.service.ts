@@ -22,14 +22,13 @@ export class ExternalsService {
 
     let formPart = new FormData();
 
-    let blob:Blob = this.btblob(base64);
+    let blob:Blob = this.b64toBlob(base64, 'image/png');
 
-    formPart.append('file', blob);
+    formPart.append('file', blob, 'matricula.png');
 
-    let headers = new HttpHeaders().set('Authorization', 'Bearer 1b26cb2f76ea4cb0979026ef6c350d05')
-      .set('Access-Control-Allow-Origin','*');
+    let headers = new HttpHeaders();
 
-    return this.http.post(url, formPart, {headers});
+    return this.http.post(url, formPart, { headers });
 
 
   }
@@ -58,7 +57,7 @@ export class ExternalsService {
    * @param sliceSize
    * @returns {Blob}
    */
-  public b64toBlob(b64Data, contentType, sliceSize):Blob {
+  public b64toBlob(b64Data, contentType, sliceSize?):Blob {
 
     contentType = contentType || '';
 

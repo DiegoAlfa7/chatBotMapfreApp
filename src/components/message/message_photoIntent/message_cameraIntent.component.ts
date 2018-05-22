@@ -38,9 +38,9 @@ export class MessageCameraIntentComponent {
   // NATIVE_URI : 2 Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
 
   private default_camera_options: CameraOptions = {
-    quality: 100,
+    quality: 50,
     destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
+    encodingType: this.camera.EncodingType.PNG,
     mediaType: this.camera.MediaType.PICTURE
 
   };
@@ -87,6 +87,8 @@ export class MessageCameraIntentComponent {
     this.parte.base64_accidente = this.base64ImageString;
     this.isAllDone = true;
     this.presentToast('Imagen Enviada...', 'bottom',1000);
+
+    this.gate.sendInvisibleMessage(this.parte.getVideoFinalizado());
 
   }
 

@@ -42,7 +42,7 @@
 <div *ngIf="imgRetrieved">
   <p>Esta es la foto que has sacado: </p>
   <br/>
-  <img [src]="base64ImageString | domseguro:'data:image/jpeg;base64,'" class="responsive">
+  <img [src]="base64ImageString | domseguro:'data:image/png;base64,'" class="responsive">
   <hr/>
   <div *ngIf="!isAllDone">
   <p>¿Está bien?</p>

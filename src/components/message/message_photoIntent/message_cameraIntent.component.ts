@@ -1,4 +1,4 @@
-import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
 //Hay que importar la camara en vez de CaeraMock si queremos que se utilize la cámara nativa
 import {CameraOptions} from "@ionic-native/camera";
@@ -16,7 +16,7 @@ import {CameraMock} from "../../../services/mocks/camera.mock";
   selector: 'message-camera-intent',
   templateUrl: 'message_cameraIntent.template.html'
 })
-export class MessageCameraIntentComponent implements OnInit{
+export class MessageCameraIntentComponent implements AfterViewChecked{
 
   @ViewChild('videoOutput') videoOut: ElementRef;
 
@@ -64,7 +64,7 @@ export class MessageCameraIntentComponent implements OnInit{
 
   }
   public toggleLock(){
-    console.log('TOGGLIng');
+
     this.locked = !this.locked;
     this.blockInput.emit({lock: this.locked});
 
@@ -119,7 +119,7 @@ export class MessageCameraIntentComponent implements OnInit{
 
   }
 
-  ngOnInit(): void {
+  ngAfterViewChecked(): void {
 
     this.toggleLock();
   }

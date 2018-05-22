@@ -48,11 +48,9 @@ export class MapfrecitoComponent implements OnInit {
   public blockInput(event:any){
 
     console.log(event);
-    setTimeout(()=>{
+    this.bloquear = event.lock;
 
-      this.bloquear = event.lock;
 
-    }, 500);
 
 
   }

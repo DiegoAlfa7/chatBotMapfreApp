@@ -10,4 +10,4 @@
 -->
 
 <!-- Audio -->
-<app-message_audioIntent *ngIf="message.type == audioIntentType" [message]="message"></app-message_audioIntent>
+<app-message_audioIntent *ngIf="message.type == audioIntentType" (blockInput)="blockInput($event)" [message]="message"></app-message_audioIntent>

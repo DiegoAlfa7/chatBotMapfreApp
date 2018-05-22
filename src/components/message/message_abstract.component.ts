@@ -16,7 +16,7 @@ export class MessageAbstract {
 
   @Input() public message:Message;
 
-  @Output() public blockInputConnector = new EventEmitter();
+  @Output() public blockInputConnector = new EventEmitter(true);
 
 
 

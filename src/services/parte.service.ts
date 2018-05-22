@@ -13,6 +13,9 @@ export class ParteService{
 
   private _base64_accidente:string;
   private _url_audioAccidente:string;
+  private _path_audioAccidente:string;
+
+
 
 
   constructor(private external:ExternalsService) {
@@ -119,4 +122,12 @@ export class ParteService{
   set base64_accidente(value: string) {
     this._base64_accidente = value;
   }
+  get path_audioAccidente(): string {
+    return this._path_audioAccidente;
+  }
+
+  set path_audioAccidente(value: string) {
+    this._path_audioAccidente = value;
+  }
+
 }

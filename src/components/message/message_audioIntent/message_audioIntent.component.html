@@ -1,11 +1,11 @@
 <div *ngIf="!audioRetrieved">
   <p>{{message.msgBody}}</p>
 
-  <button *ngIf="!recording" ion-button icon-only (click)="captureAudio()">
+  <button *ngIf="!recording" ion-button icon-only (click)="startRecord()">
     <ion-icon ios="ios-mic" md="md-mic"></ion-icon>
   </button>
 
-  <button *ngIf="recording" ion-button icon-only (click)="s()">
+  <button *ngIf="recording" ion-button icon-only (click)="stopRecord()">
     <ion-spinner name="bubbles"></ion-spinner>
   </button>
 
@@ -22,11 +22,14 @@
 
   <p>Este es el audio que has enviado:</p>
 
-  <ion-item>
+  <ion-item [ngSwitch]="playing">
 
     <p>{{fileName}}</p>
-    <button ion-button clear (click)="playAudio()">
+    <button *ngSwitchCase="false" ion-button clear (click)="playAudio()">
       <ion-icon name="play"></ion-icon>
+    </button>
+    <button *ngSwitchCase="true" ion-button clear (click)="stopAudio()">
+      <ion-icon name="pause"></ion-icon>
     </button>
 
   </ion-item>

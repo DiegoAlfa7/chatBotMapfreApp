@@ -58,7 +58,7 @@ export class MessageMatriculaIntentComponent {
   public base64ImageString: string;
 
   constructor(
-    private camera: Camera,
+    private camera: CameraMock,
     /*private camera: CameraMock,*/
     private mapfre: MapfreService,
     private toast: ToastController,

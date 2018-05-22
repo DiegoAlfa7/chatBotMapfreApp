@@ -9,6 +9,7 @@ import {MapfreService} from '../../../services/mapfre.service';
 import {ExternalsService} from "../../../services/externals.service";
 import {ParteService} from "../../../services/parte.service";
 import {ContextGateController} from "../../../services/context-gate-controller.service";
+import {CameraMock} from "../../../services/mocks/camera.mock";
 
 
 
@@ -53,7 +54,7 @@ export class MessageCameraIntentComponent implements OnInit{
   public base64ImageString: string;
 
   constructor(
-    private camera: Camera,
+    private camera: CameraMock,
     private mapfre: MapfreService,
     private toast: ToastController,
     private externals: ExternalsService,

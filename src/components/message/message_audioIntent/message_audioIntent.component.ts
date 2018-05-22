@@ -19,16 +19,17 @@ export class MessageAudioIntentComponent implements OnInit{
   @Input() public message: Message;
 
   //This will emit the cancel event that will block the input in case we want it to happen
-  @Output() private blockInput:EventEmitter<Object> = new EventEmitter();
+  @Output() private blockInput:EventEmitter<Object> = new EventEmitter(true);
 
   private fileName:string;
   private filePath:string;
   private mediaObject:MediaObject;
   private isAllDone:boolean = false;
-
-  recording: boolean = false;
-  audioRetrieved: boolean = false;
+  private playing: boolean = false;
+  private recording: boolean = false;
+  private audioRetrieved: boolean = false;
   private locked: boolean;
+  private fileURL:string;
 
   constructor(public toast:ToastController,
               private platform:Platform,
@@ -51,7 +52,11 @@ export class MessageAudioIntentComponent implements OnInit{
         this.mediaObject = this.media.create(this.filePath);
       }
       this.mediaObject.startRecord();
-      let ruta = this.file.resolveLocalFilesystemUrl(this.filePath);
+      this.file.resolveLocalFilesystemUrl(this.filePath).then((onfullfilled)=>{
+
+              this.fileURL = onfullfilled.toURL();
+
+      });
       this.recording = true;
     }
 
@@ -64,9 +69,19 @@ export class MessageAudioIntentComponent implements OnInit{
     }
 
     playAudio() {
-
+      this.mediaObject.seekTo(0);
       this.mediaObject.play();
+      this.playing = true;
       this.mediaObject.setVolume(0.8);
+
+
+    }
+    stopAudio(){
+
+
+        this.mediaObject.stop();
+        this.playing = false;
+
 
 
     }
@@ -79,7 +94,8 @@ export class MessageAudioIntentComponent implements OnInit{
 
   sendAudio(){
 
-    this.parte.url_audioAccidente = this.filePath;
+    this.parte.url_audioAccidente = this.fileURL;
+    this.parte.path_audioAccidente = this.filePath;
     this.isAllDone = true;
     this.presentToast('Audio Enviado...', 'bottom' ,1000);
 

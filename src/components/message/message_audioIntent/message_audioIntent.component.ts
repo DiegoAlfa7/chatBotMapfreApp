@@ -38,9 +38,14 @@ export class MessageAudioIntentComponent {
 
   captureAudio() {
     this.recording = true;
+
     this.mediaCapture.captureAudio().then(res => {
-      this.storeMediaFiles(res);
-    }, (err: CaptureError) => this.presentToast('Hubo un error grabando el audio', 'bottom' , 1000));
+        this.storeMediaFiles(res);
+        this.recording = false;
+      },
+      (err: CaptureError) => {
+        this.presentToast('Hubo un error grabando el audio:' + err, 'bottom', 1000);
+      });
   }
 
   public presentToast(m: string, position: string, duration: number) {

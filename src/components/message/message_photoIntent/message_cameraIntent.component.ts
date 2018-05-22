@@ -1,9 +1,8 @@
 import {AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
 //Hay que importar la camara en vez de CaeraMock si queremos que se utilize la cámara nativa
-import {CameraOptions} from "@ionic-native/camera";
+import {Camera, CameraOptions} from "@ionic-native/camera";
 //---------------------------------
-//import {CameraMock } from '../../../services/mocks/camera.mock'
 import {ToastController} from "ionic-angular";
 import {MapfreService} from '../../../services/mapfre.service';
 import {ExternalsService} from "../../../services/externals.service";
@@ -39,9 +38,9 @@ export class MessageCameraIntentComponent implements AfterViewChecked{
   // NATIVE_URI : 2 Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
 
   private default_camera_options: CameraOptions = {
-    quality: 50,
+    quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.PNG,
+    encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE
 
   };
@@ -53,7 +52,7 @@ export class MessageCameraIntentComponent implements AfterViewChecked{
   public base64ImageString: string;
 
   constructor(
-    private camera: CameraMock,
+    private camera: Camera,
     private mapfre: MapfreService,
     private toast: ToastController,
     private externals: ExternalsService,

@@ -252,7 +252,17 @@
     <hr/>
 
     <ion-card-content>
-      <ion-label>AUDIO A IMPORTAR</ion-label>
+      <ion-item [ngSwitch]="playing">
+
+        <p>{{fileName}}</p>
+        <button *ngSwitchCase="false" ion-button clear (click)="playAudio()">
+          <ion-icon name="play"></ion-icon>
+        </button>
+        <button *ngSwitchCase="true" ion-button clear (click)="stopAudio()">
+          <ion-icon name="pause"></ion-icon>
+        </button>
+
+      </ion-item>
     </ion-card-content>
 
   </ion-card>

@@ -18,6 +18,8 @@ export class ParteService{
 
 
 
+
+
   constructor(private external:ExternalsService) {
 
     this._asegurado1 = new Insured();

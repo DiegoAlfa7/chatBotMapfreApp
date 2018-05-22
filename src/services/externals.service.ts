@@ -22,9 +22,9 @@ export class ExternalsService {
 
     let formPart = new FormData();
 
-    let blob:Blob = this.b64toBlob(base64, 'image/png');
+    let blob:Blob = this.b64toBlob(base64, 'image/jpeg');
 
-    formPart.append('file', blob, 'matricula.png');
+    formPart.append('file', blob, 'matricula.jpeg');
 
     let headers = new HttpHeaders();
 

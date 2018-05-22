@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from "@angular/core";
+import {Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
 import {Content, Grid, NavController, NavParams} from 'ionic-angular';
 import {Message} from "../../app/classes/Message";
 import {ContextGateController} from "../../services/context-gate-controller.service";
@@ -15,9 +15,11 @@ export class MapfrecitoComponent implements OnInit {
 
   @ViewChild(Content) content: Content;
   @ViewChild(Grid, {read: ElementRef}) messageFeedNode: ElementRef;
+
   //TODO: implement input lock when last message context asks for photo
   public messageFeed: Message[] = [];
   public lastMsg: string;
+  public bloquear: boolean = false;
   private messageFeedChangeObserver: MutationObserver;
   public usuarioRegistrado: any = this.navParams.get('name');
 
@@ -32,6 +34,7 @@ export class MapfrecitoComponent implements OnInit {
     this.messages.getMessageListObserver().subscribe((messages: Message[]) => {
       this.messageFeed = messages;
     });
+    /*this.messages.addMessage(new Message('hi', 'audio_intent', 'bot', 'user', undefined));*/
 
 
   }
@@ -42,7 +45,15 @@ export class MapfrecitoComponent implements OnInit {
 
   }
 
+  public blockInput(event:any){
 
+    console.log(event);
+    this.bloquear = event.lock;
+
+
+
+
+  }
 
   private ionViewWillEnter() {
     console.log(this.usuarioRegistrado);

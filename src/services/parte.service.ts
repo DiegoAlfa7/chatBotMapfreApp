@@ -11,8 +11,11 @@ export class ParteService {
   private _matricula_coche_1: string;
   private _matricula_coche_2: string;
 
-  private _base64_accidente: string;
-  private _url_audioAccidente: string;
+  private _base64_accidente:string;
+  private _url_audioAccidente:string;
+  private _path_audioAccidente:string;
+
+
 
 
   constructor(private external: ExternalsService) {
@@ -72,9 +75,6 @@ export class ParteService {
     return `DescripcionAccidenteFinalizada: ${this.asegurado1.nombre || ''} , ${this.asegurado1.apellidos || ''} , ${this.asegurado1.direccion || ''} , ${this.asegurado1.localidad || ''} , ${this.asegurado1.cp || ''} , ${this.asegurado1.telefono || ''} , ${this.asegurado1.recuperar_iva ? 'Si' : 'No'} , ${this.asegurado1.marca || ''} , ${this.asegurado1.modelo || ''} , ${this.asegurado1.matricula || ''} , ${this.asegurado1.poliza || ''} , ${this.asegurado1.agencia || ''} , ${this.asegurado1.d_prop_asegurados ? 'Si' : 'No'} `;
   }
 
-  public getVideoFinalizado(): string {
-    return `VideoFinalizado`;
-  }
 
   get url_audioAccidente(): string {
     return this._url_audioAccidente;
@@ -123,4 +123,12 @@ export class ParteService {
   set base64_accidente(value: string) {
     this._base64_accidente = value;
   }
+  get path_audioAccidente(): string {
+    return this._path_audioAccidente;
+  }
+
+  set path_audioAccidente(value: string) {
+    this._path_audioAccidente = value;
+  }
+
 }

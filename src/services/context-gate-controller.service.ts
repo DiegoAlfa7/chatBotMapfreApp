@@ -112,23 +112,23 @@ export class ContextGateController {
 
           //CASOS:
 
-          // 1 -  RESPUESTA_ANERIOR: '[...] desea completar el parte de seguro mientras llega?'
+          // 1 -  RESPUESTA_ANERIOR: 'Necesitamos la matrícula del otro conductor'
 
-          //      TEXTO_ENVIADO: 'Sí' (no tiene por que)
+          //      TEXTO_ENVIADO: [matricula]
 
-          //      RESPUESTA_ACTUAL_TEXTO: 'Vamos a comprobar todos los datos [...] procederemos a completar los del otro vehiculo'
+          //      RESPUESTA_ACTUAL_TEXTO: 'Ahora necesitamos una foto del accidente'
 
-          //      COMPORTAMIENTO: Debemos enviar la palabra clave 'DatosAsegurado:[...]' con todos los campos del asegurado
-          //                      de los que dispongamos en nuestro servicio de asegurado y además pintar el mensaje de respuesta
+          //      COMPORTAMIENTO: Tenemos que pintar un mensaje de foto, guardar el valor de la matrícula del otro conductor
+          //                      Y mandar un mensaje clave de 'VideoRealizado'
 
-          //this.sendInvisibleMessage('VideoRealizado');
 
+          this.parte.asegurado2.matricula = botResponse.paramsRespose.matriculaContrario;
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
           break;
 
 
-       /* // Response is fingruaasegurado with matricula parameter
+        // Response is fingruaasegurado with matricula parameter
         case (operations.containsParameterWithName(botResponse.contexts, 'matricula')):
 
           //CASOS:
@@ -145,10 +145,10 @@ export class ContextGateController {
 
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA1_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          break;*/
+          break;
 
 
-       /* case (operations.only_contains(botResponse.contexts, 'datosaseguradocompletos')):
+       case (operations.only_contains(botResponse.contexts, 'datosaseguradocompletos')):
 
           //CASOS:
 
@@ -164,10 +164,10 @@ export class ContextGateController {
 
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA2_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          break;*/
+          break;
 
 
-        case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
+        /* case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
 
           //CASOS:
 
@@ -183,7 +183,7 @@ export class ContextGateController {
 
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          break;
+          break; */
 
 
         case (operations.only_contains(botResponse.contexts, 'videofinalizado')):

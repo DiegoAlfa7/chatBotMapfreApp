@@ -16,17 +16,16 @@ export class MessageAbstract {
 
   @Input() public message:Message;
 
-  @Output() public blockInputConnector = new EventEmitter();
-
-  @Output() public sendImageConnector = new EventEmitter();
+  @Output() public blockInputConnector = new EventEmitter(true);
 
 
-  public photoIntentType:string = GLOBALS.MESSAGE_PHOTO_INTENT;
+
+
   public audioIntentType:string = GLOBALS.MESSAGE_AUDIO_INTENT;
   public matricula1IntentType:string = GLOBALS.MESSAGE_MATRICULA1_INTENT;
   public matricula2IntentType:string = GLOBALS.MESSAGE_MATRICULA2_INTENT;
   public textType:string = GLOBALS.MESSAGE_TEXT;
-  public videoIntentType = GLOBALS.MESSAGE_VIDEO_INTENT;
+
   public cameraIntentType:string = GLOBALS.MESSAGE_CAMERA_INTENT;
 
 
@@ -37,10 +36,10 @@ export class MessageAbstract {
 
   }
 
-  public defaultConnector(event){
+  public blockInput(event){
 
-
-
+      console.log(event);
+      this.blockInputConnector.emit(event);
 
   }
 

@@ -43,8 +43,10 @@ export class MessageMatriculaIntentComponent {
 
   private default_camera_options: CameraOptions = {
     quality: 100,
+    targetWidth: 720,
+    targetHeight: 480,
     destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.PNG,
+    encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE
 
   };
@@ -56,7 +58,7 @@ export class MessageMatriculaIntentComponent {
   public base64ImageString: string;
 
   constructor(
-    private camera: Camera,
+    private camera: CameraMock,
     /*private camera: CameraMock,*/
     private mapfre: MapfreService,
     private toast: ToastController,

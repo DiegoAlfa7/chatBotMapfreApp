@@ -65,13 +65,14 @@ export interface CaptureAudioOptions {
    */
   duration?: number;
 }
+
 @Injectable()
 export class MediaCaptureMock extends MediaCapture {
-
   captureAudio(options?: CaptureAudioOptions): Promise<MediaFile[] | CaptureError> {
       let response: Array<MediaFile> = [];
       return new Promise((resolve, reject) => {
-          resolve(response);
+        alert('Simulación de grabacion audio');
+        resolve(response);
       });
   };
 }

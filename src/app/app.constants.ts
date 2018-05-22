@@ -13,13 +13,9 @@
 
   //MessageTypes
   export const  MESSAGE_TEXT = 'text'; // Message
-  export const  MESSAGE_PHOTO_INTENT = 'photo_intent';
+/*  export const  MESSAGE_PHOTO_INTENT = 'photo_intent';*/
   export const  MESSAGE_MATRICULA1_INTENT = 'matricula1_intent';
   export const  MESSAGE_MATRICULA2_INTENT = 'matricula2_intent';
-  export const  MESSAGE_VIDEO_INTENT = 'video_intent';
+/*  export const  MESSAGE_VIDEO_INTENT = 'video_intent';*/
   export const  MESSAGE_CAMERA_INTENT = 'camera_intent';
-
-
-
-
-export const MESSAGE_AUDIO_INTENT = 'audio_intent';
+  export const MESSAGE_AUDIO_INTENT = 'audio_intent';

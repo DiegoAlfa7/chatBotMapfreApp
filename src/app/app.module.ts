@@ -2,7 +2,7 @@ import { FormularioPage } from './../pages/formulario/formulario';
 import { BrowserModule } from '@angular/platform-browser';
 import { ErrorHandler, NgModule } from '@angular/core';
 //Modules
-import { IonicApp, IonicErrorHandler, IonicModule, ToastController } from 'ionic-angular';
+import {IonicApp, IonicErrorHandler, IonicModule, Platform, ToastController} from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
 //PAGES
@@ -71,12 +71,13 @@ import {MessageMatriculaIntentComponent} from "../components/message/message_mat
   providers: [
     StatusBar,
     SplashScreen,
-    Camera, // Comment for development
+    CameraMock,
+    Camera,// Comment for development
+
     // { provide: Camera, useClass: CameraMock }, // Discomment only for development
     ToastController,
     MapfreService,
-    MediaCapture, // Comment for development
-    // { provide: MediaCapture, useClass: MediaCaptureMock }, // Discomment only for development
+    MediaCapture,
     Media,
     File,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

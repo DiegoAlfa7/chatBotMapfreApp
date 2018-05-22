@@ -29,7 +29,7 @@
                     'box-user': m.from == 'user',
                     'sb4-user': m.from == 'user',
                     'box-bot': m.from == 'bot',
-                    'sb4-bot': m.from == 'bot'}" color="secondary" [message]="m">
+                    'sb4-bot': m.from == 'bot'}" color="secondary" [message]="m" (blockInputConnector)="blockInput($event)">
 
       </message-component>
     </ion-row>
@@ -46,7 +46,7 @@
 
   <ion-item padding-bottom color="transparent">
 
-    <ion-input type="text" (keyup.enter)="enviarMensaje();" placeholder="Escribe..." [(ngModel)]="lastMsg"></ion-input>
+    <ion-input [disabled]="bloquear" type="text" (keyup.enter)="enviarMensaje();" placeholder="Escribe..." [(ngModel)]="lastMsg"></ion-input>
     <button ion-button outline icon-only item-right (click)="enviarMensaje()">
       <ion-icon name="send"></ion-icon>
     </button>

@@ -71,7 +71,8 @@ import {MessageMatriculaIntentComponent} from "../components/message/message_mat
   providers: [
     StatusBar,
     SplashScreen,
-    Camera, // Comment for development
+    CameraMock, // Comment for development
+
     // { provide: Camera, useClass: CameraMock }, // Discomment only for development
     ToastController,
     MapfreService,

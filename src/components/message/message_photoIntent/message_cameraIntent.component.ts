@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
 //Hay que importar la camara en vez de CaeraMock si queremos que se utilize la cámara nativa
 import {CameraOptions} from "@ionic-native/camera";
@@ -16,7 +16,7 @@ import {CameraMock} from "../../../services/mocks/camera.mock";
   selector: 'message-camera-intent',
   templateUrl: 'message_cameraIntent.template.html'
 })
-export class MessageCameraIntentComponent {
+export class MessageCameraIntentComponent implements OnInit{
 
   @ViewChild('videoOutput') videoOut: ElementRef;
 
@@ -25,10 +25,11 @@ export class MessageCameraIntentComponent {
   @Input() public intentType: number;
 
   //This will emit the cancel event that will block the input in case we want it to happen
- /* @Output() private blockInput = new EventEmitter();*/
+  @Output() private blockInput:EventEmitter<Object> = new EventEmitter();
 
   public imgRetrieved: boolean = false;
   public isAllDone:boolean = false;
+  public locked:boolean = false;
   /*public videoRetrieved: boolean = false;*/
 
   //  destinationType values: --
@@ -62,6 +63,12 @@ export class MessageCameraIntentComponent {
 
 
   }
+  public toggleLock(){
+    console.log('TOGGLIng');
+    this.locked = !this.locked;
+    this.blockInput.emit({lock: this.locked});
+
+  }
 
   public presentToast(m: string, position: string, duration: number) {
     let toast = this.toast.create({
@@ -74,21 +81,16 @@ export class MessageCameraIntentComponent {
     toast.present();
   }
 
-  /*public lockInput() {
-
-
-    this.blockInput.emit(null);
-
-  }*/
 
 
   sendImage() {
 
     this.parte.base64_accidente = this.base64ImageString;
     this.isAllDone = true;
+    this.gate.sendInvisibleMessage('VideoFinalizado');
     this.presentToast('Imagen Enviada...', 'bottom',1000);
+    this.toggleLock();
 
-    this.gate.sendInvisibleMessage(this.parte.getVideoFinalizado());
 
   }
 
@@ -115,6 +117,11 @@ export class MessageCameraIntentComponent {
     });
 
 
+  }
+
+  ngOnInit(): void {
+
+    this.toggleLock();
   }
 
   /*

@@ -18,7 +18,6 @@ export class MessageAbstract {
 
   @Output() public blockInputConnector = new EventEmitter();
 
-  @Output() public sendImageConnector = new EventEmitter();
 
 
   public photoIntentType:string = GLOBALS.MESSAGE_PHOTO_INTENT;
@@ -37,10 +36,10 @@ export class MessageAbstract {
 
   }
 
-  public defaultConnector(event){
+  public blockInput(event){
 
-
-
+      console.log(event);
+      this.blockInputConnector.emit(event);
 
   }
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapfrecitoComponent } from '../mapfrecito/mapfrecito.component';
 
@@ -17,16 +17,25 @@ import { MapfrecitoComponent } from '../mapfrecito/mapfrecito.component';
 
 export class LoginPage {
 
-  public nombreUsuario;
+  public pw = '';
+  public nombreUsuario='';
 
   public jsonUser = {
 
     name:''
 
-  }
+  };
 
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  }
+
+  private ionViewWillEnter() {
+
+    this.nombreUsuario = '';
+    this.pw = '';
+
+
   }
 
 
@@ -39,5 +48,6 @@ export class LoginPage {
     console.log(this.jsonUser);
     this.navCtrl.push(MapfrecitoComponent, this.jsonUser);
   }
+
 
 }

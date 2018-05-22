@@ -52,7 +52,7 @@ export function only_contains(contexts:BotContext[], s:string):boolean{
 
   if(!contexts || contexts.length == 0) return false;
 
-  if(contexts.length > 1){
+  if(contexts.length > 1 || contexts.length < 1){
 
     return false;
 

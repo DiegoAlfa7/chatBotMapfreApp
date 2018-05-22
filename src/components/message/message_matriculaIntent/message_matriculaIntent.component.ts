@@ -43,8 +43,8 @@ export class MessageMatriculaIntentComponent {
 
   private default_camera_options: CameraOptions = {
     quality: 100,
-    targetWidth: 480,
-    targetHeight: 360,
+    targetWidth: 720,
+    targetHeight: 480,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE

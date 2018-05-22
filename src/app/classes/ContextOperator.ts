@@ -45,17 +45,10 @@ export function containsParameterWithName(contexts:BotContext[], name:string):bo
 }
 
 export function only_contains(contexts:BotContext[], s:string):boolean{
-
-  if(contexts.length > 1){
-
-    return false;
-
-  }else{
-
+  if (contexts.length === 1) {
     return contexts[0].name == s;
-
-
   }
+  return false;
 
 }
 

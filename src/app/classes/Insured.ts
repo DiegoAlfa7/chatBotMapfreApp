@@ -65,19 +65,6 @@ export class Insured {
 
     this._permisos = permisos[Math.floor(Math.random() * permisos.length)];
 
-    if (this.marca == 'Seat') {
-      this._modelo = modelos.Seat[Math.floor(Math.random() * 6)].nombre_modelo;
-    }
-    else if (this.marca == 'Ford') {
-      this._modelo = modelos.Ford[Math.floor(Math.random() * 6)].nombre_modelo;
-    }
-    else if (this.marca == 'Renault') {
-      this._modelo = modelos.Renault[Math.floor(Math.random() * 6)].nombre_modelo;
-    }
-    else if (this.marca == 'Audi') {
-      this._modelo = modelos.Renault[Math.floor(Math.random() * 6)].nombre_modelo;
-    }
-
   }
 
   set nombre(value: string) {
@@ -181,7 +168,32 @@ export class Insured {
   }
 
   get modelo(): string {
-    return this._modelo;
+
+
+    if (this.marca == 'Seat') {
+      if (this._modelo != null) {
+        return this._modelo;
+      }
+      return this._modelo = modelos.Seat[Math.floor(Math.random() * 6)].nombre_modelo;
+    }
+    else if (this.marca == 'Ford') {
+      if (this._modelo != null) {
+        return this._modelo;
+      }
+      return this._modelo = modelos.Ford[Math.floor(Math.random() * 6)].nombre_modelo;
+    }
+    else if (this.marca == 'Renault') {
+      if (this._modelo != null) {
+        return this._modelo;
+      }
+      return this._modelo = modelos.Renault[Math.floor(Math.random() * 6)].nombre_modelo;
+    }
+    else if (this.marca == 'Audi') {
+      if (this._modelo != null) {
+        return this._modelo;
+      }
+      return this._modelo = modelos.Audi[Math.floor(Math.random() * 6)].nombre_modelo;
+    }
   }
 
   get matricula(): string {

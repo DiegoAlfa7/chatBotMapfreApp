@@ -3,6 +3,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import {ParteService} from "../../services/parte.service";
 import {Insured} from "../../app/classes/Insured";
 import {Media, MediaObject} from "@ionic-native/media";
+import {MessagesService} from "../../services/messages.service";
 
 /**
  * Generated class for the FormularioPage page.
@@ -34,7 +35,8 @@ export class FormularioPage {
   constructor(public navCtrl: NavController,
               public navParams: NavParams,
               public parte:ParteService,
-              public media:Media) {
+              public media:Media,
+              public messages:MessagesService) {
     this.asegurado1 = this.parte.asegurado1;
     this.asegurado2 = this.parte.asegurado2;
 
@@ -86,6 +88,14 @@ export class FormularioPage {
 
     this.mediaObject.stop();
     this.playing = false;
+
+  }
+  private goOut(){
+
+   console.log('Logging out...');
+   this.messages.reset();
+   this.navCtrl.popToRoot({});
+
 
   }
 

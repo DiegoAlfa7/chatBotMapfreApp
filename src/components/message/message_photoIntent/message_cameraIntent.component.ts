@@ -26,7 +26,7 @@ export class MessageCameraIntentComponent implements OnInit{
   @Input() public intentType: number;
 
   //This will emit the cancel event that will block the input in case we want it to happen
-  @Output() private blockInput:EventEmitter<Object> = new EventEmitter();
+  @Output() private blockInput:EventEmitter<Object> = new EventEmitter(true);
 
   public imgRetrieved: boolean = false;
   public isAllDone:boolean = false;

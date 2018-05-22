@@ -38,12 +38,7 @@ export class MapfrecitoComponent implements OnInit {
 
 
   }
-  private ionViewWillLeave(){
-
-    console.log('Logging out...');
-    this.messages.reset();
-
-  }
+  
 
   public blockInput(event:any){
 
@@ -84,6 +79,7 @@ export class MapfrecitoComponent implements OnInit {
 
 
     this.navController.push(FormularioPage);
+
   }
 
 

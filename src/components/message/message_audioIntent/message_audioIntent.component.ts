@@ -100,6 +100,7 @@ export class MessageAudioIntentComponent implements OnInit{
     this.parte.url_audioAccidente = this.fileURL;
     this.parte.path_audioAccidente = this.filePath;
     this.isAllDone = true;
+    this.toggleLock();
     this.presentToast('Audio Enviado...', 'bottom' ,1000);
     this.gate.sendInvisibleMessage(this.parte.getDescripcionAccidenteFinalizada());
 
@@ -115,7 +116,7 @@ export class MessageAudioIntentComponent implements OnInit{
   }
 
   public toggleLock(){
-    console.log('TOGGLIng');
+
     this.locked = !this.locked;
     this.blockInput.emit({lock: this.locked});
 

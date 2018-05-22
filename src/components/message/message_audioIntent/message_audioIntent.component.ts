@@ -1,4 +1,4 @@
-import {AfterViewChecked, Component, EventEmitter, Input, Output} from '@angular/core';
+import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
 import {NavController, Platform, ToastController} from 'ionic-angular';
 import {CaptureError, MediaCapture} from '@ionic-native/media-capture';
@@ -14,7 +14,7 @@ const MEDIA_FILES_KEY = 'mediaFiles';
   templateUrl: './message_audioIntent.component.html'
 })
 
-export class MessageAudioIntentComponent implements AfterViewChecked{
+export class MessageAudioIntentComponent implements OnInit{
   mediaFiles = [];
   @Input() public message: Message;
 
@@ -101,7 +101,7 @@ export class MessageAudioIntentComponent implements AfterViewChecked{
 
   }
 
-  ngAfterViewChecked(): void {
+  ngOnInit(): void {
 
     this.toggleLock();
 

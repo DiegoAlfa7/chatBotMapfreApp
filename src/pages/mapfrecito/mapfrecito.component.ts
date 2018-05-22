@@ -34,7 +34,7 @@ export class MapfrecitoComponent implements OnInit {
     this.messages.getMessageListObserver().subscribe((messages: Message[]) => {
       this.messageFeed = messages;
     });
-    this.messages.addMessage(new Message('hi', 'audio_intent', 'bot', 'user', undefined));
+    /*this.messages.addMessage(new Message('hi', 'audio_intent', 'bot', 'user', undefined));*/
 
 
   }

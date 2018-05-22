@@ -1,21 +1,22 @@
-import {AfterViewChecked, Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import {Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {Message} from "../../../app/classes/Message";
 //Hay que importar la camara en vez de CaeraMock si queremos que se utilize la cámara nativa
 import {Camera, CameraOptions} from "@ionic-native/camera";
 //---------------------------------
+//import {CameraMock } from '../../../services/mocks/camera.mock'
 import {ToastController} from "ionic-angular";
 import {MapfreService} from '../../../services/mapfre.service';
 import {ExternalsService} from "../../../services/externals.service";
 import {ParteService} from "../../../services/parte.service";
 import {ContextGateController} from "../../../services/context-gate-controller.service";
-import {CameraMock} from "../../../services/mocks/camera.mock";
+
 
 
 @Component({
   selector: 'message-camera-intent',
   templateUrl: 'message_cameraIntent.template.html'
 })
-export class MessageCameraIntentComponent implements AfterViewChecked{
+export class MessageCameraIntentComponent implements OnInit{
 
   @ViewChild('videoOutput') videoOut: ElementRef;
 
@@ -38,9 +39,9 @@ export class MessageCameraIntentComponent implements AfterViewChecked{
   // NATIVE_URI : 2 Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
 
   private default_camera_options: CameraOptions = {
-    quality: 100,
+    quality: 50,
     destinationType: this.camera.DestinationType.DATA_URL,
-    encodingType: this.camera.EncodingType.JPEG,
+    encodingType: this.camera.EncodingType.PNG,
     mediaType: this.camera.MediaType.PICTURE
 
   };
@@ -118,7 +119,7 @@ export class MessageCameraIntentComponent implements AfterViewChecked{
 
   }
 
-  ngAfterViewChecked(): void {
+  ngOnInit(): void {
 
     this.toggleLock();
   }

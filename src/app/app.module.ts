@@ -22,6 +22,7 @@ import { MessageAbstract } from "../components/message/message_abstract.componen
 import { MessageTextComponent } from "../components/message/message_text/message_text.component";
 import { MessageCameraIntentComponent } from "../components/message/message_photoIntent/message_cameraIntent.component";
 import { CameraMock } from '../services/mocks/camera.mock';
+import { MediaCaptureMock } from '../services/mocks/media-capture.mock';
 import { SanitizerPipe } from '../pipes/sanitizer.pipe';
 import {ContextGateController} from "../services/context-gate-controller.service";
 import {ExternalsService} from "../services/externals.service";
@@ -70,10 +71,10 @@ import {MessageMatriculaIntentComponent} from "../components/message/message_mat
   providers: [
     StatusBar,
     SplashScreen,
-    Camera, CameraMock,
+    { provide: Camera, useClass: CameraMock },
     ToastController,
     MapfreService,
-    MediaCapture,
+    { provide: MediaCapture, useClass: MediaCaptureMock },
     Media,
     File,
     { provide: ErrorHandler, useClass: IonicErrorHandler },

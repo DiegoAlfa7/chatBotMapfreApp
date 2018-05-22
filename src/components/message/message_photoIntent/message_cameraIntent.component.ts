@@ -87,6 +87,8 @@ export class MessageCameraIntentComponent {
     this.parte.base64_accidente = this.base64ImageString;
     this.presentToast('Imagen Enviada...', 'bottom',1000);
 
+    this.gate.sendInvisibleMessage(this.parte.getVideoFinalizado());
+
   }
 
   /*sendVideo(){} -- TODO: may be implemented*/

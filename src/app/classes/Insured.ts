@@ -1,50 +1,48 @@
 
-var modelos = {
+let modelos = {
 
   "Seat":
     [
-      {nombre_modelo: "Leon"},
-      {nombre_modelo: "Ateca"},
-      {nombre_modelo: "Ibiza"},
-      {nombre_modelo: "Alhambra"},
-      {nombre_modelo: "Toledo"},
-      {nombre_modelo: "Arona"},
+      { nombre_modelo: "Leon" },
+      { nombre_modelo: "Ateca" },
+      { nombre_modelo: "Ibiza" },
+      { nombre_modelo: "Alhambra" },
+      { nombre_modelo: "Toledo" },
+      { nombre_modelo: "Arona" },
     ],
   "Ford":
     [
-      {nombre_modelo: "Edge"},
-      {nombre_modelo: "Focus"},
-      {nombre_modelo: "Fiesta"},
-      {nombre_modelo: "Galaxy"},
-      {nombre_modelo: "Mondeo"},
-      {nombre_modelo: "Kuga"},
+      { nombre_modelo: "Edge" },
+      { nombre_modelo: "Focus" },
+      { nombre_modelo: "Fiesta" },
+      { nombre_modelo: "Galaxy" },
+      { nombre_modelo: "Mondeo" },
+      { nombre_modelo: "Kuga" },
     ],
   "Renault":
     [
-      {nombre_modelo: "Captur"},
-      {nombre_modelo: "Clio"},
-      {nombre_modelo: "Espace"},
-      {nombre_modelo: "Koleos"},
-      {nombre_modelo: "Kadjar"},
-      {nombre_modelo: "Mégane"},
+      { nombre_modelo: "Captur" },
+      { nombre_modelo: "Clio" },
+      { nombre_modelo: "Espace" },
+      { nombre_modelo: "Koleos" },
+      { nombre_modelo: "Kadjar" },
+      { nombre_modelo: "Mégane" },
     ],
   "Audi":
     [
-      {nombre_modelo: "A8"},
-      {nombre_modelo: "A7"},
-      {nombre_modelo: "A6"},
-      {nombre_modelo: "A5"},
-      {nombre_modelo: "A4"},
-      {nombre_modelo: "A3"},
+      { nombre_modelo: "A8" },
+      { nombre_modelo: "A7" },
+      { nombre_modelo: "A6" },
+      { nombre_modelo: "A5" },
+      { nombre_modelo: "A4" },
+      { nombre_modelo: "A3" },
     ],
-
-
-
 
 }
 
+let permisos = ["AM", "A1", "A2", "A", "B1", "B", "C1", "D1", "D", "BE", "C1E", "CE", "D1E", "DE"];
 
-export class Insured{
+export class Insured {
 
   private _nombre: string;
   private _apellidos: string;
@@ -57,13 +55,17 @@ export class Insured{
   private _modelo: string;
   private _matricula: string;
   private _poliza: string;
-  private _agencia:string;
-  private _c_verde:string;
+  private _agencia: string;
+  private _c_verde: string;
   private _c_verde_val: string;
-  private _d_prop_asegurados:string;
+  private _d_prop_asegurados: string;
+  private _permisos: string;
 
-  constructor(){}
+  constructor() {
 
+    this._permisos = permisos[Math.floor(Math.random() * permisos.length)];
+
+  }
 
   set nombre(value: string) {
     this._nombre = value;
@@ -125,6 +127,14 @@ export class Insured{
     this._d_prop_asegurados = value;
   }
 
+  set permiso(value: string) {
+    this._permisos = value;
+  }
+
+  get permiso(): string {
+    return this._permisos;
+  }
+
   get nombre(): string {
     return this._nombre;
   }
@@ -159,11 +169,31 @@ export class Insured{
 
   get modelo(): string {
 
-    if(this.marca == 'Seat') return modelos.Seat[Math.floor(Math.random()*6)].nombre_modelo;
-    else if(this.marca == 'Ford') return modelos.Ford[Math.floor(Math.random()*6)].nombre_modelo;
-    else if(this.marca == 'Renault') return modelos.Renault[Math.floor(Math.random()*6)].nombre_modelo;
-    else if(this.marca == 'Audi') return modelos.Renault[Math.floor(Math.random()*6)].nombre_modelo;
 
+    if (this.marca == 'Seat') {
+      if (this._modelo != null) {
+        return this._modelo;
+      }
+      return this._modelo = modelos.Seat[Math.floor(Math.random() * 6)].nombre_modelo;
+    }
+    else if (this.marca == 'Ford') {
+      if (this._modelo != null) {
+        return this._modelo;
+      }
+      return this._modelo = modelos.Ford[Math.floor(Math.random() * 6)].nombre_modelo;
+    }
+    else if (this.marca == 'Renault') {
+      if (this._modelo != null) {
+        return this._modelo;
+      }
+      return this._modelo = modelos.Renault[Math.floor(Math.random() * 6)].nombre_modelo;
+    }
+    else if (this.marca == 'Audi') {
+      if (this._modelo != null) {
+        return this._modelo;
+      }
+      return this._modelo = modelos.Audi[Math.floor(Math.random() * 6)].nombre_modelo;
+    }
   }
 
   get matricula(): string {

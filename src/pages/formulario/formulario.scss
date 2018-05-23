@@ -1,9 +1,19 @@
 page-formulario {
     ion-label {
-        color: rgb(0, 112, 192);
+        color: #0070c0;
     }
     ion-input {
         color: rgb(115, 119, 126);
     }
-    
+    ion-card-header {
+        background-color: map-get($colors, secondary);
+    }
+
+    .a {
+         background-color: map-get($colors, primary);
+    }
+    .b {
+      background-color: map-get($colors, danger);
+    }
+
 }

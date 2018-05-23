@@ -22,6 +22,7 @@ export class MapfrecitoComponent implements OnInit {
   public bloquear: boolean = false;
   private messageFeedChangeObserver: MutationObserver;
   public usuarioRegistrado: any = this.navParams.get('name');
+  private once: boolean = false;
 
   constructor(
     private navParams: NavParams,
@@ -38,7 +39,7 @@ export class MapfrecitoComponent implements OnInit {
 
 
   }
-  
+
 
   public blockInput(event:any){
 
@@ -51,14 +52,15 @@ export class MapfrecitoComponent implements OnInit {
   }
 
   private ionViewWillEnter() {
+
+    if (!this.once) {
+
     console.log(this.usuarioRegistrado);
-
     //This is the app enter point, so the service should not have any data set
-
-
     this.parte.asegurado1.nombre = this.usuarioRegistrado;
     this.gate.sendLoginAsegurado(this.usuarioRegistrado);
-
+    this.once = true;
+  }
   }
 
   ngOnInit() {

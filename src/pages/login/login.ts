@@ -44,6 +44,7 @@ export class LoginPage {
   }
 
   irChatLoggeado() {
+    if(this.nombreUsuario.length < 1 || this.pw.length < 1) return;
     this.jsonUser.name = this.nombreUsuario;
     console.log(this.jsonUser);
     this.navCtrl.push(MapfrecitoComponent, this.jsonUser);

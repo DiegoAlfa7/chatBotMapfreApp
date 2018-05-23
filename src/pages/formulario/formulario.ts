@@ -19,22 +19,23 @@ import {MessagesService} from "../../services/messages.service";
 })
 export class FormularioPage {
 
-  private asegurado1:Insured;
-  private asegurado2:Insured;
+  private asegurado1: Insured;
+  private asegurado2: Insured;
 
-  private base64_matricula1:string;
-  private base64_matricula2:string;
+  private base64_matricula1: string;
+  private base64_matricula2: string;
 
-  private base64_accidente:string;
+  private base64_accidente: string;
 
+  public fechaDef: string;
   private mediaObject:MediaObject;
   private playing:boolean = false;
 
 
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
-              public parte:ParteService,
+    public navParams: NavParams,
+    public parte: ParteService,
               public media:Media,
               public messages:MessagesService) {
     this.asegurado1 = this.parte.asegurado1;
@@ -44,6 +45,8 @@ export class FormularioPage {
     this.base64_matricula2 = this.parte.matricula_coche_2;
 
     this.base64_accidente = this.parte.base64_accidente;
+
+
   }
 
   ionViewWillEnter() {
@@ -58,12 +61,9 @@ export class FormularioPage {
 
     console.log(this.asegurado1);
 
-
-
-
   }
 
-  public printInsured(){
+  public printInsured() {
 
 
     console.log(this.asegurado1);

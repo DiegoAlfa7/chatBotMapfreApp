@@ -3,9 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from "rxjs/Observable";
 import * as GLOBALS from '../app/app.constants';
-import {BotResponse} from "../app/classes/BotResponse";
-import {BoundTextAst} from "@angular/compiler";
-import {BotContext} from "../app/classes/BotContext";
+import { BotResponse } from "../app/classes/BotResponse";
+import { BoundTextAst } from "@angular/compiler";
+import { BotContext } from "../app/classes/BotContext";
 
 
 @Injectable()
@@ -47,42 +47,20 @@ export class MapfreService {
 
   public sendQuery(query: string, lang?: string, context?: string, sessionId?: string): Observable<Object> {
 
-    let url='';
+    const sessionIdParam = sessionId || this.SESSION_ID;
+    const langParam = lang || GLOBALS.LANG_ES;
+    let url = `${this.urlDialogFlow}query?v=20150910&timezone=ES&query=${query}&lang=${langParam}&sessionId=${sessionIdParam}`;
 
-    if (lang && context && sessionId) {
-
-       url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${lang}&query=${query}&sessionId=${sessionId}&timezone=ES`;
-
-
+    if (lang) {
+      url += `&lang=${lang}`;
     }
-    else if (lang && context) {
 
-       url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${lang}&query=${query}&sessionId=${this.SESSION_ID}&timezone=ES`;
-
-
-
-
-    } else if (context) {
-
-       url = this.urlDialogFlow + `query?v=20150910&contexts=${context}&lang=${GLOBALS.LANG_ES}&query=${query}&sessionId=${this.SESSION_ID}&timezone=ES`;
-
-
-
-
-    } else {
-
-       url = this.urlDialogFlow + `query?v=20150910&lang=${GLOBALS.LANG_ES}&query=${query}&sessionId=${this.SESSION_ID}&timezone=ES`;
-
-
-
-
+    if (context) {
+      url += `&contexts=${context}`;
     }
 
     let headers: HttpHeaders = this.getHeaders();
 
-
-    return this.httpClient.get(url, {headers});
+    return this.httpClient.get(url, { headers });
   }
-
-
 }

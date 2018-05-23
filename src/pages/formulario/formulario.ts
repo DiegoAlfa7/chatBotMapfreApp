@@ -4,6 +4,7 @@ import {ParteService} from "../../services/parte.service";
 import {Insured} from "../../app/classes/Insured";
 import {Media, MediaObject} from "@ionic-native/media";
 import {MessagesService} from "../../services/messages.service";
+import {ContextGateController} from "../../services/context-gate-controller.service";
 
 /**
  * Generated class for the FormularioPage page.
@@ -27,7 +28,9 @@ export class FormularioPage {
 
   private base64_accidente: string;
 
-  public fechaDef: string;
+  public fechaS_asegurado1: string;
+  public fechaS_asegurado2: string;
+
   private mediaObject:MediaObject;
   private playing:boolean = false;
 
@@ -37,9 +40,13 @@ export class FormularioPage {
     public navParams: NavParams,
     public parte: ParteService,
               public media:Media,
-              public messages:MessagesService) {
+              public messages:MessagesService,
+              public gate:ContextGateController) {
+
     this.asegurado1 = this.parte.asegurado1;
     this.asegurado2 = this.parte.asegurado2;
+
+
 
     this.base64_matricula1 = this.parte.matricula_coche_1;
     this.base64_matricula2 = this.parte.matricula_coche_2;
@@ -59,7 +66,69 @@ export class FormularioPage {
 
     this.base64_accidente = this.parte.base64_accidente;
 
-    console.log(this.asegurado1);
+    console.log('1: ->'+this.asegurado1 );
+    console.log('2: ->'+this.asegurado2);
+
+    if(this.asegurado1.c_verde_val) {
+
+      this.fechaS_asegurado1 = this.getISOStringfromDate(this.asegurado1.c_verde_val);
+
+
+    }
+    if(this.asegurado2.c_verde_val) {
+
+      this.fechaS_asegurado2 = this.getISOStringfromDate(this.asegurado2.c_verde_val);
+
+
+    }
+
+
+  }
+
+  /**
+   * This onli works for string representation of any Date following the next format: 'DD-MM-YYY'
+   */
+  private getISOStringfromDate(date:string):string{
+
+    let separated:string[] = date.split('-');
+    let day = separated[0];
+    let month = separated[1];
+    let year = separated[2];
+
+    let dateObject:Date = new Date();
+
+
+    dateObject.setFullYear(Number(year), Number(month) - 1, Number(day));
+
+    return dateObject.toISOString();
+
+  }
+
+  setFecha1(string:string){
+
+    let date:Date = new Date(Date.parse(string));
+
+    let day = date.getDate();
+    let month = date.getUTCMonth() + 1;
+    let year = date.getUTCFullYear() ;
+
+      this.asegurado1.c_verde_val = `${day}-${month}-${year}`;
+      /*this.fechaS_asegurado1 = this.getISOStringfromDate(this.asegurado1.c_verde_val);*/
+      this.parte.asegurado1 = this.asegurado1;
+
+  }
+
+  setFecha2(string:string){
+
+    let date:Date = new Date(Date.parse(string));
+
+    let day = date.getDay();
+    let month = date.getMonth() + 1;
+    let year = date.getFullYear();
+
+    this.asegurado2.c_verde_val = `${day}-${month}-${year}`;
+    /*this.fechaS_asegurado2 = this.getISOStringfromDate(this.asegurado2.c_verde_val);*/
+    this.parte.asegurado2 = this.asegurado2;
 
   }
 
@@ -93,6 +162,7 @@ export class FormularioPage {
   private goOut(){
 
    console.log('Logging out...');
+   this.gate.sendInvisibleMessage('Adios');
    this.messages.reset();
    this.navCtrl.popToRoot({});
 

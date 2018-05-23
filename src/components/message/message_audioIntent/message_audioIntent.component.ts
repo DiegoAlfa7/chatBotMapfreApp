@@ -102,7 +102,9 @@ export class MessageAudioIntentComponent implements OnInit{
     this.isAllDone = true;
     this.toggleLock();
     this.presentToast('Audio Enviado...', 'bottom' ,1000);
-    this.gate.sendInvisibleMessage(this.parte.getDescripcionAccidenteFinalizada());
+    let s = this.parte.getDescripcionAccidenteFinalizada();
+    console.log(s);
+    this.gate.sendInvisibleMessage(s);
 
 
   }

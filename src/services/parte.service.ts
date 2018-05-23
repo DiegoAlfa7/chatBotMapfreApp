@@ -72,7 +72,7 @@ export class ParteService{
   }
 
   public getDescripcionAccidenteFinalizada(): string {
-    return `DescripcionAccidenteFinalizada: ${this.asegurado1.nombre || ''} , ${this.asegurado1.apellidos || ''} , ${this.asegurado1.direccion || ''} , ${this.asegurado1.localidad || ''} , ${this.asegurado1.cp || ''} , ${this.asegurado1.telefono || ''} , ${this.asegurado1.recuperar_iva ? 'Si' : 'No'} , ${this.asegurado1.marca || ''} , ${this.asegurado1.modelo || ''} , ${this.asegurado1.matricula || ''} , ${this.asegurado1.poliza || ''} , ${this.asegurado1.agencia || ''} , ${this.asegurado1.d_prop_asegurados ? 'Si' : 'No'} `;
+    return `DescripcionAccidenteFinalizada: ${this.asegurado2.nombre || ''} , ${this.asegurado2.apellidos || ''} , ${this.asegurado2.direccion || ''} , ${this.asegurado2.localidad || ''} , ${this.asegurado2.cp || ''} , ${this.asegurado2.telefono || ''} , ${this.asegurado2.recuperar_iva ? 'Si' : 'No'} , ${this.asegurado2.marca || ''} , ${this.asegurado2.modelo || ''} , ${this.asegurado2.matricula || ''} , ${this.asegurado2.poliza || ''} , ${this.asegurado2.agencia || ''} , ${this.asegurado2.d_prop_asegurados ? 'Si' : 'No'} `;
   }
 
 

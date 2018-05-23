@@ -87,32 +87,4 @@ export class ExternalsService {
     let blob = new Blob(parentByteArrays, {type: contentType});
     return blob;
   }
-
-  /**
-   * An ugly version of the upper method 'b64toBlob'
-   *
-   * @param {string} string
-   * @returns {Blob}
-   */
-  btblob(string:string){
-
-    let decodedS = atob(string);
-
-    let ab = new ArrayBuffer(decodedS.length);
-    let ia = new Uint8Array(ab);
-    for (var i = 0; i < decodedS.length; i++) {
-      ia[i] = decodedS.charCodeAt(i);
-    }
-
-    // write the ArrayBuffer to a blob, and you're done
-    let bb = new Blob([ab]);
-    return bb;
-  }
-
-
-
-
-
-
-
 }

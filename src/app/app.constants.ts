@@ -19,3 +19,6 @@
 /*  export const  MESSAGE_VIDEO_INTENT = 'video_intent';*/
   export const  MESSAGE_CAMERA_INTENT = 'camera_intent';
   export const MESSAGE_AUDIO_INTENT = 'audio_intent';
+
+  // Token type for retrieve dialogflow token from service
+  export const NEOCOVER_TOKEN = 'NEOCover';

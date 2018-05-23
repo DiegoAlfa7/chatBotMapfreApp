@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 import * as GLOBALS from '../app/app.constants';
-import { BotResponse } from "../app/classes/BotResponse";
-import { BoundTextAst } from "@angular/compiler";
-import { BotContext } from "../app/classes/BotContext";
+import { BotResponse } from '../app/classes/BotResponse';
+import { BoundTextAst } from '@angular/compiler';
+import { BotContext } from '../app/classes/BotContext';
+import { TokenService } from './token.service';
 
 
 @Injectable()
@@ -16,7 +17,9 @@ export class MapfreService {
   private SESSION_ID: string;
 
 
-  constructor(public httpClient: HttpClient) {
+  constructor(public httpClient: HttpClient, private tokenService: TokenService) {
+
+    this.updateToken();
 
     if (localStorage.getItem(GLOBALS.STR_SESSION_ID)) {
 
@@ -34,6 +37,12 @@ export class MapfreService {
     }
     console.log('API Service initiallized. Session ID : ' + this.SESSION_ID);
 
+  }
+
+  private updateToken () {
+    this.tokenService.getToken(GLOBALS.NEOCOVER_TOKEN).subscribe( (response: any) => {
+      this.token = response.token;
+    });
   }
 
   public getHeaders(): HttpHeaders {

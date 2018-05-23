@@ -11,7 +11,7 @@ import { MapfrecitoComponent } from "../pages/mapfrecito/mapfrecito.component";
 import { Camera } from "@ionic-native/camera";
 import { MediaCapture } from "@ionic-native/media-capture";
 import { HttpClientModule } from '@angular/common/http';
-import { Media } from '@ionic-native/media';
+import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 //SERVICES
 import { MapfreService } from '../services/mapfre.service';
@@ -23,6 +23,7 @@ import { MessageTextComponent } from "../components/message/message_text/message
 import { MessageCameraIntentComponent } from "../components/message/message_photoIntent/message_cameraIntent.component";
 import { CameraMock } from '../services/mocks/camera.mock';
 import { MediaCaptureMock } from '../services/mocks/media-capture.mock';
+import { MediaMock, MediaObjectMock } from '../services/mocks/media.mock';
 import { SanitizerPipe } from '../pipes/sanitizer.pipe';
 import {ContextGateController} from "../services/context-gate-controller.service";
 import {ExternalsService} from "../services/externals.service";
@@ -71,13 +72,15 @@ import {MessageMatriculaIntentComponent} from "../components/message/message_mat
   providers: [
     StatusBar,
     SplashScreen,
-    Camera, // Comment for development
-    // { provide: Camera, useClass: CameraMock }, // Discomment only for development
+    // Camera, // Comment for development
+    { provide: Camera, useClass: CameraMock }, // Discomment only for development
     ToastController,
     MapfreService,
-    MediaCapture, // Comment for development
-    // { provide: MediaCapture, useClass: MediaCaptureMock }, // Discomment only for development
-    Media,
+    // MediaCapture, // Comment for development
+    { provide: MediaCapture, useClass: MediaCaptureMock }, // Discomment only for development
+    // Media, // Comment for development
+    { provide: Media, useClass: MediaMock }, // Discomment only for development
+    // { provide: MediaObject, useClass: MediaObjectMock },
     File,
     { provide: ErrorHandler, useClass: IonicErrorHandler },
     ContextGateController,

@@ -1,12 +1,12 @@
 import {AfterViewChecked, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Message} from "../../../app/classes/Message";
+import {Message} from '../../../app/classes/Message';
 import {NavController, Platform, ToastController} from 'ionic-angular';
 import {CaptureError, MediaCapture} from '@ionic-native/media-capture';
 import {File} from '@ionic-native/file';
 import {Storage} from '@ionic/storage';
 import {Media, MediaObject} from '@ionic-native/media';
-import {ParteService} from "../../../services/parte.service";
-import {ContextGateController} from "../../../services/context-gate-controller.service";
+import {ParteService} from '../../../services/parte.service';
+import {ContextGateController} from '../../../services/context-gate-controller.service';
 
 
 const MEDIA_FILES_KEY = 'mediaFiles';
@@ -44,27 +44,28 @@ export class MessageAudioIntentComponent implements OnInit{
 
 
     public startRecord() {
-
       if (this.platform.is('ios')) {
         this.fileName = 'observacion' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
         this.filePath = this.file.documentsDirectory + this.fileName;
-         this.mediaObject = this.media.create(this.filePath);
-      } else if (this.platform.is('android')) {
+        this.mediaObject = this.media.create(this.filePath);
+      } else if (this.platform.is('android') || this.platform.is('core')) {
         this.fileName = 'observacion' + new Date().getDate() + new Date().getMonth() + new Date().getFullYear() + new Date().getHours() + new Date().getMinutes() + new Date().getSeconds() + '.3gp';
         this.filePath = this.file.externalDataDirectory + this.fileName;
         this.mediaObject = this.media.create(this.filePath);
       }
       this.mediaObject.startRecord();
-      this.file.resolveLocalFilesystemUrl(this.filePath).then((onfullfilled)=>{
+      if (!this.platform.is('core')) {
+        this.file.resolveLocalFilesystemUrl(this.filePath).then((onfullfilled)=>{
 
-              this.fileURL = onfullfilled.toURL();
+                this.fileURL = onfullfilled.toURL();
 
-      });
+        });
+      }
       this.recording = true;
     }
 
     public stopRecord() {
-      console.log("Fin");
+      console.log('Fin');
       this.audioRetrieved = true;
       this.mediaObject.stopRecord();
       this.recording = false;

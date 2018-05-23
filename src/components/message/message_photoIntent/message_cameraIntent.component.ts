@@ -38,7 +38,7 @@ export class MessageCameraIntentComponent implements OnInit{
   // NATIVE_URI : 2 Return image native URI (e.g., assets-library:// on iOS or content:// on Android)
 
   private default_camera_options: CameraOptions = {
-    quality: 50,
+    quality: 100,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.PNG,
     mediaType: this.camera.MediaType.PICTURE

@@ -1,6 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
 import { MapfrecitoComponent } from '../mapfrecito/mapfrecito.component';
+import {ParteService} from "../../services/parte.service";
 
 /**
  * Generated class for the LoginPage page.
@@ -27,17 +28,41 @@ export class LoginPage {
   };
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,private parte:ParteService,
+  private alert:AlertController) {
   }
 
-  private ionViewWillEnter() {
-
+   ionViewWillEnter() {
+    console.log('ionViewWillEnter');
     this.nombreUsuario = '';
     this.pw = '';
+    if(this.parte.parteEnviado){
 
 
+      this.showConfirm();
+
+    }
   }
 
+
+
+  showConfirm() {
+    let confirm = this.alert.create({
+      title: `REF : ${Math.floor((Math.random() * 12343546) + 1)}`,
+      message: `Estimado ${this.parte.asegurado1.nombre}, le informamos del número de referencia con el que se ha registrado su expediente \n GRACIAS POR CONFIAR EN NEO-COVER`,
+      buttons: [
+        {
+          text: 'OK',
+          handler: () =>{
+
+            this.parte.reset();
+
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 
   irChatInvitado() {
     this.navCtrl.push(MapfrecitoComponent);

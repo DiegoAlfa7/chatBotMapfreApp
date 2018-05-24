@@ -22,10 +22,12 @@ export class MessagesService {
   }
   public reset(){
 
-    this._messagesFeed = new Subject<Message[]>();
-    this._lastMessage = new Subject<Message>();
+
     this.messagesArray = [];
     this.message_last = undefined;
+
+    this._messagesFeed.next(this.messagesArray);
+    this._lastMessage.next(this.message_last);
 
 
   }

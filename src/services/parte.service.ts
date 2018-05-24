@@ -15,6 +15,8 @@ export class ParteService{
   private _url_audioAccidente:string;
   private _path_audioAccidente:string;
 
+  private _parteEnviado: boolean = false;
+
 
 
 
@@ -138,4 +140,29 @@ export class ParteService{
     this._path_audioAccidente = value;
   }
 
+
+  get parteEnviado(): boolean {
+    return this._parteEnviado;
+  }
+
+  set parteEnviado(value: boolean) {
+    this._parteEnviado = value;
+  }
+
+  /**
+   * CAUTION!! Invoking this method could result on fatal errors in the app data-flow
+   */
+  reset() {
+
+    this.asegurado1 = new Insured();
+    this.asegurado2 = new Insured();
+
+    this.base64_accidente = '';
+    this.parteEnviado = false;
+    this.path_audioAccidente = '';
+    this.url_audioAccidente = '';
+    this.matricula_coche_1 = '';
+    this.matricula_coche_2 = '';
+
+  }
 }

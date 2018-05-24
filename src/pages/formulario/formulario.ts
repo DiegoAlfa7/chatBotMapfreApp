@@ -163,8 +163,10 @@ export class FormularioPage {
 
    console.log('Logging out...');
    this.gate.sendInvisibleMessage('Adios');
-   this.messages.reset();
-   this.navCtrl.popToRoot({});
+   setTimeout(this.messages.reset(), 500);
+   this.parte.parteEnviado = true;
+
+   this.navCtrl.popToRoot();
 
 
   }

@@ -72,7 +72,14 @@ export class ParteService{
   }
 
   public getDescripcionAccidenteFinalizada(): string {
-    return `DescripcionAccidenteFinalizada: ${this.asegurado2.nombre || ''} , ${this.asegurado2.apellidos || ''} , ${this.asegurado2.direccion || ''} , ${this.asegurado2.localidad || ''} , ${this.asegurado2.cp || ''} , ${this.asegurado2.telefono || ''} , ${this.asegurado2.recuperar_iva ? 'Si' : 'No'} , ${this.asegurado2.marca || ''} , ${this.asegurado2.modelo || ''} , ${this.asegurado2.matricula || ''} , ${this.asegurado2.poliza || ''} , ${this.asegurado2.agencia || ''} , ${this.asegurado2.d_prop_asegurados ? 'Si' : 'No'} `;
+
+    if(!this.asegurado2.apellidos){
+
+      return `DescripcionAccidenteFinalizada: ${this.asegurado2.nombre || ''}, , , ${this.asegurado2.localidad || ''}, ${this.asegurado2.cp || ''}, ${this.asegurado2.telefono || ''}, ${this.asegurado2.recuperar_iva ? 'Si' : 'No'}, ${this.asegurado2.marca || ''}, ${this.asegurado2.modelo || ''}, ${this.asegurado2.poliza || ''}, ${this.asegurado2.agencia || ''}, ${this.asegurado2.d_prop_asegurados ? 'Si' : 'No'}`;
+    }else {
+
+      return `DescripcionAccidenteFinalizada: ${this.asegurado2.nombre || ''}, ${this.asegurado2.apellidos.split(' ')[0] || ''}, ${this.asegurado2.apellidos.split(' ')[1] || ''}, ${this.asegurado2.localidad || ''}, ${this.asegurado2.cp || ''}, ${this.asegurado2.telefono || ''}, ${this.asegurado2.recuperar_iva ? 'Si' : 'No'}, ${this.asegurado2.marca || ''}, ${this.asegurado2.modelo || ''}, ${this.asegurado2.poliza || ''}, ${this.asegurado2.agencia || ''}, ${this.asegurado2.d_prop_asegurados ? 'Si' : 'No'}`;
+    }
   }
 
 

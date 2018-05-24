@@ -61,6 +61,9 @@
     </ion-row>
   </ion-grid>
   </div>
+  <button *ngIf="loading" ion-button icon-only padding disabled>Analizando Matrícula
+    <ion-spinner name="bubbles" color="white"></ion-spinner>
+  </button>
   <p *ngIf="isAllDone" padding>{{this.matricula}}</p>
 
 </div>

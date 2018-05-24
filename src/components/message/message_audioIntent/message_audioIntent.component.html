@@ -5,8 +5,8 @@
     <ion-icon ios="ios-mic" md="md-mic"></ion-icon>
   </button>
 
-  <button *ngIf="recording" ion-button icon-only (click)="stopRecord()">
-    <ion-spinner name="bubbles"></ion-spinner>
+  <button *ngIf="recording" ion-button icon-only padding (click)="stopRecord()">Grabando
+    <ion-spinner name="bubbles" color="white"></ion-spinner>
   </button>
 
  <!-- <ion-list>
@@ -20,7 +20,7 @@
 
 <div *ngIf="audioRetrieved">
 
-  <p>Este es el audio que has enviado:</p>
+  <p>Este es el audio que has {{!isAllDone ? 'grabado':'enviado'}}:</p>
 
   <ion-item [ngSwitch]="playing">
 

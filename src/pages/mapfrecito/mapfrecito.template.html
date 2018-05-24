@@ -14,7 +14,11 @@
 </ion-header>
 <ion-content>
   <ion-grid>
-    <ion-row *ngFor="let m of messageFeed" [ngClass]="{'row-start': m.from == 'user'}">
+    <ion-row class="animated" *ngFor="let m of messageFeed"
+             [ngClass]="
+             {'row-start': m.from == 'user',
+               'slideInLeft': m.from == 'bot',
+                 'slideInRight': m.from == 'user'}">
       <div class="max-h" *ngIf="m.from == 'bot'" style="display: flex;align-items: center;justify-content: center;">
         <div class="circle d-flex"
             [ngStyle]="{

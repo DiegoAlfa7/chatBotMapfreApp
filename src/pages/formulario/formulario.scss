@@ -16,4 +16,19 @@ page-formulario {
       background-color: map-get($colors, danger);
     }
 
+    .audio-item{
+
+      background-color: aliceblue;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+
+    }
+
+  .video-item{
+
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+
+  }
+
 }

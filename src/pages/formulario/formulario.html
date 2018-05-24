@@ -12,7 +12,7 @@
 
 
 <ion-content padding>
-  <h1>{{asegurado1.nombre || 'Sin especificar'}}</h1>
+  <h1 padding text-center>{{asegurado1.nombre || 'Sin especificar'}}</h1>
   <hr/>
   <!-- ASEGURADO -->
   <ion-card text-wrap>
@@ -263,7 +263,7 @@
 
   </ion-card>
 
-  <h1>{{asegurado2.nombre || 'Sin especificar'}}</h1>
+  <h1 padding text-center>{{asegurado2.nombre || 'Sin especificar'}}</h1>
   <hr/>
 
   <!--
@@ -520,7 +520,7 @@
 
   </ion-card>
 
-  <h2>Otros</h2>
+  <h2 text-center >Otros</h2>
   <hr/>
 
   <ion-card>
@@ -531,7 +531,7 @@
     <hr/>
 
     <ion-card-content>
-      <ion-item [ngSwitch]="playing">
+      <ion-item class="audio-item" [ngSwitch]="playing">
 
         <p>{{fileName}}</p>
         <button *ngSwitchCase="false" ion-button clear (click)="playAudio()">
@@ -553,16 +553,20 @@
     </ion-card-header>
 
     <ion-card-content padding>
-
-      <img [src]="this.base64_accidente | domseguro:'data:image/jpeg;base64,'" />
-
+      <div class="video-item">
+      <img style="width: 100%" [src]="this.base64_accidente | domseguro:'data:image/jpeg;base64,'" />
+      </div>
     </ion-card-content>
 
   </ion-card>
 
 
 
-    <button ion-button color="secondary" (click)="goOut()">Aceptar</button>
+    <button ion-button block icon-left color="secondary" (click)="goOut()">
+      <p padding>Enviar</p>
+
+    <ion-icon name="send" color="white"></ion-icon>
+    </button>
 
 
 

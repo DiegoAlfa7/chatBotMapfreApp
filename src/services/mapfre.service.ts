@@ -21,20 +21,11 @@ export class MapfreService {
 
     this.updateToken();
 
-    if (localStorage.getItem(GLOBALS.STR_SESSION_ID)) {
-
-      //IF the user's already in possesion of an ID lets just use that one
-      this.SESSION_ID = localStorage.getItem(GLOBALS.STR_SESSION_ID);
-
-    } else {
-
       //Otherwise, get a Session ID by just calling a pseudo TIMESTAMP
 
       this.SESSION_ID = Date.now().toString();
       localStorage.setItem(GLOBALS.STR_SESSION_ID, this.SESSION_ID);
 
-
-    }
     console.log('API Service initiallized. Session ID : ' + this.SESSION_ID);
 
   }

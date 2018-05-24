@@ -56,6 +56,7 @@ export class MessageMatriculaIntentComponent {
     duration: 20
   };*/
   public base64ImageString: string;
+  private loading: boolean = false;
 
   constructor(
     private camera: Camera,
@@ -91,6 +92,7 @@ export class MessageMatriculaIntentComponent {
 
   sendImage() {
 
+    this.loading = true;
     this.externals.reconocerMatrícula(this.base64ImageString).subscribe((response:any)=>{
 
 
@@ -111,6 +113,7 @@ export class MessageMatriculaIntentComponent {
 
           this.matricula = response.matricula;
           this.isAllDone = true;
+          this.loading = false;
 
         }else{
 

@@ -11,3 +11,8 @@
 
 <!-- Audio -->
 <app-message_audioIntent *ngIf="message.type == audioIntentType" (blockInput)="blockInput($event)" [message]="message"></app-message_audioIntent>
+<!-- Video -->
+<message-video-intent *ngIf="message.type === videoIntentType"
+  (blockInput)="blockInput($event)"
+  [message]="message">
+</message-video-intent>

@@ -10,6 +10,7 @@ import { MapfreService } from '../../../services/mapfre.service';
 import { ExternalsService } from "../../../services/externals.service";
 import { ParteService } from "../../../services/parte.service";
 import { ContextGateController } from "../../../services/context-gate-controller.service";
+import { BaseMessageWithToast } from "../../../app/classes/BaseMessageWithToast";
 
 /**
  * Generated class for the MessageVideoIntentComponent component.
@@ -21,14 +22,11 @@ import { ContextGateController } from "../../../services/context-gate-controller
   selector: 'message-video-intent',
   templateUrl: 'message-video-intent.template.html'
 })
-export class MessageVideoIntentComponent implements OnInit {
+export class MessageVideoIntentComponent extends BaseMessageWithToast implements OnInit {
 
   @ViewChildren('videoOutput') videoOuts: QueryList<any>;
 
   @Input() public message: Message;
-
-  //This will emit the cancel event that will block the input in case we want it to happen
-  @Output() private blockInput: EventEmitter<Object> = new EventEmitter(true);
 
   private fileName: string;
   private filePath: string;
@@ -36,8 +34,8 @@ export class MessageVideoIntentComponent implements OnInit {
   private playing: boolean = false;
   private recording: boolean = false;
   public videoRetrieved: boolean = false;
-  private locked: boolean;
   private fileURL: string;
+  private urlVideoAccidente: string;
 
   private mediaFile:MediaFile[];
 
@@ -52,7 +50,9 @@ export class MessageVideoIntentComponent implements OnInit {
     private parte:ParteService,
     private mapfre: MapfreService,
     private externals: ExternalsService
-  ) { }
+  ) {
+    super(toast);
+  }
 
   ngOnInit(): void {
     this.toggleLock();
@@ -65,9 +65,9 @@ export class MessageVideoIntentComponent implements OnInit {
           // For mock work
           const dataDirectory = this.file.dataDirectory || 'assets/Camera/';
           let path = dataDirectory + this.fileName;
-          let url = path.replace(/^file:\/\//, '');
+          this.urlVideoAccidente = path.replace(/^file:\/\//, '');
           let video = element.nativeElement;
-          video.src = url;
+          video.src = this.urlVideoAccidente;
         });
       }
     });
@@ -94,23 +94,8 @@ export class MessageVideoIntentComponent implements OnInit {
     (err: CaptureError) => console.error(err));
   }
 
-  public toggleLock() {
-    this.locked = !this.locked;
-    this.blockInput.emit({ lock: this.locked });
-  }
-
   public repeatVideo(){
     this.videoRetrieved = false;
-  }
-
-  public presentToast(m: string, position: string, duration: number) {
-    let toast = this.toast.create({
-      message: m,
-      duration: duration,
-      position: position
-    });
-
-    toast.present();
   }
 
   sendVideo() {
@@ -118,6 +103,7 @@ export class MessageVideoIntentComponent implements OnInit {
     // this.parte.path_videoAccidente = this.filePath;
     this.isAllDone = true;
     this.toggleLock();
+    this.parte.urlVideoAccidente = this.urlVideoAccidente;
     this.presentToast('Video Enviado...', 'bottom' ,1000);
   }
 }

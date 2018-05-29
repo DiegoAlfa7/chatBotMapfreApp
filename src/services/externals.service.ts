@@ -1,6 +1,18 @@
-import {Injectable} from "@angular/core";
-import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs/Observable";
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+
+const TYPE = {
+  DNI: 'dni',
+  CAR_REGISTRATION: 'matricula',
+  USER_DATA: 'datos_matricula',
+  PART_ACCIDENT: 'datos_parte'
+}
+const URL_MAPPER = {}
+URL_MAPPER[TYPE.DNI] = 'dni';
+URL_MAPPER[TYPE.CAR_REGISTRATION] = 'reconocer_matricula';
+URL_MAPPER[TYPE.USER_DATA] = 'datos_matricula';
+URL_MAPPER[TYPE.PART_ACCIDENT] = 'datos_parte';
 
 /**
  * Implements the calls to external services, ex: MATRICULA_OCR
@@ -8,46 +20,45 @@ import {Observable} from "rxjs/Observable";
 @Injectable()
 export class ExternalsService {
 
-
   constructor(
-      private http:HttpClient
-  ){}
+    private http: HttpClient
+  ) { }
 
+  private reconocerImagen(base64: string, type: string, imageName: string): Observable<Object> {
 
-
-  public reconocerMatrícula(base64:string):Observable<Object>{
-
-
-    let url = 'http://api.cemobile.eu/gv/reconocer_matricula';
+    let url = this.getUrlByType(type);
 
     let formPart = new FormData();
 
-    let blob:Blob = this.b64toBlob(base64, 'image/jpeg');
+    let blob: Blob = this.b64toBlob(base64, 'image/jpeg');
 
-    formPart.append('file', blob, 'matricula.jpeg');
+    formPart.append('file', blob, `${imageName}.jpeg`);
 
     let headers = new HttpHeaders();
 
     return this.http.post(url, formPart, { headers });
-
-
   }
 
-  public getDatosAsegurado():Observable<Object>{
-
-    let url = 'http://api.cemobile.eu/gv/datos_matricula';
-
-
-
-
-
-    return this.http.post(url, null);
-
-
-
+  private getUrlByType (type: string):string {
+    const subUrl: string = URL_MAPPER[type];
+    return `http://api.cemobile.eu/gv/${subUrl}`;
   }
 
+  public reconocerMatrícula(base64: string): Observable<Object> {
+    return this.reconocerImagen(base64, TYPE.CAR_REGISTRATION, 'matricula');
+  }
 
+  public reconocerDni(base64: string): Observable<Object> {
+    return this.reconocerImagen(base64, TYPE.DNI, 'dni');
+  }
+
+  public getDatosAsegurado(): Observable<Object> {
+    return this.http.post(this.getUrlByType(TYPE.USER_DATA), null);
+  }
+
+  public getDatosParte(): Observable<Object> {
+    return this.http.post(this.getUrlByType(TYPE.PART_ACCIDENT) , null);
+  }
 
 
   /**
@@ -57,7 +68,7 @@ export class ExternalsService {
    * @param sliceSize
    * @returns {Blob}
    */
-  public b64toBlob(b64Data, contentType, sliceSize?):Blob {
+  public b64toBlob(b64Data, contentType, sliceSize?): Blob {
 
     contentType = contentType || '';
 
@@ -84,7 +95,7 @@ export class ExternalsService {
       parentByteArrays.push(byteArray);
     }
 
-    let blob = new Blob(parentByteArrays, {type: contentType});
+    let blob = new Blob(parentByteArrays, { type: contentType });
     return blob;
   }
 }

@@ -24,11 +24,14 @@ page-formulario {
     }
 
   .video-item{
-
+    text-align: center;
     max-width: 100%;
     margin-left: auto;
     margin-right: auto;
-
+    img {
+      margin-bottom: 5px;
+      display: inline-block;
+    }
   }
 
 }

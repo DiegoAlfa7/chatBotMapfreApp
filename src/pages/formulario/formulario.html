@@ -531,7 +531,7 @@
     <hr/>
 
     <ion-card-content>
-      <ion-item class="audio-item" [ngSwitch]="playing">
+      <ion-item class="audio-item" [ngSwitch]="playing" *ngIf="hasAudio()">
 
         <p>{{fileName}}</p>
         <button *ngSwitchCase="false" ion-button clear (click)="playAudio()">
@@ -546,15 +546,38 @@
 
   </ion-card>
 
-  <ion-card>
+  <ion-card *ngIf="hasImages()">
 
     <ion-card-header class="b">
-      <h1 ion-text color="white">Imagen del accidente</h1>
+      <h1 ion-text color="white">Imagenes del accidente</h1>
     </ion-card-header>
 
     <ion-card-content padding>
       <div class="video-item">
-      <img style="width: 100%" [src]="this.base64_accidente | domseguro:'data:image/jpeg;base64,'" />
+      <img *ngFor="let base64_accidente of base64_accidentes"
+        style="width: 100%"
+        [src]="base64_accidente | domseguro:'data:image/jpeg;base64,'" />
+      </div>
+    </ion-card-content>
+
+  </ion-card>
+
+  <ion-card *ngIf="hasVideo()">
+
+    <ion-card-header class="b">
+      <h1 ion-text color="white">Video del accidente</h1>
+    </ion-card-header>
+
+    <ion-card-content padding>
+      <div class="video-item">
+        <video #videoOutput
+          [src]="urlVideoAccidente"
+          controls="controls"
+          preload="metadata"
+          webkit-playsinline="webkit-playsinline"
+          width="200"
+          height="160">
+        </video>
       </div>
     </ion-card-content>
 

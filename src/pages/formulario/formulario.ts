@@ -26,15 +26,14 @@ export class FormularioPage {
   private base64_matricula1: string;
   private base64_matricula2: string;
 
-  private base64_accidente: string;
+  private base64_accidentes: string[];
+  private urlVideoAccidente: string;
 
   public fechaS_asegurado1: string;
   public fechaS_asegurado2: string;
 
   private mediaObject:MediaObject;
   private playing:boolean = false;
-
-
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -46,14 +45,23 @@ export class FormularioPage {
     this.asegurado1 = this.parte.asegurado1;
     this.asegurado2 = this.parte.asegurado2;
 
-
-
     this.base64_matricula1 = this.parte.matricula_coche_1;
     this.base64_matricula2 = this.parte.matricula_coche_2;
 
-    this.base64_accidente = this.parte.base64_accidente;
+    this.base64_accidentes = this.parte.base64_accidentes;
+    this.urlVideoAccidente = this.parte.urlVideoAccidente;
+  }
 
+  hasVideo () {
+    return this.urlVideoAccidente && this.urlVideoAccidente.length > 0 ? true : false;
+  }
 
+  hasImages () {
+    return this.base64_accidentes && this.base64_accidentes.length > 0 ? true : false;
+  }
+
+  hasAudio () {
+    return this.mediaObject ? true : false;
   }
 
   ionViewWillEnter() {
@@ -64,25 +72,19 @@ export class FormularioPage {
     this.base64_matricula1 = this.parte.matricula_coche_1;
     this.base64_matricula2 = this.parte.matricula_coche_2;
 
-    this.base64_accidente = this.parte.base64_accidente;
+    this.base64_accidentes = this.parte.base64_accidentes;
+    this.urlVideoAccidente = this.parte.urlVideoAccidente;
 
     console.log('1: ->'+this.asegurado1 );
     console.log('2: ->'+this.asegurado2);
 
     if(this.asegurado1.c_verde_val) {
-
       this.fechaS_asegurado1 = this.getISOStringfromDate(this.asegurado1.c_verde_val);
-
-
     }
+
     if(this.asegurado2.c_verde_val) {
-
       this.fechaS_asegurado2 = this.getISOStringfromDate(this.asegurado2.c_verde_val);
-
-
     }
-
-
   }
 
   /**
@@ -96,7 +98,6 @@ export class FormularioPage {
     let year = separated[2];
 
     let dateObject:Date = new Date();
-
 
     dateObject.setFullYear(Number(year), Number(month) - 1, Number(day));
 

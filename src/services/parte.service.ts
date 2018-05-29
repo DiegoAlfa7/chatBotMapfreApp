@@ -3,49 +3,70 @@ import { Insured } from "../app/classes/Insured";
 import { ExternalsService } from "./externals.service";
 
 @Injectable()
-export class ParteService{
+export class ParteService {
 
-  private _asegurado1: Insured;
-  private _asegurado2: Insured;
+  private _asegurado: Insured;
+  private _contrario: Insured;
 
-  private _matricula_coche_1: string;
-  private _matricula_coche_2: string;
+  private _matricula_coche_asegurado: string;
+  private _matricula_coche_contrario: string;
 
-  private _base64_accidente:string;
-  private _url_audioAccidente:string;
-  private _path_audioAccidente:string;
+  private _base64_accidentes: string[];
+  private _urlVideoAccidente: string;
+  private _url_audioAccidente: string;
+  private _path_audioAccidente: string;
+  private _audioFileName: string;
 
   private _parteEnviado: boolean = false;
 
 
 
 
-  constructor(private external:ExternalsService) {
+  constructor(private external: ExternalsService) {
 
-    this._asegurado1 = new Insured();
-    this._asegurado2 = new Insured();
+    this._asegurado = new Insured();
+    this._contrario = new Insured();
     this.external.getDatosAsegurado().subscribe((response: any) => {
 
-      this._asegurado1.telefono = response.telefono;
-      this._asegurado1.cp = response.cp;
-      this._asegurado1.poliza = response.poliza;
-      this._asegurado1.d_prop_asegurados = response.d_prop_asegurados;
-      this._asegurado1.c_verde_val = response.c_verde_val;
-      this._asegurado1.c_verde = response.c_verde;
-      this._asegurado1.localidad = response.localidad;
-      this._asegurado1.apellidos = response.apellidos;
-      this._asegurado1.direccion = response.direccion;
-      this._asegurado1.matricula = response.matricula;
-      this._asegurado1.agencia = response.agencia;
-      this._asegurado1.marca = response.marca;
-      this._asegurado1.recuperar_iva = response.recuperar_iva;
+      this._asegurado.telefono = response.telefono;
+      this._asegurado.cp = response.cp;
+      this._asegurado.poliza = response.poliza;
+      this._asegurado.d_prop_asegurados = response.d_prop_asegurados;
+      this._asegurado.c_verde_val = response.c_verde_val;
+      this._asegurado.c_verde = response.c_verde;
+      this._asegurado.localidad = response.localidad;
+      this._asegurado.apellidos = response.apellidos;
+      this._asegurado.direccion = response.direccion;
+      this._asegurado.matricula = response.matricula;
+      this._asegurado.agencia = response.agencia;
+      this._asegurado.marca = response.marca;
+      this._asegurado.recuperar_iva = response.recuperar_iva;
 
       console.log('Asegurado: ');
-      console.log(this._asegurado1);
+      console.log(this._asegurado);
 
+    });
 
-    }
-    );
+    this.external.getDatosParte().subscribe((response: any) => {
+
+      this._contrario.telefono = response.telefono;
+      this._contrario.cp = response.cp;
+      this._contrario.poliza = response.poliza;
+      this._contrario.d_prop_asegurados = response.d_prop_asegurados;
+      this._contrario.c_verde_val = response.c_verde_val;
+      this._contrario.c_verde = response.c_verde;
+      this._contrario.localidad = response.localidad;
+      this._contrario.apellidos = response.apellidos;
+      this._contrario.direccion = response.direccion;
+      this._contrario.matricula = response.matricula;
+      this._contrario.agencia = response.agencia;
+      this._contrario.marca = response.marca;
+      this._contrario.recuperar_iva = response.recuperar_iva;
+
+      console.log('Asegurado: ');
+      console.log(this._contrario);
+
+    });
   }
 
 
@@ -54,11 +75,8 @@ export class ParteService{
    * the values are separated by columns and every value is directly surrounded by character spacings so if any value is not initialized, it would be replaced by duble-spacing.
    * @returns {string} DatosAsegurado-like string representation of an Insured object
    */
-  public getDatosAsegurado1(): string {
-
-    return `DatosAsegurado: ${this.asegurado1.nombre || ''}  , ${this.asegurado1.apellidos || ''} , ${this.asegurado1.direccion || ''} , ${this.asegurado1.localidad || ''} , ${this.asegurado1.cp || ''} , ${this.asegurado1.telefono || ''} , ${this.asegurado1.recuperar_iva == 'True' ? 'Si' : 'No'} , ${this.asegurado1.marca || ''} , ${this.asegurado1.modelo || ''} , ${this.asegurado1.matricula || ''} , ${this.asegurado1.poliza || ''} , ${this.asegurado1.agencia || ''} , ${this.asegurado1.d_prop_asegurados == 'True' ? 'Si' : 'No'} `;
-
-
+  public getDatosAsegurado(): string {
+    return `DatosAsegurado: ${this.asegurado.nombre || ''}  , ${this.asegurado.apellidos || ''} , ${this.asegurado.direccion || ''} , ${this.asegurado.localidad || ''} , ${this.asegurado.cp || ''} , ${this.asegurado.telefono || ''} , ${this.asegurado.recuperar_iva == 'True' ? 'Si' : 'No'} , ${this.asegurado.marca || ''} , ${this.asegurado.modelo || ''} , ${this.asegurado.matricula || ''} , ${this.asegurado.poliza || ''} , ${this.asegurado.agencia || ''} , ${this.asegurado.d_prop_asegurados == 'True' ? 'Si' : 'No'} `;
   }
 
   /**
@@ -66,24 +84,29 @@ export class ParteService{
    * the values are separated by columns and every value is directly surrounded by character spacings so if any value is not initialized, it would be replaced by duble-spacing.
    * @returns {string} DatosAsegurado-like string representation of an Insured object
    */
-  public getDatosAsegurado2(): string {
-
-    return `DatosAsegurado: ${this.asegurado2.nombre || ''} , ${this.asegurado2.apellidos || ''} , ${this.asegurado2.direccion || ''} , ${this.asegurado2.localidad || ''} , ${this.asegurado2.cp || ''} , ${this.asegurado2.telefono || ''} , ${this.asegurado2.recuperar_iva ? 'Si' : 'No'} , ${this.asegurado2.marca || ''} , ${this.asegurado2.modelo || ''} , ${this.asegurado2.matricula || ''} , ${this.asegurado2.poliza || ''} , ${this.asegurado2.agencia || ''} , ${this.asegurado2.d_prop_asegurados ? 'Si' : 'No'} `;
-
-
+  public getDatosContrario(): string {
+    return `DatosAsegurado: ${this.contrario.nombre || ''} , ${this.contrario.apellidos || ''} , ${this.contrario.direccion || ''} , ${this.contrario.localidad || ''} , ${this.contrario.cp || ''} , ${this.contrario.telefono || ''} , ${this.contrario.recuperar_iva ? 'Si' : 'No'} , ${this.contrario.marca || ''} , ${this.contrario.modelo || ''} , ${this.contrario.matricula || ''} , ${this.contrario.poliza || ''} , ${this.contrario.agencia || ''} , ${this.contrario.d_prop_asegurados ? 'Si' : 'No'} `;
   }
 
   public getDescripcionAccidenteFinalizada(): string {
 
-    if(!this.asegurado2.apellidos){
-
-      return `DescripcionAccidenteFinalizada: ${this.asegurado2.nombre || ''}, , , ${this.asegurado2.localidad || ''}, ${this.asegurado2.cp || ''}, ${this.asegurado2.telefono || ''}, ${this.asegurado2.recuperar_iva ? 'Si' : 'No'}, ${this.asegurado2.marca || ''}, ${this.asegurado2.modelo || ''}, ${this.asegurado2.poliza || ''}, ${this.asegurado2.agencia || ''}, ${this.asegurado2.d_prop_asegurados ? 'Si' : 'No'}`;
-    }else {
-
-      return `DescripcionAccidenteFinalizada: ${this.asegurado2.nombre || ''}, ${this.asegurado2.apellidos.split(' ')[0] || ''}, ${this.asegurado2.apellidos.split(' ')[1] || ''}, ${this.asegurado2.localidad || ''}, ${this.asegurado2.cp || ''}, ${this.asegurado2.telefono || ''}, ${this.asegurado2.recuperar_iva ? 'Si' : 'No'}, ${this.asegurado2.marca || ''}, ${this.asegurado2.modelo || ''}, ${this.asegurado2.poliza || ''}, ${this.asegurado2.agencia || ''}, ${this.asegurado2.d_prop_asegurados ? 'Si' : 'No'}`;
-    }
+    return `DescripcionAccidenteFinalizada: ${this.contrario.nombre || ''},
+      ${this.contrario.apellidos || ''}
+      ${this.contrario.localidad || ''},
+      ${this.contrario.cp || ''},
+      ${this.contrario.telefono || ''},
+      ${this.contrario.recuperar_iva ? 'Si' : 'No'},
+      ${this.contrario.marca || ''},
+      ${this.contrario.modelo || ''},
+      ${this.contrario.poliza || ''},
+      ${this.contrario.agencia || ''},
+      ${this.contrario.d_prop_asegurados ? 'Si' : 'No'}`;
   }
 
+  public getDatosDNIContrario () {
+    const [apellido1, apellido2] = this.contrario.apellidos.split(' ');
+    return `DatosDNIContrario: nom: ${this.contrario.nombre} , Apel1= ${apellido1 || ''} , apel2= ${apellido2 || ''}`;
+  }
 
   get url_audioAccidente(): string {
     return this._url_audioAccidente;
@@ -93,45 +116,54 @@ export class ParteService{
     this._url_audioAccidente = value;
   }
 
-  get asegurado1(): Insured {
-    return this._asegurado1;
+  get asegurado(): Insured {
+    return this._asegurado;
   }
 
-  set asegurado1(value: Insured) {
-    this._asegurado1 = value;
+  set asegurado(value: Insured) {
+    this._asegurado = value;
   }
 
-  get asegurado2(): Insured {
-    return this._asegurado2;
+  get contrario(): Insured {
+    return this._contrario;
   }
 
-  set asegurado2(value: Insured) {
-    this._asegurado2 = value;
+  set contrario(value: Insured) {
+    this._contrario = value;
   }
 
-  get matricula_coche_1(): string {
-    return this._matricula_coche_1;
+  get matricula_coche_asegurado(): string {
+    return this._matricula_coche_asegurado;
   }
 
-  set matricula_coche_1(value: string) {
-    this._matricula_coche_1 = value;
+  set matricula_coche_asegurado(value: string) {
+    this._matricula_coche_asegurado = value;
   }
 
-  get matricula_coche_2(): string {
-    return this._matricula_coche_2;
+  get matricula_coche_contrario(): string {
+    return this._matricula_coche_contrario;
   }
 
-  set matricula_coche_2(value: string) {
-    this._matricula_coche_2 = value;
+  set matricula_coche_contrario(value: string) {
+    this._matricula_coche_contrario = value;
   }
 
-  get base64_accidente(): string {
-    return this._base64_accidente;
+  get base64_accidentes(): string[] {
+    return this._base64_accidentes;
   }
 
-  set base64_accidente(value: string) {
-    this._base64_accidente = value;
+  set base64_accidentes(values: string[]) {
+    this._base64_accidentes = values;
   }
+
+  get urlVideoAccidente(): string {
+    return this._urlVideoAccidente;
+  }
+
+  set urlVideoAccidente(value: string) {
+    this._urlVideoAccidente = value;
+  }
+
   get path_audioAccidente(): string {
     return this._path_audioAccidente;
   }
@@ -140,6 +172,13 @@ export class ParteService{
     this._path_audioAccidente = value;
   }
 
+  get audioFileName(): string {
+    return this._audioFileName;
+  }
+
+  set audioFileName(value: string) {
+    this._audioFileName = value;
+  }
 
   get parteEnviado(): boolean {
     return this._parteEnviado;
@@ -154,15 +193,16 @@ export class ParteService{
    */
   reset() {
 
-    this.asegurado1 = new Insured();
-    this.asegurado2 = new Insured();
+    this.asegurado = new Insured();
+    this.contrario = new Insured();
 
-    this.base64_accidente = '';
+    this.base64_accidentes = [];
     this.parteEnviado = false;
     this.path_audioAccidente = '';
     this.url_audioAccidente = '';
-    this.matricula_coche_1 = '';
-    this.matricula_coche_2 = '';
+    this.audioFileName = '';
+    this.matricula_coche_asegurado = '';
+    this.matricula_coche_contrario = '';
 
   }
 }

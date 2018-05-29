@@ -89,7 +89,7 @@ export class ContextGateController {
       switch (true){
 
         // Response is fingruaasegurado, so its expecting DatosAsegurado-like expresion with data
-        case (operations.contains_noContainsStartWith(botResponse.contexts, 'fingruaasegurado', 'completardatosasegurado_dialog_params')):
+        case (operations.contains_noContainsStartWith(botResponse.contexts, 'fingrua', 'completardatosasegurado_dialog_params')):
 
           //CASOS:
 
@@ -102,8 +102,8 @@ export class ContextGateController {
           //      COMPORTAMIENTO: Debemos enviar la palabra clave 'DatosAsegurado:[...]' con todos los campos del asegurado
           //                      de los que dispongamos en nuestro servicio de asegurado y además pintar el mensaje de respuesta
 
-          this.sendInvisibleMessage(this.parte.getDatosAsegurado1());
-          console.log(this.parte.getDatosAsegurado1()+' Enviado...');
+          this.sendInvisibleMessage(this.parte.getDatosAsegurado());
+          console.log(this.parte.getDatosAsegurado()+' Enviado...');
           this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
           break;
@@ -122,8 +122,51 @@ export class ContextGateController {
           //                      Y mandar un mensaje clave de 'VideoRealizado'
 
 
-          this.parte.asegurado2.matricula = botResponse.paramsRespose.matriculaContrario;
-          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+          this.parte.contrario.matricula = botResponse.paramsRespose.matriculaContrario;
+
+          const showCameraIntent = function () {
+            this.messages.addMessage(
+              new Message(
+                botResponse.speech,
+                GLOBALS.MESSAGE_CAMERA_INTENT,
+                GLOBALS.STR_BOT,
+                GLOBALS.STR_USER,
+                botResponse.contexts[0]
+              )
+            );
+          }
+
+          const showVideoIntent = function () {
+            this.messages.addMessage(
+              new Message(
+                botResponse.speech,
+                GLOBALS.MESSAGE_VIDEO_INTENT,
+                GLOBALS.STR_BOT,
+                GLOBALS.STR_USER,
+                botResponse.contexts[0]
+              )
+            );
+          }
+
+          const options = [{
+            label: 'Hacer fotos',
+            action: showCameraIntent.bind(this)
+          }, {
+            label: 'Hacer video',
+            action: showVideoIntent.bind(this)
+          }]
+
+          this.messages.addMessage(
+            new Message(
+              botResponse.speech,
+              GLOBALS.MESSAGE_BUTTONS,
+              GLOBALS.STR_BOT,
+              GLOBALS.STR_USER,
+              undefined,
+              options
+            )
+          );
+          // this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
           break;
 
@@ -185,6 +228,11 @@ export class ContextGateController {
 
           break; */
 
+        case (operations.only_contains(botResponse.contexts, 'sinonombreotroconductor')):
+
+          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_DNI_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+
+          break;
 
         case (operations.only_contains(botResponse.contexts, 'videofinalizado')):
 

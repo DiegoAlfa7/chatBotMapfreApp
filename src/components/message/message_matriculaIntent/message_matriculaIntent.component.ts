@@ -67,11 +67,11 @@ export class MessageMatriculaIntentComponent {
 
   saveImage() {
     if (this.intentType == 1) {
-      this.parte.asegurado1.matricula = this.matricula;
-      this.parte.matricula_coche_1 = this.base64ImageString;
+      this.parte.asegurado.matricula = this.matricula;
+      this.parte.matricula_coche_asegurado = this.base64ImageString;
     } else {
-      this.parte.asegurado2.matricula = this.matricula;
-      this.parte.matricula_coche_2 = this.base64ImageString;
+      this.parte.contrario.matricula = this.matricula;
+      this.parte.matricula_coche_contrario = this.base64ImageString;
     }
     this.isAllDone = true;
     this.gate.sendInvisibleMessage(this.matricula);

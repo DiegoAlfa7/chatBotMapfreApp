@@ -5,14 +5,14 @@ import { Observable } from "rxjs/Observable";
 const TYPE = {
   DNI: 'dni',
   CAR_REGISTRATION: 'matricula',
-  USER_DATA: 'datos_matricula',
-  PART_ACCIDENT: 'datos_parte'
+  DRIVER_DATA: 'datos_parte',
+  OPPOSITE_DRIVER: 'datos_matricula'
 }
 const URL_MAPPER = {}
 URL_MAPPER[TYPE.DNI] = 'dni';
 URL_MAPPER[TYPE.CAR_REGISTRATION] = 'reconocer_matricula';
-URL_MAPPER[TYPE.USER_DATA] = 'datos_matricula';
-URL_MAPPER[TYPE.PART_ACCIDENT] = 'datos_parte';
+URL_MAPPER[TYPE.DRIVER_DATA] = 'datos_parte';
+URL_MAPPER[TYPE.OPPOSITE_DRIVER] = 'datos_matricula';
 
 /**
  * Implements the calls to external services, ex: MATRICULA_OCR
@@ -53,11 +53,11 @@ export class ExternalsService {
   }
 
   public getDatosAsegurado(): Observable<Object> {
-    return this.http.post(this.getUrlByType(TYPE.USER_DATA), null);
+    return this.http.post(this.getUrlByType(TYPE.DRIVER_DATA), null);
   }
 
   public getDatosParte(): Observable<Object> {
-    return this.http.post(this.getUrlByType(TYPE.PART_ACCIDENT) , null);
+    return this.http.post(this.getUrlByType(TYPE.OPPOSITE_DRIVER) , null);
   }
 
 

@@ -49,7 +49,7 @@ export class LoginPage {
   showConfirm() {
     let confirm = this.alert.create({
       title: `REF : ${Math.floor((Math.random() * 12343546) + 1)}`,
-      message: `Estimado ${this.parte.asegurado1.nombre}, le informamos del número de referencia con el que se ha registrado su expediente \n GRACIAS POR CONFIAR EN NEO-COVER`,
+      message: `Estimado ${this.parte.asegurado.nombre}, le informamos del número de referencia con el que se ha registrado su expediente \n GRACIAS POR CONFIAR EN NEO-COVER`,
       buttons: [
         {
           text: 'OK',

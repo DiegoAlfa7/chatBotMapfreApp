@@ -12,7 +12,7 @@
 
 
 <ion-content class="animated fadeInDownBig" padding>
-  <h1 padding text-center>{{asegurado1.nombre || 'Sin especificar'}}</h1>
+  <h1 padding text-center>{{asegurado.nombre || 'Sin especificar'}}</h1>
   <hr/>
   <!-- ASEGURADO -->
   <ion-card text-wrap>
@@ -27,21 +27,21 @@
           <ion-label floating color="primary">Nombre
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.nombre" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.nombre" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Apellidos
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.apellidos" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.apellidos" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Número de teléfono
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.telefono" type="number"></ion-input>
+          <ion-input [(value)]="asegurado.telefono" type="number"></ion-input>
         </ion-item>
 
 
@@ -53,7 +53,7 @@
 
           <ion-item>
             <ion-label>Si</ion-label>
-            <ion-radio [(checked)]="asegurado1.recuperar_iva" value="true"></ion-radio>
+            <ion-radio [(checked)]="asegurado.recuperar_iva" value="true"></ion-radio>
           </ion-item>
 
           <ion-item>
@@ -72,14 +72,14 @@
           <ion-label floating color="primary">Calle y número
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.direccion" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.direccion" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Localidad
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.localidad" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.localidad" type="text"></ion-input>
         </ion-item>
 
       </ion-list>
@@ -102,21 +102,21 @@
           <ion-label floating color="primary">Marca
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.marca" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.marca" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Modelo
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.modelo" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.modelo" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Matrícula
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.matricula" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.matricula" type="text"></ion-input>
         </ion-item>
 
       </ion-list>
@@ -141,14 +141,14 @@
           <ion-label floating color="primary">Nombre de la aseguradora
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.agencia" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.agencia" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Número de la póliza
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.poliza" type="number"></ion-input>
+          <ion-input [(value)]="asegurado.poliza" type="number"></ion-input>
         </ion-item>
 
         <br>
@@ -159,13 +159,13 @@
 
         <ion-item>
           <ion-label floating color="primary">Número de carta verde</ion-label>
-          <ion-input [(value)]="asegurado1.c_verde" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.c_verde" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
 
           <ion-label color="primary">Válido hasta</ion-label>
-          <ion-datetime [(ngModel)]="fechaS_asegurado1" (ionChange)="setFecha1(fechaS_asegurado1)" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY"></ion-datetime>
+          <ion-datetime [(ngModel)]="fechaS_asegurado" (ionChange)="setFecha1(fechaS_asegurado)" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY"></ion-datetime>
         </ion-item>
 
         <ion-list radio-group padding>
@@ -175,7 +175,7 @@
           <hr>
           <ion-item>
             <ion-label>Si</ion-label>
-            <ion-radio [checked]="asegurado1.d_prop_asegurados" value="true"></ion-radio>
+            <ion-radio [checked]="asegurado.d_prop_asegurados" value="true"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>No</ion-label>
@@ -205,28 +205,28 @@
           <ion-label floating color="primary">Nombre
             <strong>*</strong>
           </ion-label>
-          <ion-input [(ngModel)]='asegurado1.nombre' type="text"></ion-input>
+          <ion-input [(ngModel)]='asegurado.nombre' type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Apellidos
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.apellidos" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.apellidos" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Dirección
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado1.direccion" type="text"></ion-input>
+          <ion-input [(value)]="asegurado.direccion" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label color="primary">Permiso de conducir
             <strong>*</strong>
           </ion-label>
-          <ion-select [(ngModel)]="asegurado1.permiso">
+          <ion-select [(ngModel)]="asegurado.permiso">
             <ion-option value="AM">AM</ion-option>
             <ion-option value="A1">A1</ion-option>
             <ion-option value="A2">A2</ion-option>
@@ -263,7 +263,7 @@
 
   </ion-card>
 
-  <h1 padding text-center>{{asegurado2.nombre || 'Sin especificar'}}</h1>
+  <h1 padding text-center>{{contrario.nombre || 'Sin especificar'}}</h1>
   <hr/>
 
   <!--
@@ -285,21 +285,21 @@
           <ion-label floating color="primary">Nombre
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.nombre" type="text"></ion-input>
+          <ion-input [(value)]="contrario.nombre" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Apellidos
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.apellidos" type="text"></ion-input>
+          <ion-input [(value)]="contrario.apellidos" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Número de teléfono
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.telefono" type="number"></ion-input>
+          <ion-input [(value)]="contrario.telefono" type="number"></ion-input>
         </ion-item>
 
 
@@ -311,7 +311,7 @@
 
           <ion-item>
             <ion-label>Si</ion-label>
-            <ion-radio [(checked)]="asegurado2.recuperar_iva" value="true"></ion-radio>
+            <ion-radio [(checked)]="contrario.recuperar_iva" value="true"></ion-radio>
           </ion-item>
 
           <ion-item>
@@ -330,14 +330,14 @@
           <ion-label floating color="primary">Calle y número
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.direccion" type="text"></ion-input>
+          <ion-input [(value)]="contrario.direccion" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Localidad
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.localidad" type="text"></ion-input>
+          <ion-input [(value)]="contrario.localidad" type="text"></ion-input>
         </ion-item>
 
       </ion-list>
@@ -360,21 +360,21 @@
           <ion-label floating color="primary">Marca
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.marca" type="text"></ion-input>
+          <ion-input [(value)]="contrario.marca" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Modelo
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.modelo" type="text"></ion-input>
+          <ion-input [(value)]="contrario.modelo" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Matrícula
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.matricula" type="text"></ion-input>
+          <ion-input [(value)]="contrario.matricula" type="text"></ion-input>
         </ion-item>
 
       </ion-list>
@@ -398,14 +398,14 @@
           <ion-label floating color="primary">Nombre de la aseguradora
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.agencia" type="text"></ion-input>
+          <ion-input [(value)]="contrario.agencia" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Número de la póliza
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.poliza" type="number"></ion-input>
+          <ion-input [(value)]="contrario.poliza" type="number"></ion-input>
         </ion-item>
 
         <br>
@@ -416,13 +416,13 @@
 
         <ion-item>
           <ion-label floating color="primary">Número de carta verde</ion-label>
-          <ion-input [(value)]="asegurado2.c_verde" type="text"></ion-input>
+          <ion-input [(value)]="contrario.c_verde" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
 
           <ion-label color="primary">Válido hasta</ion-label>
-          <ion-datetime [(ngModel)]="fechaS_asegurado2" (ionChange)="setFecha2(fechaS_asegurado2)" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY"></ion-datetime>
+          <ion-datetime [(ngModel)]="fechaS_contrario" (ionChange)="setFecha2(fechaS_contrario)" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY"></ion-datetime>
         </ion-item>
 
         <ion-list radio-group padding>
@@ -432,7 +432,7 @@
           <hr>
           <ion-item>
             <ion-label>Si</ion-label>
-            <ion-radio [checked]="asegurado2.d_prop_asegurados" value="true"></ion-radio>
+            <ion-radio [checked]="contrario.d_prop_asegurados" value="true"></ion-radio>
           </ion-item>
           <ion-item>
             <ion-label>No</ion-label>
@@ -462,28 +462,28 @@
           <ion-label floating color="primary">Nombre
             <strong>*</strong>
           </ion-label>
-          <ion-input [(ngModel)]='asegurado2.nombre' type="text"></ion-input>
+          <ion-input [(ngModel)]='contrario.nombre' type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Apellidos
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.apellidos" type="text"></ion-input>
+          <ion-input [(value)]="contrario.apellidos" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label floating color="primary">Dirección
             <strong>*</strong>
           </ion-label>
-          <ion-input [(value)]="asegurado2.direccion" type="text"></ion-input>
+          <ion-input [(value)]="contrario.direccion" type="text"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label color="primary">Permiso de conducir
             <strong>*</strong>
           </ion-label>
-          <ion-select [(ngModel)]="asegurado2.permiso">
+          <ion-select [(ngModel)]="contrario.permiso">
             <ion-option value="AM">AM</ion-option>
             <ion-option value="A1">A1</ion-option>
             <ion-option value="A2">A2</ion-option>
@@ -505,7 +505,7 @@
           <ion-label color="primary">Fecha de expedición
             <strong>*</strong>
           </ion-label>
-          <ion-datetime [(ngModel)]="asegurado2.c_verde_val" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
+          <ion-datetime [(ngModel)]="contrario.c_verde_val" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY" placeholder="Seleccionar fecha"></ion-datetime>
         </ion-item>
 
         <ion-item>

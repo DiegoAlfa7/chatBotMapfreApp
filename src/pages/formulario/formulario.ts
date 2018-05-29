@@ -20,8 +20,8 @@ import {ContextGateController} from "../../services/context-gate-controller.serv
 })
 export class FormularioPage {
 
-  private asegurado1: Insured;
-  private asegurado2: Insured;
+  private asegurado: Insured;
+  private contrario: Insured;
 
   private base64_matricula1: string;
   private base64_matricula2: string;
@@ -29,11 +29,13 @@ export class FormularioPage {
   private base64_accidentes: string[];
   private urlVideoAccidente: string;
 
-  public fechaS_asegurado1: string;
-  public fechaS_asegurado2: string;
+  public fechaS_asegurado: string;
+  public fechaS_contrario: string;
 
   private mediaObject:MediaObject;
   private playing:boolean = false;
+
+  private fileName: String;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -42,14 +44,16 @@ export class FormularioPage {
               public messages:MessagesService,
               public gate:ContextGateController) {
 
-    this.asegurado1 = this.parte.asegurado1;
-    this.asegurado2 = this.parte.asegurado2;
+    this.asegurado = this.parte.asegurado;
+    this.contrario = this.parte.contrario;
 
-    this.base64_matricula1 = this.parte.matricula_coche_1;
-    this.base64_matricula2 = this.parte.matricula_coche_2;
+    this.base64_matricula1 = this.parte.matricula_coche_asegurado;
+    this.base64_matricula2 = this.parte.matricula_coche_contrario;
 
     this.base64_accidentes = this.parte.base64_accidentes;
     this.urlVideoAccidente = this.parte.urlVideoAccidente;
+
+    this.fileName = this.parte.audioFileName;
   }
 
   hasVideo () {
@@ -61,29 +65,31 @@ export class FormularioPage {
   }
 
   hasAudio () {
-    return this.mediaObject ? true : false;
+    return this.fileName && this.fileName.length > 0 ? true : false;
   }
 
   ionViewWillEnter() {
 
-    this.asegurado1 = this.parte.asegurado1;
-    this.asegurado2 = this.parte.asegurado2;
+    this.asegurado = this.parte.asegurado;
+    this.contrario = this.parte.contrario;
 
-    this.base64_matricula1 = this.parte.matricula_coche_1;
-    this.base64_matricula2 = this.parte.matricula_coche_2;
+    this.base64_matricula1 = this.parte.matricula_coche_asegurado;
+    this.base64_matricula2 = this.parte.matricula_coche_contrario;
 
     this.base64_accidentes = this.parte.base64_accidentes;
     this.urlVideoAccidente = this.parte.urlVideoAccidente;
 
-    console.log('1: ->'+this.asegurado1 );
-    console.log('2: ->'+this.asegurado2);
+    this.fileName = this.parte.audioFileName;
 
-    if(this.asegurado1.c_verde_val) {
-      this.fechaS_asegurado1 = this.getISOStringfromDate(this.asegurado1.c_verde_val);
+    console.log('1: ->'+this.asegurado );
+    console.log('2: ->'+this.contrario);
+
+    if(this.asegurado.c_verde_val) {
+      this.fechaS_asegurado = this.getISOStringfromDate(this.asegurado.c_verde_val);
     }
 
-    if(this.asegurado2.c_verde_val) {
-      this.fechaS_asegurado2 = this.getISOStringfromDate(this.asegurado2.c_verde_val);
+    if(this.contrario.c_verde_val) {
+      this.fechaS_contrario = this.getISOStringfromDate(this.contrario.c_verde_val);
     }
   }
 
@@ -113,9 +119,9 @@ export class FormularioPage {
     let month = date.getUTCMonth() + 1;
     let year = date.getUTCFullYear() ;
 
-      this.asegurado1.c_verde_val = `${day}-${month}-${year}`;
-      /*this.fechaS_asegurado1 = this.getISOStringfromDate(this.asegurado1.c_verde_val);*/
-      this.parte.asegurado1 = this.asegurado1;
+      this.asegurado.c_verde_val = `${day}-${month}-${year}`;
+      /*this.fechaS_asegurado = this.getISOStringfromDate(this.asegurado.c_verde_val);*/
+      this.parte.asegurado = this.asegurado;
 
   }
 
@@ -127,16 +133,16 @@ export class FormularioPage {
     let month = date.getMonth() + 1;
     let year = date.getFullYear();
 
-    this.asegurado2.c_verde_val = `${day}-${month}-${year}`;
-    /*this.fechaS_asegurado2 = this.getISOStringfromDate(this.asegurado2.c_verde_val);*/
-    this.parte.asegurado2 = this.asegurado2;
+    this.contrario.c_verde_val = `${day}-${month}-${year}`;
+    /*this.fechaS_contrario = this.getISOStringfromDate(this.contrario.c_verde_val);*/
+    this.parte.contrario = this.contrario;
 
   }
 
   public printInsured() {
 
 
-    console.log(this.asegurado1);
+    console.log(this.asegurado);
 
   }
 

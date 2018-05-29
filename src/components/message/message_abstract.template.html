@@ -37,3 +37,7 @@
   [message]="message">
 </message-buttons>
 
+<message-dni-intent *ngIf="message.type === dniIntentType"
+  (blockInput)="blockInput($event)"
+  [message]="message">
+</message-dni-intent>

@@ -12,7 +12,7 @@ import { TokenService } from './token.service';
 @Injectable()
 export class MapfreService {
 
-  private token: string = '1b26cb2f76ea4cb0979026ef6c350d05';
+  private token: string = '6fe75fa3fe99466da660336b84bfcf56';
   private urlDialogFlow: string = 'https://api.dialogflow.com/v1/';
   private SESSION_ID: string;
 

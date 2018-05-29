@@ -18,24 +18,15 @@ export class MessageAbstract {
 
   @Output() public blockInputConnector = new EventEmitter(true);
 
-
-
-
   public audioIntentType:string = GLOBALS.MESSAGE_AUDIO_INTENT;
   public videoIntentType:string = GLOBALS.MESSAGE_VIDEO_INTENT;
   public matricula1IntentType:string = GLOBALS.MESSAGE_MATRICULA1_INTENT;
   public matricula2IntentType:string = GLOBALS.MESSAGE_MATRICULA2_INTENT;
   public textType:string = GLOBALS.MESSAGE_TEXT;
-
+  public buttonsType:string = GLOBALS.MESSAGE_BUTTONS;
   public cameraIntentType:string = GLOBALS.MESSAGE_CAMERA_INTENT;
 
-
-  constructor() {
-
-
-
-
-  }
+  constructor() {}
 
   public blockInput(event){
 

@@ -10,6 +10,8 @@ export class Message{
 
    private _context: string;
 
+   private _options:any[];
+
   /**
    *
    * @param {string} body message string
@@ -17,26 +19,25 @@ export class Message{
    * @param {string} to
    * @param context should store the context for further usages
    */
-   constructor(body:string, type:string, from?:string, to?:string, context?:any){
+   constructor(body:string, type:string, from?:string, to?:string, context?:any, options?:any[]){
 
     this._msgBody = body;
     this._type = type;
 
     if(from){
-
       this._from = from;
-
     }
 
     if(to){
-
       this._to = to;
-
     }
 
     if(context){
-
       this._context = context;
+    }
+
+    if(options){
+      this._options = options;
     }
 
    }
@@ -80,5 +81,13 @@ export class Message{
 
   set context(value: string) {
     this._context = value;
+  }
+
+  get options(): any[] {
+    return this._options;
+  }
+
+  set options(options: any[]) {
+    this._options = options;
   }
 }

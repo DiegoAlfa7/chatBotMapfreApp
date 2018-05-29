@@ -8,19 +8,19 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { IonicStorageModule } from '@ionic/storage';
 //PAGES
 import { LoginPage } from '../pages/login/login';
-import { MapfrecitoComponent } from "../pages/mapfrecito/mapfrecito.component";
-import { Camera } from "@ionic-native/camera";
-import { MediaCapture } from "@ionic-native/media-capture";
+import { MapfrecitoComponent } from '../pages/mapfrecito/mapfrecito.component';
+import { Camera } from '@ionic-native/camera';
+import { MediaCapture } from '@ionic-native/media-capture';
 import { HttpClientModule } from '@angular/common/http';
 import { Media, MediaObject } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 //SERVICES
 import { MapfreService } from '../services/mapfre.service';
 import { TokenService } from '../services/token.service';
-import { ContextGateController } from "../services/context-gate-controller.service";
-import { ExternalsService } from "../services/externals.service";
-import { MessagesService } from "../services/messages.service";
-import { ParteService } from "../services/parte.service";
+import { ContextGateController } from '../services/context-gate-controller.service';
+import { ExternalsService } from '../services/externals.service';
+import { MessagesService } from '../services/messages.service';
+import { ParteService } from '../services/parte.service';
 
 import { CameraMock } from '../services/mocks/camera.mock';
 import { MediaCaptureMock } from '../services/mocks/media-capture.mock';
@@ -30,10 +30,11 @@ import { FileMock } from '../services/mocks/file.mock';
 import { MyApp } from './app.component';
 import { MessageAudioIntentComponent } from '../components/message/message_audioIntent/message_audioIntent.component';
 import { MessageVideoIntentComponent } from '../components/message/message-video-intent/message-video-intent.component';
-import { MessageAbstract } from "../components/message/message_abstract.component";
-import { MessageTextComponent } from "../components/message/message_text/message_text.component";
-import { MessageCameraIntentComponent } from "../components/message/message_photoIntent/message_cameraIntent.component";
-import { MessageMatriculaIntentComponent } from "../components/message/message_matriculaIntent/message_matriculaIntent.component";
+import { MessageAbstract } from '../components/message/message_abstract.component';
+import { MessageTextComponent } from '../components/message/message_text/message_text.component';
+import { MessageButtonsComponent } from '../components/message/message-buttons/message-buttons.component';
+import { MessageCameraIntentComponent } from '../components/message/message_photoIntent/message_cameraIntent.component';
+import { MessageMatriculaIntentComponent } from '../components/message/message_matriculaIntent/message_matriculaIntent.component';
 
 import { cameraProvider, mediaProvider, mediaCaptureProvider, fileProvider } from './providers.factory';
 
@@ -43,6 +44,7 @@ import { SanitizerPipe } from '../pipes/sanitizer.pipe';
   declarations: [
     MyApp,
     MessageTextComponent,
+    MessageButtonsComponent,
     MapfrecitoComponent,
     MessageAbstract,
     FormularioPage,
@@ -66,6 +68,7 @@ import { SanitizerPipe } from '../pipes/sanitizer.pipe';
   entryComponents: [
     MyApp,
     MessageTextComponent,
+    MessageButtonsComponent,
     MapfrecitoComponent,
     MessageAbstract,
     MessageCameraIntentComponent,

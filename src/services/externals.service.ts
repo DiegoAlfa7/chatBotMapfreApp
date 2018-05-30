@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpResponse } from "@angular/common/http";
 import { Observable } from "rxjs/Observable";
 
 const TYPE = {
@@ -53,11 +53,15 @@ export class ExternalsService {
   }
 
   public getDatosAsegurado(): Observable<Object> {
-    return this.http.post(this.getUrlByType(TYPE.DRIVER_DATA), null);
+    return this.http.get(this.getUrlByType(TYPE.DRIVER_DATA));
   }
 
-  public getDatosParte(): Observable<Object> {
-    return this.http.post(this.getUrlByType(TYPE.OPPOSITE_DRIVER) , null);
+  public getDatosParte(matricula: string): Observable<any> {
+    return this.http.get<Object>(`${this.getUrlByType(TYPE.OPPOSITE_DRIVER)}?matricula=${matricula}`, {
+      observe: 'response',
+      responseType: 'json'
+    })
+
   }
 
 

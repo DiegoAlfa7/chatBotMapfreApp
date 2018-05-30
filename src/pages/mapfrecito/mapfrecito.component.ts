@@ -6,6 +6,7 @@ import { MessagesService } from 'services/messages.service';
 import { ParteService } from 'services/parte.service';
 import { Insured } from 'app/classes/Insured';
 import { FormularioPage } from 'pages/formulario/formulario';
+import { ExternalsService } from 'services/externals.service';
 
 @Component({
   selector: 'page-mapfrecito',
@@ -29,6 +30,7 @@ export class MapfrecitoComponent implements OnInit {
     private navController: NavController,
     private gate: ContextGateController,
     private messages: MessagesService,
+    private external: ExternalsService,
     private parte: ParteService
   ) {
     this.messages.getMessageListObserver().subscribe((messages: Message[]) => {
@@ -61,6 +63,27 @@ export class MapfrecitoComponent implements OnInit {
 
     this.messageFeedChangeObserver.observe(this.messageFeedNode.nativeElement, {
       childList: true
+    });
+
+    this.external.getDatosAsegurado().subscribe((response: any) => {
+
+      this.parte.asegurado.telefono = response.telefono;
+      this.parte.asegurado.cp = response.cp;
+      this.parte.asegurado.poliza = response.poliza;
+      this.parte.asegurado.d_prop_asegurados = response.d_prop_asegurados;
+      this.parte.asegurado.c_verde_val = response.c_verde_val;
+      this.parte.asegurado.c_verde = response.c_verde;
+      this.parte.asegurado.localidad = response.localidad;
+      this.parte.asegurado.apellidos = response.apellidos;
+      this.parte.asegurado.direccion = response.direccion;
+      this.parte.asegurado.matricula = response.matricula;
+      this.parte.asegurado.agencia = response.agencia;
+      this.parte.asegurado.marca = response.marca;
+      this.parte.asegurado.recuperar_iva = response.recuperar_iva;
+
+      console.log('Asegurado: ');
+      console.log(this.parte.asegurado);
+
     });
 
   }

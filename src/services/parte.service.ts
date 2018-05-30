@@ -1,6 +1,5 @@
 import { Injectable } from "@angular/core";
 import { Insured } from "app/classes/Insured";
-import { ExternalsService } from "services/externals.service";
 
 @Injectable()
 export class ParteService {
@@ -19,54 +18,9 @@ export class ParteService {
 
   private _parteEnviado: boolean = false;
 
-
-
-
-  constructor(private external: ExternalsService) {
-
+  constructor() {
     this._asegurado = new Insured();
     this._contrario = new Insured();
-    this.external.getDatosAsegurado().subscribe((response: any) => {
-
-      this._asegurado.telefono = response.telefono;
-      this._asegurado.cp = response.cp;
-      this._asegurado.poliza = response.poliza;
-      this._asegurado.d_prop_asegurados = response.d_prop_asegurados;
-      this._asegurado.c_verde_val = response.c_verde_val;
-      this._asegurado.c_verde = response.c_verde;
-      this._asegurado.localidad = response.localidad;
-      this._asegurado.apellidos = response.apellidos;
-      this._asegurado.direccion = response.direccion;
-      this._asegurado.matricula = response.matricula;
-      this._asegurado.agencia = response.agencia;
-      this._asegurado.marca = response.marca;
-      this._asegurado.recuperar_iva = response.recuperar_iva;
-
-      console.log('Asegurado: ');
-      console.log(this._asegurado);
-
-    });
-
-    this.external.getDatosParte().subscribe((response: any) => {
-
-      this._contrario.telefono = response.telefono;
-      this._contrario.cp = response.cp;
-      this._contrario.poliza = response.poliza;
-      this._contrario.d_prop_asegurados = response.d_prop_asegurados;
-      this._contrario.c_verde_val = response.c_verde_val;
-      this._contrario.c_verde = response.c_verde;
-      this._contrario.localidad = response.localidad;
-      this._contrario.apellidos = response.apellidos;
-      this._contrario.direccion = response.direccion;
-      this._contrario.matricula = response.matricula;
-      this._contrario.agencia = response.agencia;
-      this._contrario.marca = response.marca;
-      this._contrario.recuperar_iva = response.recuperar_iva;
-
-      console.log('Asegurado: ');
-      console.log(this._contrario);
-
-    });
   }
 
 

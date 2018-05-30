@@ -1,7 +1,7 @@
-import {Component, ElementRef, ViewChild} from '@angular/core';
-import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
+import { Component, ElementRef, ViewChild } from '@angular/core';
+import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapfrecitoComponent } from 'pages/mapfrecito/mapfrecito.component';
-import {ParteService} from 'services/parte.service';
+import { ParteService } from 'services/parte.service';
 
 /**
  * Generated class for the LoginPage page.
@@ -19,24 +19,27 @@ import {ParteService} from 'services/parte.service';
 export class LoginPage {
 
   public pw = '';
-  public nombreUsuario='';
+  public nombreUsuario = '';
 
   public jsonUser = {
 
-    name:''
+    name: ''
 
   };
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,private parte:ParteService,
-  private alert:AlertController) {
+  constructor(
+    public navCtrl: NavController,
+    public navParams: NavParams,
+    private parte: ParteService,
+    private alert: AlertController) {
   }
 
-   ionViewWillEnter() {
+  ionViewWillEnter() {
     console.log('ionViewWillEnter');
     this.nombreUsuario = '';
     this.pw = '';
-    if(this.parte.parteEnviado){
+    if (this.parte.parteEnviado) {
 
 
       this.showConfirm();
@@ -53,7 +56,7 @@ export class LoginPage {
       buttons: [
         {
           text: 'OK',
-          handler: () =>{
+          handler: () => {
 
             this.parte.reset();
 
@@ -69,7 +72,7 @@ export class LoginPage {
   }
 
   irChatLoggeado() {
-    if(this.nombreUsuario.length < 1 || this.pw.length < 1) return;
+    if (this.nombreUsuario.length < 1 || this.pw.length < 1) return;
     this.jsonUser.name = this.nombreUsuario;
     console.log(this.jsonUser);
     this.navCtrl.push(MapfrecitoComponent, this.jsonUser);

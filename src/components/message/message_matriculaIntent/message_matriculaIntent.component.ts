@@ -84,6 +84,13 @@ export class MessageMatriculaIntentComponent {
 
         this.matricula = response.matricula;
         this.matriculaRetrieved = true;
+        if (this.intentType == 2) {
+          this.externals.getDatosParte(this.matricula).subscribe((response: any) => {
+            if (response.status === '200') { // if response 204 no found data
+              this.updateDatosContrario(response);
+            }
+          });
+        }
         this.isAllDone = false;
         this.loading = false;
       } else {
@@ -98,6 +105,25 @@ export class MessageMatriculaIntentComponent {
       this.presentToast('Ha habido un error reconociendo la matrícula de la foto, lo sentimos', 'bottom', 3000);
     });
 
+  }
+
+  private updateDatosContrario (response) {
+    this.parte.contrario.telefono = response.telefono;
+    this.parte.contrario.cp = response.cp;
+    this.parte.contrario.poliza = response.poliza;
+    this.parte.contrario.d_prop_asegurados = response.d_prop_asegurados;
+    this.parte.contrario.c_verde_val = response.c_verde_val;
+    this.parte.contrario.c_verde = response.c_verde;
+    this.parte.contrario.localidad = response.localidad;
+    this.parte.contrario.apellidos = response.apellidos;
+    this.parte.contrario.direccion = response.direccion;
+    this.parte.contrario.matricula = response.matricula;
+    this.parte.contrario.agencia = response.agencia;
+    this.parte.contrario.marca = response.marca;
+    this.parte.contrario.recuperar_iva = response.recuperar_iva;
+
+    console.log('Contrario: ');
+    console.log(this.parte.contrario);
   }
 
   public getImage() {

@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {Message} from "../../../app/classes/Message";
+import {Message} from 'app/classes/Message';
 
 
 /**

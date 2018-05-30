@@ -1,6 +1,6 @@
 import { Component, Input, EventEmitter, Output, OnInit } from '@angular/core';
-import { Message } from "../../../app/classes/Message";
-import { BaseMessage } from "../../../app/classes/BaseMessage";
+import { Message } from 'app/classes/Message';
+import { BaseMessage } from 'app/classes/BaseMessage';
 
 /**
  * Generated class for the MessageButtonsComponent component.
@@ -10,7 +10,7 @@ import { BaseMessage } from "../../../app/classes/BaseMessage";
  */
 @Component({
   selector: 'message-buttons',
-  templateUrl: 'message-buttons.html'
+  templateUrl: 'message-buttons.template.html'
 })
 export class MessageButtonsComponent extends BaseMessage implements OnInit {
 

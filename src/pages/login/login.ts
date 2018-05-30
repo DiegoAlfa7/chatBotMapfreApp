@@ -1,7 +1,7 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {AlertController, IonicPage, NavController, NavParams} from 'ionic-angular';
-import { MapfrecitoComponent } from '../mapfrecito/mapfrecito.component';
-import {ParteService} from "../../services/parte.service";
+import { MapfrecitoComponent } from 'pages/mapfrecito/mapfrecito.component';
+import {ParteService} from 'services/parte.service';
 
 /**
  * Generated class for the LoginPage page.

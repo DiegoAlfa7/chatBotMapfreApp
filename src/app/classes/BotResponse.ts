@@ -6,6 +6,7 @@ export class BotResponse{
   paramsRespose:any;
   speech:string;
   contexts:BotContext[];
+  intent:string;
 
   constructor(){}
 

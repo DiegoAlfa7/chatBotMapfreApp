@@ -1,14 +1,14 @@
-import {Injectable} from "@angular/core";
-import {MapfreService} from "./mapfre.service";
-import {MessagesService} from "./messages.service";
-import {ParteService} from "./parte.service";
-import {BotResponse} from "../app/classes/BotResponse";
-import {Message} from "../app/classes/Message";
-import * as GLOBALS from '../app/app.constants';
-import {BotContext} from "../app/classes/BotContext";
-import {Observable} from "rxjs/Observable";
+import { Injectable } from '@angular/core';
+import { MapfreService } from 'services/mapfre.service';
+import { MessagesService } from 'services/messages.service';
+import { ParteService } from 'services/parte.service';
+import { BotResponse } from 'app/classes/BotResponse';
+import { Message } from 'app/classes/Message';
+import * as GLOBALS from 'app/app.constants';
+import { BotContext } from 'app/classes/BotContext';
+import { Observable } from 'rxjs/Observable';
 
-import * as operations from '../app/classes/ContextOperator';
+import * as operations from 'app/classes/ContextOperator';
 
 /**
  *  The main logic of the application, manages communication between MapfrecitoComponent an all the services involved in the process
@@ -16,267 +16,224 @@ import * as operations from '../app/classes/ContextOperator';
 @Injectable()
 export class ContextGateController {
 
-
   /**
    * Injecting all the services involved in the application
    */
   constructor(
+    private mapfre: MapfreService,
+    private parte: ParteService,
+    private messages: MessagesService
+  ) { }
 
-    private mapfre:MapfreService,
-    private parte:ParteService,
-    private messages:MessagesService
-
-
-  ){}
-
-
-
-
-  public sendLoginAsegurado(nombre:string){
-
+  public sendLoginAsegurado(nombre: string) {
     this.sendInvisibleMessage(`loginAsegurado:${nombre}`);
-
-
   }
 
-  public sendVisibleMessage(text:string){
-
+  public sendVisibleMessage(text: string) {
     this.messages.addMessage(new Message(text, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_USER, GLOBALS.STR_BOT));
     this.waitAndMapResponse(this.mapfre.sendQuery(text));
-
   }
 
 
-  public sendInvisibleMessage(text:string){
-
+  public sendInvisibleMessage(text: string) {
     this.waitAndMapResponse(this.mapfre.sendQuery(text));
-
   }
 
   private waitAndMapResponse(objectObservable: Observable<Object>) {
-
-
-
-    objectObservable.subscribe( (dialogResponse:any) => {
-      let respuestaBot:BotResponse = new BotResponse();
+    objectObservable.subscribe((dialogResponse: any) => {
+      let respuestaBot: BotResponse = new BotResponse();
       //Mapping all data
-      respuestaBot.pregunta = dialogResponse.result.resolvedQuery;
-      respuestaBot.speech = dialogResponse.result.fulfillment.speech;
-      respuestaBot.paramsRespose = dialogResponse.result.parameters;
-      respuestaBot.contexts = dialogResponse.result.contexts.map((context) => {
-
-        let context1:BotContext = new BotContext();
+      const {
+        result: {
+          resolvedQuery,
+          fulfillment: { speech },
+          parameters,
+          contexts,
+          metadata: { intentName }
+        }
+      } = dialogResponse;
+      respuestaBot.pregunta = resolvedQuery;
+      respuestaBot.speech = speech;
+      respuestaBot.paramsRespose = parameters;
+      respuestaBot.contexts = contexts.map((context) => {
+        let context1: BotContext = new BotContext();
         context1.name = context.name;
         context1.params = context.params;
         return context1;
-
       });
+      respuestaBot.intent = intentName
 
       this.responseGate(respuestaBot);
-
     });
-
-
-
-
   }
 
   private responseGate(botResponse: BotResponse) {
+    console.log(botResponse);
 
+    switch (true) {
 
-      console.log(botResponse);
+      // Response is fingruaasegurado, so its expecting DatosAsegurado-like expresion with data
+      case (operations.contains_noContainsStartWith(botResponse.contexts, 'fingrua', 'completardatosasegurado_dialog_params')):
 
-      switch (true){
+        //CASOS:
 
-        // Response is fingruaasegurado, so its expecting DatosAsegurado-like expresion with data
-        case (operations.contains_noContainsStartWith(botResponse.contexts, 'fingrua', 'completardatosasegurado_dialog_params')):
+        // 1 -  RESPUESTA_ANERIOR: '[...] desea completar el parte de seguro mientras llega?'
 
-          //CASOS:
+        //      TEXTO_ENVIADO: 'Sí' (no tiene por que)
 
-          // 1 -  RESPUESTA_ANERIOR: '[...] desea completar el parte de seguro mientras llega?'
+        //      RESPUESTA_ACTUAL_TEXTO: 'Vamos a comprobar todos los datos [...] procederemos a completar los del otro vehiculo'
 
-          //      TEXTO_ENVIADO: 'Sí' (no tiene por que)
+        //      COMPORTAMIENTO: Debemos enviar la palabra clave 'DatosAsegurado:[...]' con todos los campos del asegurado
+        //                      de los que dispongamos en nuestro servicio de asegurado y además pintar el mensaje de respuesta
 
-          //      RESPUESTA_ACTUAL_TEXTO: 'Vamos a comprobar todos los datos [...] procederemos a completar los del otro vehiculo'
+        this.sendInvisibleMessage(this.parte.getDatosAsegurado());
+        console.log(this.parte.getDatosAsegurado() + ' Enviado...');
+        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          //      COMPORTAMIENTO: Debemos enviar la palabra clave 'DatosAsegurado:[...]' con todos los campos del asegurado
-          //                      de los que dispongamos en nuestro servicio de asegurado y además pintar el mensaje de respuesta
+        break;
 
-          this.sendInvisibleMessage(this.parte.getDatosAsegurado());
-          console.log(this.parte.getDatosAsegurado()+' Enviado...');
-          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+      case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
 
-          break;
+        //CASOS:
 
-        case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
+        // 1 -  RESPUESTA_ANERIOR: 'Necesitamos la matrícula del otro conductor'
 
-          //CASOS:
+        //      TEXTO_ENVIADO: [matricula]
 
-          // 1 -  RESPUESTA_ANERIOR: 'Necesitamos la matrícula del otro conductor'
+        //      RESPUESTA_ACTUAL_TEXTO: 'Ahora necesitamos una foto del accidente'
 
-          //      TEXTO_ENVIADO: [matricula]
+        //      COMPORTAMIENTO: Tenemos que pintar un mensaje de foto, guardar el valor de la matrícula del otro conductor
+        //                      Y mandar un mensaje clave de 'VideoRealizado'
 
-          //      RESPUESTA_ACTUAL_TEXTO: 'Ahora necesitamos una foto del accidente'
+        this.parte.contrario.matricula = botResponse.paramsRespose.matriculaContrario;
 
-          //      COMPORTAMIENTO: Tenemos que pintar un mensaje de foto, guardar el valor de la matrícula del otro conductor
-          //                      Y mandar un mensaje clave de 'VideoRealizado'
-
-
-          this.parte.contrario.matricula = botResponse.paramsRespose.matriculaContrario;
-
-          const showCameraIntent = function () {
-            this.messages.addMessage(
-              new Message(
-                botResponse.speech,
-                GLOBALS.MESSAGE_CAMERA_INTENT,
-                GLOBALS.STR_BOT,
-                GLOBALS.STR_USER,
-                botResponse.contexts[0]
-              )
-            );
-          }
-
-          const showVideoIntent = function () {
-            this.messages.addMessage(
-              new Message(
-                botResponse.speech,
-                GLOBALS.MESSAGE_VIDEO_INTENT,
-                GLOBALS.STR_BOT,
-                GLOBALS.STR_USER,
-                botResponse.contexts[0]
-              )
-            );
-          }
-
-          const options = [{
-            label: 'Hacer fotos',
-            action: showCameraIntent.bind(this)
-          }, {
-            label: 'Hacer video',
-            action: showVideoIntent.bind(this)
-          }]
-
+        const showCameraIntent = function () {
           this.messages.addMessage(
             new Message(
               botResponse.speech,
-              GLOBALS.MESSAGE_BUTTONS,
+              GLOBALS.MESSAGE_CAMERA_INTENT,
               GLOBALS.STR_BOT,
               GLOBALS.STR_USER,
-              undefined,
-              options
+              botResponse.contexts[0]
             )
           );
-          // this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        }
 
-          break;
+        const showVideoIntent = function () {
+          this.messages.addMessage(
+            new Message(
+              botResponse.speech,
+              GLOBALS.MESSAGE_VIDEO_INTENT,
+              GLOBALS.STR_BOT,
+              GLOBALS.STR_USER,
+              botResponse.contexts[0]
+            )
+          );
+        }
 
+        const options = [{
+          label: 'Hacer fotos',
+          action: showCameraIntent.bind(this)
+        }, {
+          label: 'Hacer video',
+          action: showVideoIntent.bind(this)
+        }]
 
-        // Response is fingruaasegurado with matricula parameter
-        case (operations.containsParameterWithName(botResponse.contexts, 'matricula')):
+        this.messages.addMessage(
+          new Message(
+            botResponse.speech,
+            GLOBALS.MESSAGE_BUTTONS,
+            GLOBALS.STR_BOT,
+            GLOBALS.STR_USER,
+            undefined,
+            options
+          )
+        );
+        // this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          //CASOS:
+        break;
 
-          // 1 -  RESPUESTA_ANERIOR: Peticion de un parámetro
+      // Response is fingruaasegurado with matricula parameter
+      case (operations.containsParameterWithName(botResponse.contexts, 'matricula')):
 
-          //      TEXTO_ENVIADO: un código postal
+        //CASOS:
 
-          //      RESPUESTA_ACTUAL_TEXTO: 'Necesitamos una foto de tu matricula'
+        // 1 -  RESPUESTA_ANERIOR: Peticion de un parámetro
 
-          //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
+        //      TEXTO_ENVIADO: un código postal
 
+        //      RESPUESTA_ACTUAL_TEXTO: 'Necesitamos una foto de tu matricula'
 
+        //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
 
-          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA1_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA1_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          break;
-
-
-       case (operations.only_contains(botResponse.contexts, 'datosaseguradocompletos')):
-
-          //CASOS:
-
-          // 1 -  RESPUESTA_ANERIOR: Se ha pedido el último parámetro del asegurado 1
-
-          //      TEXTO_ENVIADO: (whatever)
-
-          //      RESPUESTA_ACTUAL_TEXTO: 'Ahora necesitamos que introduzcas la matricula del otro conductor'
-
-          //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
-
-
-
-          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA2_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
-
-          break;
-
-
-        /* case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
-
-          //CASOS:
-
-          // 1 -  RESPUESTA_ANERIOR: Se ha pedido la matrícula del otro conductor
-
-          //      TEXTO_ENVIADO: (whatever)
-
-          //      RESPUESTA_ACTUAL_TEXTO: 'Ahora necesitamos una foto del accidente'
-
-          //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
+        break;
 
 
+      case (operations.only_contains(botResponse.contexts, 'datosaseguradocompletos')):
 
-          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        //CASOS:
 
-          break; */
+        // 1 -  RESPUESTA_ANERIOR: Se ha pedido el último parámetro del asegurado 1
 
-        case (operations.only_contains(botResponse.contexts, 'sinonombreotroconductor')):
+        //      TEXTO_ENVIADO: (whatever)
 
-          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_DNI_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        //      RESPUESTA_ACTUAL_TEXTO: 'Ahora necesitamos que introduzcas la matricula del otro conductor'
 
-          break;
+        //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
 
-        case (operations.only_contains(botResponse.contexts, 'videofinalizado')):
+        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA2_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          //CASOS:
+        break;
 
-          // 1 -  RESPUESTA_ANERIOR: Foto del accidente
+      /* case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
 
-          //      TEXTO_ENVIADO: (whatever??)
+        //CASOS:
 
-          //      RESPUESTA: (whatever??)
+        // 1 -  RESPUESTA_ANERIOR: Se ha pedido la matrícula del otro conductor
 
-          //      COMPORTAMIENTO: Mostrar el boton para grabar audio
+        //      TEXTO_ENVIADO: (whatever)
 
+        //      RESPUESTA_ACTUAL_TEXTO: 'Ahora necesitamos una foto del accidente'
 
+        //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
 
-          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_AUDIO_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_CAMERA_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
 
-          break;
+        break; */
 
-        default:
-          // EL COMPORTAMIENTO POR DEFECTO CUANDO SE LEE UNA RESPUESTA_ACTUAL_TEXTO DEBE SER PINTAR EL MENSAJE DEL BOT, UN MENSAJE NORMAL
-          this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+      case (operations.only_contains(botResponse.contexts, 'sinonombreotroconductor')):
 
-          break;
+        const { speech, contexts, intent } = botResponse;
 
+        const messageType = intent === 'NoCoincideNombreConductor' ? GLOBALS.MESSAGE_DNI_INTENT : GLOBALS.MESSAGE_TEXT;
 
+        this.messages.addMessage(new Message(speech, messageType, GLOBALS.STR_BOT, GLOBALS.STR_USER, contexts[0]));
 
-      }
+        break;
 
+      case (operations.only_contains(botResponse.contexts, 'videofinalizado')):
 
+        //CASOS:
 
+        // 1 -  RESPUESTA_ANERIOR: Foto del accidente
 
+        //      TEXTO_ENVIADO: (whatever??)
 
+        //      RESPUESTA: (whatever??)
+
+        //      COMPORTAMIENTO: Mostrar el boton para grabar audio
+
+        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_AUDIO_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+
+        break;
+
+      default:
+        // EL COMPORTAMIENTO POR DEFECTO CUANDO SE LEE UNA RESPUESTA_ACTUAL_TEXTO DEBE SER PINTAR EL MENSAJE DEL BOT, UN MENSAJE NORMAL
+        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+
+        break;
+    }
   }
-
-
-
-
-
-
-
-
-
-
-
-
 }

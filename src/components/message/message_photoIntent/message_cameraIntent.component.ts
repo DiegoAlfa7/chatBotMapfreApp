@@ -1,13 +1,13 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
-import { Message } from '../../../app/classes/Message';
+import { Message } from 'app/classes/Message';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 //---------------------------------
 import { ToastController } from 'ionic-angular';
-import { MapfreService } from '../../../services/mapfre.service';
-import { ExternalsService } from '../../../services/externals.service';
-import { ParteService } from '../../../services/parte.service';
-import { ContextGateController } from '../../../services/context-gate-controller.service';
-import { BaseMessageWithToast } from '../../../app/classes/BaseMessageWithToast';
+import { MapfreService } from 'services/mapfre.service';
+import { ExternalsService } from 'services/externals.service';
+import { ParteService } from 'services/parte.service';
+import { ContextGateController } from 'services/context-gate-controller.service';
+import { BaseMessageWithToast } from 'app/classes/BaseMessageWithToast';
 
 
 

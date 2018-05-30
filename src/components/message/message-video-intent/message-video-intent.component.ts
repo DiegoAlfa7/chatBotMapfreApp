@@ -1,16 +1,14 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChildren, QueryList } from '@angular/core';
-import { Message } from "../../../app/classes/Message";
+import { Component, Input, OnInit, ViewChildren, QueryList } from '@angular/core';
+import { Message } from 'app/classes/Message';
 //---------------------------------
-import { Platform, ToastController } from "ionic-angular";
+import { ToastController } from 'ionic-angular';
 import { CaptureError, MediaCapture, CaptureVideoOptions, MediaFile } from '@ionic-native/media-capture';
 import { File } from '@ionic-native/file';
-import { Storage } from '@ionic/storage';
-import { Media, MediaObject } from '@ionic-native/media';
-import { MapfreService } from '../../../services/mapfre.service';
-import { ExternalsService } from "../../../services/externals.service";
-import { ParteService } from "../../../services/parte.service";
-import { ContextGateController } from "../../../services/context-gate-controller.service";
-import { BaseMessageWithToast } from "../../../app/classes/BaseMessageWithToast";
+import { MapfreService } from 'services/mapfre.service';
+import { ExternalsService } from 'services/externals.service';
+import { ParteService } from 'services/parte.service';
+import { ContextGateController } from 'services/context-gate-controller.service';
+import { BaseMessageWithToast } from 'app/classes/BaseMessageWithToast';
 
 /**
  * Generated class for the MessageVideoIntentComponent component.
@@ -41,11 +39,8 @@ export class MessageVideoIntentComponent extends BaseMessageWithToast implements
 
   constructor(
     public toast:ToastController,
-    private platform:Platform,
     private mediaCapture: MediaCapture,
-    private storage: Storage,
     private file: File,
-    private media: Media,
     private gate:ContextGateController,
     private parte:ParteService,
     private mapfre: MapfreService,

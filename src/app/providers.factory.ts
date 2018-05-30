@@ -1,14 +1,14 @@
 import { Platform } from 'ionic-angular';
 
-import { Camera } from "@ionic-native/camera";
-import { MediaCapture } from "@ionic-native/media-capture";
+import { Camera } from '@ionic-native/camera';
+import { MediaCapture } from '@ionic-native/media-capture';
 import { Media } from '@ionic-native/media';
 import { File } from '@ionic-native/file';
 
-import { CameraMock } from '../services/mocks/camera.mock';
-import { MediaCaptureMock } from '../services/mocks/media-capture.mock';
-import { MediaMock } from '../services/mocks/media.mock';
-import { FileMock } from '../services/mocks/file.mock';
+import { CameraMock } from 'services/mocks/camera.mock';
+import { MediaCaptureMock } from 'services/mocks/media-capture.mock';
+import { MediaMock } from 'services/mocks/media.mock';
+import { FileMock } from 'services/mocks/file.mock';
 
 export function cameraProvider(platform: Platform) {
   if (platform.is('android') || platform.is('ios')) {

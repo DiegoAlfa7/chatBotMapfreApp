@@ -2,11 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import 'rxjs/add/operator/map';
 import { Observable } from 'rxjs/Observable';
-import * as GLOBALS from '../app/app.constants';
-import { BotResponse } from '../app/classes/BotResponse';
+import * as GLOBALS from 'app/app.constants';
 import { BoundTextAst } from '@angular/compiler';
-import { BotContext } from '../app/classes/BotContext';
-import { TokenService } from './token.service';
+import { BotContext } from 'app/classes/BotContext';
+import { TokenService } from 'services/token.service';
 
 
 @Injectable()

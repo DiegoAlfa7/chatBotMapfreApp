@@ -1,11 +1,11 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from "@angular/core";
-import {Content, Grid, NavController, NavParams} from 'ionic-angular';
-import {Message} from "../../app/classes/Message";
-import {ContextGateController} from "../../services/context-gate-controller.service";
-import {MessagesService} from "../../services/messages.service";
-import {ParteService} from "../../services/parte.service";
-import {Insured} from "../../app/classes/Insured";
-import {FormularioPage} from "../formulario/formulario";
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Content, Grid, NavController, NavParams } from 'ionic-angular';
+import { Message } from 'app/classes/Message';
+import { ContextGateController } from 'services/context-gate-controller.service';
+import { MessagesService } from 'services/messages.service';
+import { ParteService } from 'services/parte.service';
+import { Insured } from 'app/classes/Insured';
+import { FormularioPage } from 'pages/formulario/formulario';
 
 @Component({
   selector: 'page-mapfrecito',
@@ -14,7 +14,7 @@ import {FormularioPage} from "../formulario/formulario";
 export class MapfrecitoComponent implements OnInit {
 
   @ViewChild(Content) content: Content;
-  @ViewChild(Grid, {read: ElementRef}) messageFeedNode: ElementRef;
+  @ViewChild(Grid, { read: ElementRef }) messageFeedNode: ElementRef;
 
   //TODO: implement input lock when last message context asks for photo
   public messageFeed: Message[] = [];
@@ -31,41 +31,30 @@ export class MapfrecitoComponent implements OnInit {
     private messages: MessagesService,
     private parte: ParteService
   ) {
-
     this.messages.getMessageListObserver().subscribe((messages: Message[]) => {
       this.messageFeed = messages;
     });
-    /*this.messages.addMessage(new Message('hi', 'audio_intent', 'bot', 'user', undefined));*/
-
-
+    // this.messages.addMessage(new Message('hi', 'video_intent', 'bot', 'user', undefined));
   }
 
 
-  public blockInput(event:any){
-
+  public blockInput(event: any) {
     console.log(event);
     this.bloquear = event.lock;
-
-
-
-
   }
 
   private ionViewWillEnter() {
-
     if (!this.once) {
 
-    console.log(this.usuarioRegistrado);
-    //This is the app enter point, so the service should not have any data set
-    this.parte.asegurado.nombre = this.usuarioRegistrado;
-    this.gate.sendLoginAsegurado(this.usuarioRegistrado);
-    this.once = true;
-  }
+      console.log(this.usuarioRegistrado);
+      //This is the app enter point, so the service should not have any data set
+      this.parte.asegurado.nombre = this.usuarioRegistrado;
+      this.gate.sendLoginAsegurado(this.usuarioRegistrado);
+      this.once = true;
+    }
   }
 
   ngOnInit() {
-
-
     this.messageFeedChangeObserver = new MutationObserver((mutations) => {
       this.scrollToBottom()
     });
@@ -77,13 +66,9 @@ export class MapfrecitoComponent implements OnInit {
   }
 
 
-  private goToParte(){
-
-
+  private goToParte() {
     this.navController.push(FormularioPage);
-
   }
-
 
   /**
    * This method uses de template-binded variable 'lastMsg' in order to send query to DialogFlow API
@@ -98,14 +83,7 @@ export class MapfrecitoComponent implements OnInit {
     }
   }
 
-  public cargarMensajes(infiniteScrollEvent) {
-
-  }
-
-
   public scrollToBottom() {
-
     this.content.scrollToBottom(300);
-
   }
 }

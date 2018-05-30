@@ -1,19 +1,19 @@
 import { AfterViewChecked, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Message } from '../../../app/classes/Message';
+import { Message } from 'app/classes/Message';
 import { NavController, Platform, ToastController } from 'ionic-angular';
 import { CaptureError, MediaCapture } from '@ionic-native/media-capture';
 import { File } from '@ionic-native/file';
 import { Storage } from '@ionic/storage';
 import { Media, MediaObject } from '@ionic-native/media';
-import { ParteService } from '../../../services/parte.service';
-import { ContextGateController } from '../../../services/context-gate-controller.service';
-import { BaseMessageWithToast } from '../../../app/classes/BaseMessageWithToast';
+import { ParteService } from 'services/parte.service';
+import { ContextGateController } from 'services/context-gate-controller.service';
+import { BaseMessageWithToast } from 'app/classes/BaseMessageWithToast';
 
 const MEDIA_FILES_KEY = 'mediaFiles';
 
 @Component({
   selector: 'app-message_audioIntent',
-  templateUrl: './message_audioIntent.component.html'
+  templateUrl: 'message_audioIntent.template.html'
 })
 
 export class MessageAudioIntentComponent extends BaseMessageWithToast implements OnInit {
@@ -82,6 +82,7 @@ export class MessageAudioIntentComponent extends BaseMessageWithToast implements
   }
 
   sendAudio() {
+    this.parte.audioFileName = this.fileName;
     this.parte.url_audioAccidente = this.fileURL;
     this.parte.path_audioAccidente = this.filePath;
     this.isAllDone = true;

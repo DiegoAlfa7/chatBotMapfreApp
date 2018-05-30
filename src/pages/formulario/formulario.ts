@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import {ParteService} from "../../services/parte.service";
-import {Insured} from "../../app/classes/Insured";
-import {Media, MediaObject} from "@ionic-native/media";
-import {MessagesService} from "../../services/messages.service";
-import {ContextGateController} from "../../services/context-gate-controller.service";
+import {ParteService} from 'services/parte.service';
+import {Insured} from 'app/classes/Insured';
+import {Media, MediaObject} from '@ionic-native/media';
+import {MessagesService} from 'services/messages.service';
+import {ContextGateController} from 'services/context-gate-controller.service';
 
 /**
  * Generated class for the FormularioPage page.

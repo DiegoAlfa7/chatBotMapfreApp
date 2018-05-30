@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import {Subject} from "rxjs/Subject";
-import {Message} from "../app/classes/Message";
+import {Message} from "app/classes/Message";
 import {Observable} from "rxjs/Observable";
 
 @Injectable()

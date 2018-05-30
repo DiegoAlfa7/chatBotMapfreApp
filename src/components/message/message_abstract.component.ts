@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Message} from "../../app/classes/Message";
-import * as GLOBALS from '../../app/app.constants';
+import {Message} from 'app/classes/Message';
+import * as GLOBALS from 'app/app.constants';
 
 /**
  * Generated class for the MessageAbstract component.

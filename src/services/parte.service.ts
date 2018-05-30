@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Insured } from "../app/classes/Insured";
-import { ExternalsService } from "./externals.service";
+import { Insured } from "app/classes/Insured";
+import { ExternalsService } from "services/externals.service";
 
 @Injectable()
 export class ParteService {

@@ -26,6 +26,7 @@ export class MessageAbstract {
   public buttonsType:string = GLOBALS.MESSAGE_BUTTONS;
   public cameraIntentType:string = GLOBALS.MESSAGE_CAMERA_INTENT;
   public dniIntentType:string = GLOBALS.MESSAGE_DNI_INTENT;
+  public phoneFormType:string = GLOBALS.MESSAGE_PHONE_FORM;
 
   constructor() {}
 

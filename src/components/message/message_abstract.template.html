@@ -38,6 +38,10 @@
 </message-buttons>
 
 <message-dni-intent *ngIf="message.type === dniIntentType"
-  (blockInput)="blockInput($event)"
   [message]="message">
 </message-dni-intent>
+
+<message-phone-form *ngIf="message.type === phoneFormType"
+  (blockInput)="blockInput($event)"
+  [message]="message">
+</message-phone-form>

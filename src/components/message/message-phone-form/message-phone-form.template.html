@@ -1,0 +1,38 @@
+<!-- Generated template for the MessagePhoneFormComponent component -->
+<div>
+    <p>{{message.msgBody}}</p>
+
+    <ion-grid *ngIf="!isAllDone">
+      <ion-row>
+        <ion-col>
+          <ion-item>
+              <ion-input
+              type="tel"
+              placeholder="612345678"
+              required
+              maxLength="9"
+              pattern="[0-9]{9}"
+              #phone="ngModel"
+              [(ngModel)]="phoneNumber">
+            </ion-input>
+            <button ion-button item-right (click)="sendPhoneNumber()" [disabled]="phone.hasError('required') || phone.hasError('pattern')">
+                <ion-icon name="send"></ion-icon>
+            </button>
+          </ion-item>
+          <ion-item *ngIf="phone.dirty && phone.hasError('required')">
+            <p class="danger" padding>Es obligatorio</p>
+          </ion-item>
+          <ion-item *ngIf="phone.dirty && phone.hasError('pattern')">
+              <p class="danger" padding>Solo se admiten números</p>
+            </ion-item>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div *ngIf="isAllDone">
+      <p text-center>{{ phoneNumber }}</p>
+    </div>
+
+  </div>
+
+

@@ -36,6 +36,7 @@ import { MessageButtonsComponent } from 'components/message/message-buttons/mess
 import { MessageCameraIntentComponent } from 'components/message/message_photoIntent/message_cameraIntent.component';
 import { MessageMatriculaIntentComponent } from 'components/message/message_matriculaIntent/message_matriculaIntent.component';
 import { MessageDniIntentComponent } from 'components/message/message-dni-intent/message-dni-intent.component';
+import { MessagePhoneFormComponent } from 'components/message/message-phone-form/message-phone-form.component';
 
 import { cameraProvider, mediaProvider, mediaCaptureProvider, fileProvider } from 'app/providers.factory';
 
@@ -52,6 +53,7 @@ import { SanitizerPipe } from 'pipes/sanitizer.pipe';
     MessageAudioIntentComponent,
     MessageVideoIntentComponent,
     MessageDniIntentComponent,
+    MessagePhoneFormComponent,
     LoginPage,
     MessageCameraIntentComponent,
     MessageMatriculaIntentComponent,
@@ -78,6 +80,7 @@ import { SanitizerPipe } from 'pipes/sanitizer.pipe';
     MessageAudioIntentComponent,
     MessageVideoIntentComponent,
     MessageDniIntentComponent,
+    MessagePhoneFormComponent,
     FormularioPage,
     LoginPage
   ],

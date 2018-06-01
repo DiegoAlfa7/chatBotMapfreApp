@@ -21,6 +21,7 @@
   export const MESSAGE_AUDIO_INTENT = 'audio_intent';
   export const MESSAGE_BUTTONS = 'buttons';
   export const MESSAGE_DNI_INTENT = 'dni_intent';
+  export const MESSAGE_PHONE_FORM = 'phone_form';
 
   // Token type for retrieve dialogflow token from service
   export const NEOCOVER_TOKEN = 'NEOCover';

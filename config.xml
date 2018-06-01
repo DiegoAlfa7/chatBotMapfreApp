@@ -41,6 +41,18 @@
         <splash density="port-xxxhdpi" src="resources/android/neocover.png" />
     </platform>
     <platform name="ios">
+        <config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Necesitamos la camara para realizar las fotos.</string>
+        </config-file>
+        <config-file parent="NSLocationWhenInUseUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Necesitamos la localizacion para realizar saber donde estas.</string>
+        </config-file>
+        <config-file parent="NSPhotoLibraryUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Necesitamos el acceso a la galeria para guardar las imagenes.</string>
+        </config-file>
+        <config-file parent="NSMicrophoneUsageDescription" platform="ios" target="*-Info.plist">
+            <string>Necesitamos acceso al microfono para grabar el audo.</string>
+        </config-file>
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/neocover.png" width="57" />

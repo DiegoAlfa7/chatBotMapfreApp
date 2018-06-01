@@ -1,4 +1,13 @@
 
-.responsive{
-  min-width: 100%;
+.message-dni-intent {
+  .responsive{
+    min-width: 100%;
+  }
+
+  .neo-info {
+    p {
+      display: block;
+    }
+  }
 }
+

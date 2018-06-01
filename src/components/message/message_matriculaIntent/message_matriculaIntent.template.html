@@ -48,7 +48,7 @@
   <button *ngIf="loading" ion-button icon-only padding disabled>Analizando Matrícula
     <ion-spinner name="bubbles" color="white"></ion-spinner>
   </button>
-  <div *ngIf="matriculaRetrieved && !isAllDone">
+  <div *ngIf="matriculaRetrieved && !isAllDone" class="neo-info">
     <p text-center>Esta es la matricula que he reconocido: </p>
     <p text-center>{{this.matricula}}</p>
     <p text-center>¿Está bien?</p>

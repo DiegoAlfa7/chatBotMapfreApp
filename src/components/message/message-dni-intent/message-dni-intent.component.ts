@@ -11,6 +11,9 @@ import { BaseMessageWithToast } from 'app/classes/BaseMessageWithToast';
 
 @Component({
   selector: 'message-dni-intent',
+  host: {
+    class: 'message-dni-intent'
+  },
   templateUrl: 'message-dni-intent.template.html'
 })
 export class MessageDniIntentComponent extends BaseMessageWithToast {
@@ -21,6 +24,7 @@ export class MessageDniIntentComponent extends BaseMessageWithToast {
   public isAllDone: boolean = false;
   private nombre: string;
   private apellidos: string;
+  private dni: string;
 
   //  destinationType values: --
   //  ------------------------
@@ -35,12 +39,12 @@ export class MessageDniIntentComponent extends BaseMessageWithToast {
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE
-
   };
 
   public base64ImageString: string;
   private loading: boolean = false;
   private dniRetrieved: boolean = false;
+  private errorRetrieveDniData: boolean = false;
 
   constructor(
     private camera: Camera,
@@ -62,17 +66,21 @@ export class MessageDniIntentComponent extends BaseMessageWithToast {
     this.loading = true;
     this.externals.reconocerDni(this.base64ImageString).subscribe((response: any) => {
       console.log('reconocerDni' + response);
-      if (response.data) {
-        const { data: { nombre, apellidos } } = response;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.dniRetrieved = true;
-        this.isAllDone = false;
-        this.loading = false;
+      if (response.codigoError === 10) { // No reconoce que la imagen es un dni
+        this.errorRetrieveDniData = true;
       } else {
-        this.presentToast('Ha habido un error desconocido reconociendo el dni de la foto, lo sentimos', 'bottom', 3000);
+        if (response.data) {
+          const { data: { nombre, apellidos, dni } } = response;
+          this.nombre = nombre;
+          this.apellidos = apellidos;
+          this.dni = dni;
+          this.dniRetrieved = true;
+          this.isAllDone = false;
+          this.loading = false;
+        } else {
+          this.presentToast('Ha habido un error desconocido reconociendo el dni de la foto, lo sentimos', 'bottom', 3000);
+        }
       }
-
     }, (error1) => {
       this.isAllDone = false;
       this.loading = false;
@@ -85,6 +93,7 @@ export class MessageDniIntentComponent extends BaseMessageWithToast {
   public getImage() {
     //Camera.getPicture returns a Promise, so should implement success and error cb functions
     console.log('Getting Photo');
+    this.errorRetrieveDniData = false;
     this.camera.getPicture(this.default_camera_options).then((imageData) => {
       // data is base64:
       this.base64ImageString = imageData + '';

@@ -7,6 +7,7 @@ import { Message } from 'app/classes/Message';
 import * as GLOBALS from 'app/app.constants';
 import { BotContext } from 'app/classes/BotContext';
 import { Observable } from 'rxjs/Observable';
+import { Observer } from 'rxjs/Observer';
 
 import * as operations from 'app/classes/ContextOperator';
 
@@ -16,6 +17,9 @@ import * as operations from 'app/classes/ContextOperator';
 @Injectable()
 export class ContextGateController {
 
+  private finished$: Observable<boolean>;
+  private finished: Observer<boolean>;
+
   /**
    * Injecting all the services involved in the application
    */
@@ -23,7 +27,16 @@ export class ContextGateController {
     private mapfre: MapfreService,
     private parte: ParteService,
     private messages: MessagesService
-  ) { }
+  ) {
+    this.finished$ = Observable.create((observer: Observer<any>) => {
+      this.finished = observer;
+      this.finished.next(false);
+    });
+  }
+
+  public hasFinished (): Observable<boolean> {
+    return this.finished$;
+  }
 
   public sendLoginAsegurado(nombre: string) {
     this.sendInvisibleMessage(`loginAsegurado:${nombre}`);

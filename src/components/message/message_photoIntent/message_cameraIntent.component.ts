@@ -58,6 +58,7 @@ export class MessageCameraIntentComponent extends BaseMessageWithToast implement
     this.gate.sendInvisibleMessage('VideoFinalizado');
     this.presentToast('Imagen Enviada...', 'bottom', 1000);
     this.toggleLock();
+    this.blockInput.complete();
   }
 
   public getImage() {

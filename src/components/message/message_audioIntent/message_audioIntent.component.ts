@@ -87,6 +87,7 @@ export class MessageAudioIntentComponent extends BaseMessageWithToast implements
     this.parte.path_audioAccidente = this.filePath;
     this.isAllDone = true;
     this.toggleLock();
+    this.blockInput.complete();
     this.presentToast('Audio Enviado...', 'bottom', 1000);
     let s = this.parte.getDescripcionAccidenteFinalizada();
     console.log(s);

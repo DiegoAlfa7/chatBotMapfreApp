@@ -98,6 +98,7 @@ export class MessageVideoIntentComponent extends BaseMessageWithToast implements
     // this.parte.path_videoAccidente = this.filePath;
     this.isAllDone = true;
     this.toggleLock();
+    this.blockInput.complete();
     this.parte.urlVideoAccidente = this.urlVideoAccidente;
     this.gate.sendInvisibleMessage('VideoFinalizado');
     this.presentToast('Video Enviado...', 'bottom' ,1000);

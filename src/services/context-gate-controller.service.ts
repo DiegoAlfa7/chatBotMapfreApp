@@ -83,10 +83,12 @@ export class ContextGateController {
   private responseGate(botResponse: BotResponse) {
     console.log(botResponse);
 
+    const { speech, contexts, intent, paramsRespose } = botResponse;
+
     switch (true) {
 
       // Response is fingruaasegurado, so its expecting DatosAsegurado-like expresion with data
-      case (operations.contains_noContainsStartWith(botResponse.contexts, 'fingrua', 'completardatosasegurado_dialog_params')):
+      case (operations.contains_noContainsStartWith(contexts, 'fingrua', 'completardatosasegurado_dialog_params')):
 
         //CASOS:
 
@@ -101,11 +103,11 @@ export class ContextGateController {
 
         this.sendInvisibleMessage(this.parte.getDatosAsegurado());
         console.log(this.parte.getDatosAsegurado() + ' Enviado...');
-        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        this.messages.addMessage(new Message(speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, contexts[0]));
 
         break;
 
-      case (operations.only_contains(botResponse.contexts, 'matriculacontrariocogida')):
+      case (operations.only_contains(contexts, 'matriculacontrariocogida')):
 
         //CASOS:
 
@@ -118,16 +120,16 @@ export class ContextGateController {
         //      COMPORTAMIENTO: Tenemos que pintar un mensaje de foto, guardar el valor de la matrícula del otro conductor
         //                      Y mandar un mensaje clave de 'VideoRealizado'
 
-        this.parte.contrario.matricula = botResponse.paramsRespose.matriculaContrario;
+        this.parte.contrario.matricula = paramsRespose.matriculaContrario;
 
         const showCameraIntent = function () {
           this.messages.addMessage(
             new Message(
-              botResponse.speech,
+              speech,
               GLOBALS.MESSAGE_CAMERA_INTENT,
               GLOBALS.STR_BOT,
               GLOBALS.STR_USER,
-              botResponse.contexts[0]
+              contexts[0]
             )
           );
         }
@@ -135,11 +137,11 @@ export class ContextGateController {
         const showVideoIntent = function () {
           this.messages.addMessage(
             new Message(
-              botResponse.speech,
+              speech,
               GLOBALS.MESSAGE_VIDEO_INTENT,
               GLOBALS.STR_BOT,
               GLOBALS.STR_USER,
-              botResponse.contexts[0]
+              contexts[0]
             )
           );
         }
@@ -150,11 +152,11 @@ export class ContextGateController {
         }, {
           label: 'Hacer video',
           action: showVideoIntent.bind(this)
-        }]
+        }];
 
         this.messages.addMessage(
           new Message(
-            botResponse.speech,
+            speech,
             GLOBALS.MESSAGE_BUTTONS,
             GLOBALS.STR_BOT,
             GLOBALS.STR_USER,
@@ -167,7 +169,7 @@ export class ContextGateController {
         break;
 
       // Response is fingruaasegurado with matricula parameter
-      case (operations.containsParameterWithName(botResponse.contexts, 'matricula')):
+      case (operations.containsParameterWithName(contexts, 'matricula')):
 
         //CASOS:
 
@@ -179,12 +181,12 @@ export class ContextGateController {
 
         //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
 
-        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA1_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        this.messages.addMessage(new Message(speech, GLOBALS.MESSAGE_MATRICULA1_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, contexts[0]));
 
         break;
 
 
-      case (operations.only_contains(botResponse.contexts, 'datosaseguradocompletos')):
+      case (operations.only_contains(contexts, 'datosaseguradocompletos')):
 
         //CASOS:
 
@@ -196,7 +198,7 @@ export class ContextGateController {
 
         //      COMPORTAMIENTO: Deberíamos crear un mensaje de foto OCR con el texto que mande el bot
 
-        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_MATRICULA2_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        this.messages.addMessage(new Message(speech, GLOBALS.MESSAGE_MATRICULA2_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, contexts[0]));
 
         break;
 
@@ -216,17 +218,17 @@ export class ContextGateController {
 
         break; */
 
-      case (operations.only_contains(botResponse.contexts, 'sinonombreotroconductor')):
+      case (operations.only_contains(contexts, 'sinonombreotroconductor')):
 
-        const { speech, contexts, intent } = botResponse;
-
-        const messageType = intent === 'NoCoincideNombreConductor' ? GLOBALS.MESSAGE_DNI_INTENT : GLOBALS.MESSAGE_TEXT;
-
-        this.messages.addMessage(new Message(speech, messageType, GLOBALS.STR_BOT, GLOBALS.STR_USER, contexts[0]));
+        if (intent === 'NoCoincideNombreConductor') {
+          this.messages.addMessage(new Message(speech, GLOBALS.MESSAGE_DNI_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, contexts[0]));
+        } else if (intent === 'SiCoincideNombreOtroConductor') {
+          this.endChatMessage(speech, contexts[0]);
+        }
 
         break;
 
-      case (operations.only_contains(botResponse.contexts, 'videofinalizado')):
+      case (operations.only_contains(contexts, 'videofinalizado')):
 
         //CASOS:
 
@@ -238,15 +240,58 @@ export class ContextGateController {
 
         //      COMPORTAMIENTO: Mostrar el boton para grabar audio
 
-        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_AUDIO_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        this.messages.addMessage(new Message(speech, GLOBALS.MESSAGE_AUDIO_INTENT, GLOBALS.STR_BOT, GLOBALS.STR_USER, contexts[0]));
 
         break;
+
+      case (intent ==='NoCoincideNombreOtroConductorRelleno' && !operations.contains(contexts, 'sinonombreotroconductor')) :
+
+        this.endChatMessage(speech, contexts[0]);
+
+        break
+
+      case (intent === 'NoCoincideNombreOtroConductorRelleno' && operations.contains(contexts, 'nocoincidenombreotroconductorrelleno_dialog_params_telefono')) :
+
+        this.messages.addMessage(
+          new Message(
+            speech,
+            GLOBALS.MESSAGE_PHONE_FORM,
+            GLOBALS.STR_BOT,
+            GLOBALS.STR_USER,
+            contexts[0]
+          )
+        );
+
+        break
 
       default:
         // EL COMPORTAMIENTO POR DEFECTO CUANDO SE LEE UNA RESPUESTA_ACTUAL_TEXTO DEBE SER PINTAR EL MENSAJE DEL BOT, UN MENSAJE NORMAL
-        this.messages.addMessage(new Message(botResponse.speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, botResponse.contexts[0]));
+        this.messages.addMessage(new Message(speech, GLOBALS.MESSAGE_TEXT, GLOBALS.STR_BOT, GLOBALS.STR_USER, contexts[0]));
 
         break;
     }
+  }
+
+  private endChatMessage (speech, context) {
+    const showPart = function () {
+      this.finished.next(true);
+      this.finished.complete();
+    }
+
+    const finishOptions = [{
+      label: 'Ver parte',
+      action: showPart.bind(this)
+    }];
+
+    this.messages.addMessage(
+      new Message(
+        speech,
+        GLOBALS.MESSAGE_BUTTONS,
+        GLOBALS.STR_BOT,
+        GLOBALS.STR_USER,
+        context,
+        finishOptions
+      )
+    );
   }
 }

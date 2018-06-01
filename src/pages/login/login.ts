@@ -2,6 +2,7 @@ import { Component, ElementRef, ViewChild } from '@angular/core';
 import { AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import { MapfrecitoComponent } from 'pages/mapfrecito/mapfrecito.component';
 import { ParteService } from 'services/parte.service';
+import { MessagesService } from 'services/messages.service';
 
 /**
  * Generated class for the LoginPage page.
@@ -32,6 +33,7 @@ export class LoginPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     private parte: ParteService,
+    private messages: MessagesService,
     private alert: AlertController) {
   }
 
@@ -40,10 +42,7 @@ export class LoginPage {
     this.nombreUsuario = '';
     this.pw = '';
     if (this.parte.parteEnviado) {
-
-
       this.showConfirm();
-
     }
   }
 
@@ -57,9 +56,8 @@ export class LoginPage {
         {
           text: 'OK',
           handler: () => {
-
             this.parte.reset();
-
+            this.messages.reset();
           }
         }
       ]

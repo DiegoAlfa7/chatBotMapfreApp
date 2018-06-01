@@ -8,11 +8,13 @@ import { CaptureVideoOptions, MediaCapture, MediaFile } from '@ionic-native/medi
 import { ExternalsService } from 'services/externals.service';
 import { ParteService } from 'services/parte.service';
 import { ContextGateController } from 'services/context-gate-controller.service';
-import { CameraMock } from 'services/mocks/camera.mock';
 
 
 @Component({
   selector: 'message-matricula-intent',
+  host: {
+    class: 'message-matricula-intent'
+  },
   templateUrl: 'message_matriculaIntent.template.html'
 })
 export class MessageMatriculaIntentComponent {
@@ -73,6 +75,14 @@ export class MessageMatriculaIntentComponent {
       this.parte.contrario.matricula = this.matricula;
       this.parte.matricula_coche_contrario = this.base64ImageString;
     }
+    if (this.intentType == 2) {
+      this.externals.getDatosParte(this.matricula).subscribe((response: any) => {
+        console.log('getDatosParte', response)
+        if (response.status === 200) { // if response 204 no found data
+          this.updateDatosContrario(response.body);
+        }
+      }, (error) => { console.log(error)});
+    }
     this.isAllDone = true;
     this.gate.sendInvisibleMessage(this.matricula);
   }
@@ -84,13 +94,6 @@ export class MessageMatriculaIntentComponent {
 
         this.matricula = response.matricula;
         this.matriculaRetrieved = true;
-        if (this.intentType == 2) {
-          this.externals.getDatosParte(this.matricula).subscribe((response: any) => {
-            if (response.status === '200') { // if response 204 no found data
-              this.updateDatosContrario(response);
-            }
-          });
-        }
         this.isAllDone = false;
         this.loading = false;
       } else {
@@ -108,6 +111,7 @@ export class MessageMatriculaIntentComponent {
   }
 
   private updateDatosContrario (response) {
+    this.parte.contrario.nombre = response.nombre;
     this.parte.contrario.telefono = response.telefono;
     this.parte.contrario.cp = response.cp;
     this.parte.contrario.poliza = response.poliza;
